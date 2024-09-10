@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* Estilos gerais */
+    .file-upload-wrapper {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 400px;
+      margin: 20px auto;
+    }
+
+    .file-upload-input {
+      position: absolute;
+      width: 0.1px;
+      height: 0.1px;
+      opacity: 0;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .file-upload-label {
+      font-size: 16px;
+      font-weight: 600;
+      color: white;
+      background-color: #4a90e2;
+      padding: 10px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-bottom: 10px;
+    }
+
+    .file-upload-label:hover {
+      background-color: #357ABD;
+    }
+
+    .file-name {
+      font-size: 14px;
+      color: #333;
+      font-style: italic;
+      margin-top: 5px;
+    }
+
+    /* Adicionar um pouco de estilo moderno */
+    .file-upload-label:active {
+      transform: scale(0.98);
+      background-color: #2C6399;
+    }
+
+    .file-upload-wrapper:hover .file-name {
+      color: #4a90e2;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="file-upload-wrapper">
+    <input type="file" id="file-upload" class="file-upload-input" />
+    <label for="file-upload" class="file-upload-label">
+      Escolher arquivo
+    </label>
+    <span id="file-name" class="file-name">Nenhum arquivo escolhido</span>
+  </div>
+  <script>
+    const fileInput = document.getElementById('file-upload');
+    const fileName = document.getElementById('file-name');
+
+    fileInput.addEventListener('change', function () {
+      fileName.textContent = this.files[0] ? this.files[0].name : 'Nenhum arquivo escolhido';
+    });
+
+  </script>
+</body>
+
+</html>
+
+<div class="row">
+  <div class="col-12">
+    <table class="table">
+      <tr>
+        <th>Employee:</th>
+        <td colspan="2">TIAGO MENDONÇA</td>
+        <th>Pis Number:</th>
+        <td>26727257653</td>
+        <th>Enterprise</th>
+        <td>METALÚRGICA BRASIL</td>
+        <td>
+          <div>
+            <a class="btn btn-secondary" href="#">
+              <i class="icon_settings"></i>
+            </a>
+            <a class="btn btn-secondary" href="#">
+              <i class="icon_print"></i>
+            </a>
+          </div>
+        </td>
+      </tr>
+    </table>
+    <table class="table mt-3">
+      <tr>
+        <th>Date</th>
+        <th>Week</th>
+        <th>Entry</th>
+        <th>Exit</th>
+        <th>Entry</th>
+        <th>Exit</th>
+        <th>Entry</th>
+        <th>Exit</th>
+      </tr>
+
+      <tr>
+        <td>01/09/2024</td>
+        <td>Sunday</td>
+        <td>00:00</td>
+        <td>00:00</td>
+        <td>00:00</td>
+        <td>00:00</td>
+        <td>00:00</td>
+        <td>00:00</td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div class="row">
+  <div class="col-6">
+    <table class="table">
+      <tr>
+        <th>Date</th>
+        <th>Observation</th>
+        <th>#</th>
+      </tr>
+      <tr>
+        <td>01/09/2024</td>
+        <td>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</td>
+        <td>
+          <div>
+            <a class="btn btn-secondary" href="#">
+              <i class="icon_delete"></i>
+            </a>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="col-6">
+    <table class="table">
+      <tr>
+        <th>Hrs Normais</th>
+        <th>Hrs extras 50%</th>
+        <th>Hrs extras 50%</th>
+      </tr>
+      <tr>
+        <td>120:00</td>
+        <td>12:00</td>
+        <td>4:00</td>
+      </tr>
+    </table>
+  </div>
+</div>

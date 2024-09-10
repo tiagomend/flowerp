@@ -1,0 +1,28 @@
+{% extends "global/base.html" %}
+
+{% block content %}
+<div class="card">
+  <div class="card-header flex space-between">
+    {% include "product/partials/page_header.html" %}
+  </div>
+  <div class="card-body">
+    <table class="table">
+      <tbody>
+        {% for model in models %}
+        <tr>
+          {% if forloop.counter == 1 %}
+            {% for data in model %}
+              <th>{{ data }}</th>
+            {% endfor %}
+          {% else %}
+            {% for data in model %}
+              <td>{{ data }}</td>
+            {% endfor %}
+          {% endif %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock content %}

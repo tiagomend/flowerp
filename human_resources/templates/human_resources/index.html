@@ -1,0 +1,102 @@
+{% extends "global/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-4">
+        <div class="card">
+          <div class="card-row">
+              <nav class="card-nav">
+                <a href="{% url "human_resources:read_employee" %}" class="nav-item">
+                  <i class="icon_account_box"></i>
+                  {% translate "Employee List" %}
+                </a>
+                <a href="{% url "human_resources:create_employee" %}" class="nav-item">
+                  <i class="icon_account_box"></i>
+                  {% translate "Create New Employee" %}
+                </a>
+                <a href="{% url "human_resources:read_position" %}" class="nav-item">
+                  <i class="icon_schema"></i>
+                  {% translate "Position List" %}
+                </a>
+                <a href="{% url "human_resources:create_position" %}" class="nav-item">
+                  <i class="icon_schema"></i>
+                  {% translate "Create New Position" %}
+                </a>
+                <a href="{% url "human_resources:read_hiring" %}" class="nav-item">
+                  <i class="icon_badge"></i>
+                  {% translate "Employee Hirings List" %}
+                </a>
+                <a href="{% url "human_resources:create_hiring" %}" class="nav-item">
+                  <i class="icon_badge"></i>
+                  {% translate "Create Employee Hirings" %}
+                </a>
+              </nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div class="card">
+          <div class="card-row">
+              <nav class="card-nav">
+                <a href="{% url "human_resources:read_vacation" %}" class="nav-item">
+                  <i class="icon_event_available"></i>
+                  {% translate "Vacation List" %}
+                </a>
+                <a href="{% url "human_resources:create_vacation" %}" class="nav-item">
+                  <i class="icon_event_available"></i>
+                  {% translate "Create New Vacation" %}
+                </a>
+                <a href="{% url "human_resources:register_point_henry" %}" class="nav-item">
+                  <i class="icon_more_time"></i>
+                  {% translate "Register Point Prisma Henry" %}
+                </a>
+                <a href="{% url "human_resources:time_sheet_report" %}" class="nav-item">
+                  <i class="icon_alarm_on"></i>
+                  {% translate "Time Sheet Report" %}
+                </a>
+                <a href="{% url "human_resources:read_salary" %}" class="nav-item">
+                  <i class="icon_account_balance_wallet"></i>
+                  {% translate "Salary List" %}
+                </a>
+                <a href="{% url "human_resources:create_salary" %}" class="nav-item">
+                  <i class="icon_account_balance_wallet"></i>
+                  {% translate "Create New Salary" %}
+                </a>
+              </nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div class="card">
+          <div class="card-row">
+              <nav class="card-nav">
+                <a href="{% url "human_resources:read_salary_adjustment" %}" class="nav-item">
+                  <i class="icon_account_balance_wallet"></i>
+                  {% translate "Salary Adjustment List" %}
+                </a>
+                <a href="{% url "human_resources:create_salary_adjustment" %}" class="nav-item">
+                  <i class="icon_account_balance_wallet"></i>
+                  {% translate "Create Salary Adjustment" %}
+                </a>
+                <a href="{% url "human_resources:read_document" %}" class="nav-item">
+                  <i class="icon_attach_file"></i>
+                  {% translate "Document List" %}
+                </a>
+                <a href="{% url "human_resources:create_document" %}" class="nav-item">
+                  <i class="icon_attach_file"></i>
+                  {% translate "Create New Document" %}
+                </a>
+              </nav>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock content %}

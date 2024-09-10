@@ -1,0 +1,76 @@
+{% extends "human_resources/time_sheet_base.html" %}
+{% load i18n %}
+
+{% block page_header %}
+<div class="page-header">
+  <i class="icon_more_time"></i>
+  <h3>{% translate "Time Sheet Edit" %}</h3>
+</div>
+<div class="search-form">
+  <button id="btnTimeSheet" class="btn btn-primary">
+    {% translate "Save" %}
+  </button>
+</div>
+{% endblock page_header %}
+
+{% block employee_info %}
+<table class="table">
+  <tr>
+    <th colspan="7">
+      <h2>{% translate "Time Sheet" %}</h2>
+    </th>
+  </tr>
+  <tr>
+    <th>{% translate "Employee:" %}</th>
+    <td>{{ time_sheet.0.employee_hiring }}</td>
+    <th>{% translate "Pis Number:" %}</th>
+    <td>{{ time_sheet.0.employee_hiring.employee.pis_number }}</td>
+    <th>{% translate "Enterprise" %}</th>
+    <td>{{ time_sheet.0.employee_hiring.enterprise }}</td>
+  </tr>
+</table>
+{% endblock employee_info %}
+
+{% block timesheet %}
+<form action="" class="form-control">
+{% csrf_token %}
+<table class="table mt-3" id="time_sheet">
+  <tr>
+    <th>{% translate "Date" %}</th>
+    <th>{% translate "Week" %}</th>
+    <th>{% translate "Entry" %}</th>
+    <th>{% translate "Exit" %}</th>
+    <th>{% translate "Entry" %}</th>
+    <th>{% translate "Exit" %}</th>
+    <th>{% translate "Entry" %}</th>
+    <th>{% translate "Exit" %}</th>
+  </tr>
+  {% for point in time_sheet %}
+  <tr>
+    <td>{{ point.date|date:'d/m/Y' }}</td>
+    <td>{{ point.date|date:'d/m/Y' }}</td>
+    <td>
+      <input type="time" name="first_entry" id="" value="{{ point.first_entry }}">
+    </td>
+    <td>
+      <input type="time" name="first_exit" id="" value="{{ point.first_exit }}">
+    </td>
+    <td>
+      <input type="time" name="second_entry" id="" value="{{ point.second_entry }}">
+    </td>
+    <td>
+      <input type="time" name="second_exit" id="" value="{{ point.second_exit }}">
+    </td>
+    <td>
+      <input type="time" name="third_entry" id="" value="{{ point.third_entry }}">
+    </td>
+    <td>
+      <input type="time" name="third_exit" id="" value="{{ point.third_exit }}">
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+</form>
+
+<div class="msg"></div>
+{% endblock timesheet %}

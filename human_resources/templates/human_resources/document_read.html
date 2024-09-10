@@ -1,0 +1,43 @@
+{% extends "global/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="card">
+  <div class="card-header flex space-between">
+    <div class="page-header">
+      <i class="{{ icon }}"></i>
+      <h3>{{ page_title }}</h3>
+    </div>
+    <div class="section-action">
+      <a href="{{ redirect_for_new }}" class="btn btn-primary">
+        {% translate "New" %}
+      </a>
+    </div>
+  </div>
+  <div class="card-body">
+    <table class="table">
+        <tr>
+          {% for header in presenters.0.headers %}
+            <th>{{ header }}</th>
+          {% endfor %}
+          <th>#</th>
+        </tr>
+
+        {% for presenter in presenters %}
+        <tr>
+          {% for value in presenter.values %}
+            <td>{{ value }}</td>
+          {% endfor %}
+          <td>
+            <div>
+              <a class="btn btn-secondary" target="_blank" href="{{ redirect_for_edit }}{{ presenter.get_pk }}">
+                <i class="icon_download"></i>
+              </a>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+    </table>
+  </div>
+</div>
+{% endblock content %}

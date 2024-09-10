@@ -1,0 +1,40 @@
+{% extends "global/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="card">
+  <div class="card-header flex space-between">
+    <div class="page-header">
+      <i class="{{ icon }}"></i>
+      <h3>{{ page_title }}</h3>
+    </div>
+    <div class="section-action">
+      <button class="btn btn-secondary" id="refresh_button" data-session="stock_issue">
+        <i class="icon_refresh"></i>
+      </button>
+      <button data-btn="form-submit" data-form="main-form" class="btn btn-primary">
+        {% translate "Save" %}
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-4"></div>
+      <div class="col-4">
+        <form action="" enctype="multipart/form-data" id="main-form" class="form-control" method="post">
+          {% csrf_token %}
+          <div class="file-upload-wrapper">
+            <input type="file" name="point_henry" id="point_henry_id" class="file-upload-input">
+            <label for="point_henry_id" class="file-upload-label">
+              <i class="icon_attach_file"></i>
+              {% translate "Select File" %}
+            </label>
+            <span class="file-name">{% translate "No file chosen" %}</span>
+          </div>
+          
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,85 @@
+{% extends "human_resources/time_sheet_base.html" %}
+{% load i18n %}
+
+{% block page_header %}
+<div class="page-header">
+  <i class="icon_more_time"></i>
+  <h3>{% translate "Time Sheet Report" %}</h3>
+</div>
+<div class="search-form">
+  <form action="" class="form-control" method="get">
+    <label for="employee_hiring">{% translate "Select Employee" %}</label>
+    <select name="employee_hiring" id="employee_hiring">
+      <option value="">---------------</option>
+      {% for employee in employees %}
+        <option value="{{ employee.pk }}">{{ employee }}</option>
+      {% endfor %}
+    </select>
+    <input type="month" name="month_year" id="month_year">
+    <button type="submit" class="btn btn-primary">
+      {% translate "Generate" %}
+    </button>
+  </form>
+</div>
+{% endblock page_header %}
+
+{% block employee_info %}
+<table class="table">
+  <tr>
+    <th colspan="7">
+      <h2>{% translate "Time Sheet" %}</h2>
+    </th>
+  </tr>
+  <tr>
+    <th>{% translate "Employee:" %}</th>
+    <td>{{ time_sheet.0.employee_hiring }}</td>
+    <th>{% translate "Pis Number:" %}</th>
+    <td>{{ time_sheet.0.employee_hiring.employee.pis_number }}</td>
+    <th>{% translate "Enterprise" %}</th>
+    <td>{{ time_sheet.0.employee_hiring.enterprise }}</td>
+    <td>
+      <div>
+        <a class="btn btn-secondary" href="{% url "human_resources:time_sheet_edit" pk_employee month_year %}">
+          <i class="icon_settings"></i>
+        </a>
+        <a class="btn btn-secondary" href="#">
+          <i class="icon_print"></i>
+        </a>
+      </div>
+    </td>
+  </tr>
+</table>
+{% endblock employee_info %}
+
+{% block timesheet %}
+<table class="table mt-3">
+  <tr>
+    <th>{% translate "Date" %}</th>
+    <th>{% translate "Week" %}</th>
+    <th>{% translate "Entry" %}</th>
+    <th>{% translate "Exit" %}</th>
+    <th>{% translate "Entry" %}</th>
+    <th>{% translate "Exit" %}</th>
+    <th>{% translate "Entry" %}</th>
+    <th>{% translate "Exit" %}</th>
+  </tr>
+  {% for point in time_sheet %}
+  {% if point.date|date:'w' == '0' %}
+  <tr class="warning-100">
+  {% elif point.date|date:'w' == '6' %}
+  <tr class="primary-100">
+  {% else %}
+  <tr>
+  {% endif %}
+    <td>{{ point.date|date:'d/m/Y' }}</td>
+    <td>{{ point.date|date:'d/m/Y' }}</td>
+    <td>{{ point.first_entry }}</td>
+    <td>{{ point.first_exit}}</td>
+    <td>{{ point.second_entry }}</td>
+    <td>{{ point.second_exit }}</td>
+    <td>{{ point.third_entry }}</td>
+    <td>{{ point.third_exit }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock timesheet %}

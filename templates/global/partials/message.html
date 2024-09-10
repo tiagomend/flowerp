@@ -1,0 +1,15 @@
+{% if messages %}
+  {% for message in messages %}
+  <div class="notification">
+    <div class="message {{message.tags}}">
+      {% if message.tags == 'message-success' %}
+      <i class="icon_check"></i>
+      {% endif %}
+      {% if message.tags == 'message-error' %}
+      <i class="icon_close"></i>
+      {% endif %}
+      {{message}}
+    </div>
+  </div>
+  {% endfor %}
+{% endif %}

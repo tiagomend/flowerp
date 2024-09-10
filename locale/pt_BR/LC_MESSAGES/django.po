@@ -1,0 +1,356 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-10 14:30-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\core\views.py:19
+#: .\human_resources\templates\human_resources\document_read.html:13
+#: .\templates\global\read.html:13
+msgid "New"
+msgstr "Criar"
+
+#: .\core\views.py:42 .\core\views.py:84
+msgid "Save with success!"
+msgstr "Salvo com sucesso!"
+
+#: .\core\views.py:51 .\core\views.py:90
+msgid "Error: An error has occurred!"
+msgstr "Erro: Ocorreu um erro!"
+
+#: .\core\views.py:104
+msgid "List of"
+msgstr "Lista de"
+
+#: .\human_resources\models.py:23
+msgid "Employee Position"
+msgstr "Cargo do Funcionário"
+
+#: .\human_resources\models.py:30 .\human_resources\models.py:113
+#: .\human_resources\presenters.py:47 .\human_resources\presenters.py:75
+#: .\human_resources\presenters.py:127 .\human_resources\presenters.py:151
+msgid "Position"
+msgstr "Cargo"
+
+#: .\human_resources\models.py:32 .\human_resources\presenters.py:128
+msgid "Level"
+msgstr "Nível"
+
+#: .\human_resources\models.py:35
+msgid "Monthly"
+msgstr "Mensal"
+
+#: .\human_resources\models.py:35
+msgid "Hourly"
+msgstr "Horário"
+
+#: .\human_resources\models.py:36 .\human_resources\presenters.py:129
+msgid "Modality"
+msgstr "Modalidade"
+
+#: .\human_resources\models.py:41 .\human_resources\presenters.py:130
+msgid "Base Salary"
+msgstr "Salário Base"
+
+#: .\human_resources\models.py:45 .\human_resources\models.py:49
+msgid "$"
+msgstr "R$"
+
+#: .\human_resources\models.py:53 .\human_resources\models.py:61
+#: .\human_resources\models.py:149 .\human_resources\presenters.py:76
+msgid "Salary"
+msgstr "Salário"
+
+#: .\human_resources\models.py:57 .\human_resources\models.py:306
+#: .\human_resources\presenters.py:150
+#: .\human_resources\templates\human_resources\time_sheet.html:57
+#: .\human_resources\templates\human_resources\time_sheet_edit.html:39
+msgid "Date"
+msgstr "Data"
+
+#: .\human_resources\models.py:68 .\human_resources\presenters.py:152
+msgid "Previous Salary"
+msgstr "Salário Anterior"
+
+#: .\human_resources\models.py:72
+msgid "Percentage"
+msgstr "Porcentagem"
+
+#: .\human_resources\models.py:72
+msgid "Amount"
+msgstr "Valor"
+
+#: .\human_resources\models.py:73 .\human_resources\presenters.py:153
+msgid "Adjustment Type"
+msgstr "Tipo de Ajuste"
+
+#: .\human_resources\models.py:78 .\human_resources\presenters.py:154
+msgid "Adjustment Value"
+msgstr "Valor do Ajuste"
+
+#: .\human_resources\models.py:80
+msgid "Reason"
+msgstr "Motivo"
+
+#: .\human_resources\models.py:103
+msgid "Salary Adjustment"
+msgstr "Ajuste Salarial"
+
+#: .\human_resources\models.py:107
+msgid "First name"
+msgstr "Nome"
+
+#: .\human_resources\models.py:108
+msgid "Last name"
+msgstr "Sobrenome"
+
+#: .\human_resources\models.py:109 .\human_resources\presenters.py:73
+#: .\human_resources\presenters.py:105
+msgid "Pis number"
+msgstr "Número do PIS"
+
+#: .\human_resources\models.py:120 .\human_resources\models.py:127
+msgid "Employee"
+msgstr "Funcionário"
+
+#: .\human_resources\models.py:129 .\human_resources\presenters.py:78
+msgid "Admission date"
+msgstr "Data de Admissão"
+
+#: .\human_resources\models.py:133 .\human_resources\presenters.py:79
+msgid "Expiry of experience"
+msgstr "Término da Experiência"
+
+#: .\human_resources\models.py:138 .\human_resources\presenters.py:80
+msgid "Termination date"
+msgstr "Data de Demissão"
+
+#: .\human_resources\models.py:143 .\human_resources\presenters.py:77
+#: .\human_resources\templates\human_resources\time_sheet.html:38
+#: .\human_resources\templates\human_resources\time_sheet_edit.html:28
+msgid "Enterprise"
+msgstr "Empresa"
+
+#: .\human_resources\models.py:160
+msgid "There is already a hiring with this employee!"
+msgstr "Já existe uma contratação com este funcionário!"
+
+#: .\human_resources\models.py:180
+msgid "Active"
+msgstr "Ativo"
+
+#: .\human_resources\models.py:180
+msgid "Inactive"
+msgstr "Inativo"
+
+#: .\human_resources\models.py:186 .\human_resources\models.py:273
+#: .\human_resources\models.py:304 .\human_resources\models.py:338
+msgid "Employee Hiring"
+msgstr "Contratação de Funcionário"
+
+#: .\human_resources\models.py:187
+msgid "Employee Hirings"
+msgstr "Contratações de Funcionários"
+
+msgid "Day"
+msgstr "Dia"
+
+msgid "Month"
+msgstr "Mês"
+
+msgid "Descrição"
+msgstr "Descrição"
+
+msgid "Holiday"
+msgstr "Feriado"
+
+msgid "Point"
+msgstr "Ponto"
+
+msgid "Observation"
+msgstr "Observação"
+
+msgid "Start date"
+msgstr "Data de Início"
+
+msgid "End date"
+msgstr "Data de Término"
+
+msgid "Taken from"
+msgstr "Tirado de"
+
+msgid "to"
+msgstr "até"
+
+msgid "Vacation"
+msgstr "Férias"
+
+msgid "Hours owed"
+msgstr "Horas Devidas"
+
+msgid "Hours compensated"
+msgstr "Horas Compensadas"
+
+msgid "Hours Bank"
+msgstr "Banco de Horas"
+
+msgid "Name"
+msgstr "Nome"
+
+msgid "Issue date"
+msgstr "Data de Emissão"
+
+msgid "Expiration date"
+msgstr "Data de Expiração"
+
+msgid "File"
+msgstr "Arquivo"
+
+msgid "Document"
+msgstr "Documento"
+
+msgid "Pis Number"
+msgstr "Número do PIS"
+
+msgid "Vacation limit"
+msgstr "Limite para Férias"
+
+msgid "Document Name"
+msgstr "Nome do Documento"
+
+msgid "Employee Name"
+msgstr "Nome do Funcionário"
+
+msgid "Save"
+msgstr "Salvar"
+
+msgid "Select File"
+msgstr "Selecionar Arquivo"
+
+msgid "No file chosen"
+msgstr "Nenhum arquivo selecionado"
+
+msgid "Time Sheet Report"
+msgstr "Relatório de Folha de Ponto"
+
+msgid "Select Employee"
+msgstr "Selecionar Funcionário"
+
+msgid "Generate"
+msgstr "Gerar"
+
+msgid "Time Sheet"
+msgstr "Folha de Ponto"
+
+msgid "Employee:"
+msgstr "Funcionário:"
+
+msgid "Pis Number:"
+msgstr "Número do PIS:"
+
+msgid "Week"
+msgstr "Semana"
+
+msgid "Entry"
+msgstr "Entrada"
+
+msgid "Exit"
+msgstr "Saída"
+
+msgid "No reports generated yet"
+msgstr ""
+
+msgid "Normal Hrs"
+msgstr "Hrs normais"
+
+msgid "Overtime 50%"
+msgstr "Hrs extras 50%"
+
+msgid "Overtime 100%"
+msgstr "Hrs extras 100%"
+
+msgid "Time Sheet Edit"
+msgstr "Editar Folha de Ponto"
+
+msgid "Sales"
+msgstr "Vendas"
+
+msgid "Warehouse"
+msgstr "Almoxarifado"
+
+msgid "Purchase"
+msgstr "Compras"
+
+msgid "Manufacturing"
+msgstr "Fabricação"
+
+msgid "Human Resources"
+msgstr "Recursos Humanos"
+
+msgid "Messages"
+msgstr ""
+
+msgid "Site Maps"
+msgstr ""
+
+msgid "Static Files"
+msgstr "Selecionar Arquivo"
+
+msgid "Employee List"
+msgstr "Lista de Funcionários"
+
+msgid "Create New Employee"
+msgstr "Criar Novo Funcionário"
+
+msgid "Position List"
+msgstr "Lista de Cargos"
+
+msgid "Create New Position"
+msgstr "Criar Novo Cargo"
+
+msgid "Employee Hirings List"
+msgstr "Lista de Contratações"
+
+msgid "Create Employee Hirings"
+msgstr "Criar Nova Contratação"
+
+msgid "Vacation List"
+msgstr "Lista de Férias"
+
+msgid "Create New Vacation"
+msgstr "Registrar Nova Férias"
+
+msgid "Register Point Prisma Henry"
+msgstr "Registrar Ponto Prisma Henry"
+
+msgid "Salary List"
+msgstr "Lista de Salários"
+
+msgid "Create New Salary"
+msgstr "Criar Novo Salário"
+
+msgid "Salary Adjustment List"
+msgstr "Lista de Ajuste Salarial"
+
+msgid "Create Salary Adjustment"
+msgstr "Gerar Ajuste Salarial"
+
+msgid "Document List"
+msgstr "Lista de Documentos"
+
+msgid "Create New Document"
+msgstr "Anexar Novo Documento"

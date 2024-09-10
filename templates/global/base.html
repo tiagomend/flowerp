@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="{{ html_language }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static "css/style.css" %}">
+  <link rel="stylesheet" href="{% static "icon/style.css" %}">
+  <script type="module" src="{% static "js/main.js" %}"></script>
+  <title>FlowERP</title>
+</head>
+<body>
+  <div class="screen-base">
+    {% include "global/partials/side_bar.html" %}
+
+    <section class="main-side">
+      <header class="main-header shadow-sm">
+        
+      </header>
+
+      <main class="main-content">
+        {% block content %}{% endblock content %}
+      </main>
+    </section>
+  </div>
+  {% include "global/partials/message.html" %}
+</body>
+</html>

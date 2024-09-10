@@ -1,0 +1,31 @@
+{% load static %}
+{% load i18n %}
+
+<aside class="side-bar">
+  <nav>
+    <a href="#" class="nav-item">
+      <i class="icon_account_balance_wallet"></i>
+      {% translate "Sales" %}
+    </a>
+
+    <a href="#" class="nav-item">
+      <i class="icon_garage_home"></i>
+      {% translate "Warehouse" %}
+    </a>
+
+    <a href="#" class="nav-item">
+      <i class="icon_shopping_bag"></i>
+      {% translate "Purchase" %}
+    </a>
+
+    <a href="#" class="nav-item">
+      <i class="icon_factory"></i>
+      {% translate "Manufacturing" %}
+    </a>
+
+    <a href="{% url "human_resources:index" %}" class="nav-item">
+      <i class="icon_badge"></i>
+      {% translate "Human Resources" %}
+    </a>
+  </nav>
+</aside>

@@ -1,0 +1,46 @@
+{% extends "global/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="card">
+  <div class="card-header flex space-between">
+    {% block page_header %}{% endblock page_header %}
+  </div>
+  <div class="card-body">
+    {% if time_sheet %}
+    <div class="row">
+      <div class="col-12">
+        {% block employee_info %}{% endblock employee_info %}
+
+        {% block timesheet %}{% endblock timesheet %}
+      </div>
+    </div>
+    
+    {% else %}
+    <div class="container no-info">
+        <i class="icon_notifications"></i>
+        <h3>{% translate "No reports generated yet" %}</h3>
+    </div>
+    {% endif %}
+
+    {% if normal_hours %}
+    <div class="row">
+      <div class="col-6">
+        <table class="table">
+          <tr>
+            <th>{% translate "Normal Hrs" %}</th>
+            <th>{% translate "Overtime 50%" %}</th>
+            <th>{% translate "Overtime 100%" %}</th>
+          </tr>
+          <tr>
+            <td>{{ normal_hours }}</td>
+            <td>{{ fifty_percent_hours }}</td>
+            <td>{{ hundred_percent_hours }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock content %}
