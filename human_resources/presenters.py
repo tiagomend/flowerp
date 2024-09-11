@@ -114,8 +114,10 @@ class SalaryPresenter(Presenter):
 
     @property
     def values(self):
+        level = self.model.level if self.model.level else ''
+
         return [
-            f'{self.model.position} {self.model.level}',
+            f'{self.model.position} {level}',
             self.model.get_modality_display(),
             self.model.base_salary
         ]
