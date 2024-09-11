@@ -125,7 +125,7 @@ msgstr "Número do PIS"
 
 #: .\human_resources\models.py:120 .\human_resources\models.py:127
 msgid "Employee"
-msgstr "Funcionário"
+msgstr "Pessoa"
 
 #: .\human_resources\models.py:129 .\human_resources\presenters.py:78
 msgid "Admission date"
@@ -311,10 +311,10 @@ msgid "Static Files"
 msgstr "Selecionar Arquivo"
 
 msgid "Employee List"
-msgstr "Lista de Funcionários"
+msgstr "Lista de Pessoas"
 
 msgid "Create New Employee"
-msgstr "Criar Novo Funcionário"
+msgstr "Criar Nova Pessoa"
 
 msgid "Position List"
 msgstr "Lista de Cargos"
