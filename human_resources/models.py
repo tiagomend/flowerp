@@ -51,6 +51,9 @@ class Salary(models.Model):
 
     class Meta:
         verbose_name = _('Salary')
+        constraints = [
+            models.UniqueConstraint(fields=['position', 'level'], name='unique_position_level')
+        ]
 
 
 class SalaryAdjustment(models.Model):
@@ -101,6 +104,9 @@ class SalaryAdjustment(models.Model):
 
     class Meta:
         verbose_name = _('Salary Adjustment')
+        constraints = [
+            models.UniqueConstraint(fields=['date', 'salary'], name='unique_date_salary')
+        ]
 
 
 class Employee(models.Model):
