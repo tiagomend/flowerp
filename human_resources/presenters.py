@@ -115,8 +115,7 @@ class SalaryPresenter(Presenter):
     @property
     def values(self):
         return [
-            self.model.position,
-            self.model.level,
+            f'{self.model.position} {self.model.level}',
             self.model.get_modality_display(),
             self.model.base_salary
         ]
@@ -125,7 +124,6 @@ class SalaryPresenter(Presenter):
     def headers(self):
         return [
             _('Position'),
-            _('Level'),
             _('Modality'),
             _('Base Salary')
         ]
