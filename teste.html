@@ -8,24 +8,25 @@
 </head>
 
 <body>
-  <div class="awesomplete">
-    <select name="">
-      <option value="1">Option 1</option>
-      <option value="2">Option 2</option>
-      <option value="3">Option 3</option>
-      <option value="4">Option 4</option>
-      <option value="5">Option 5</option>
-      <option value="6">Option 6</option>
-      <option value="7">Option 7</option>
-      <option value="8">Option 8</option>
-      <option value="9">Option 9</option>
-    </select>
-  </div>
+  <form action="">
+    <div class="awesomplete">
+      <select name="select">
+        <option value=""></option>
+        <option value="1">Option 1</option>
+        <option value="2">Option 2</option>
+        <option value="3">Option 3</option>
+        <option value="4">Option 4</option>
+        <option value="5">Option 5</option>
+        <option value="6">Option 6</option>
+        <option value="7">Option 7</option>
+        <option value="8">Option 8</option>
+        <option value="9">Option 9</option>
+      </select>
+    </div>
+    <input type="submit" value="submit">
+  </form>
 
   <script>
-    // const awesomplete = document.getElementById('awesomplete');
-    // const select = awesomplete.firstElementChild;
-
     const Awesomplete = () => {
       const awesomplete = [...document.getElementsByClassName("awesomplete")];
 
@@ -40,8 +41,9 @@
             textContent: option.textContent
           })
         }
+        select.style.visibility = 'hidden';
+        select.style.position = 'absolute';
 
-        select.style.visibility = 'hidden'
         return data;
       }
 
@@ -54,7 +56,7 @@
       function getRelatedData(data, value) {
         return (
           data.filter(item => {
-            return item.toLowerCase()
+            return item.textContent.toLowerCase()
               .includes(value.toLowerCase())
           })
         )
@@ -63,6 +65,15 @@
       function cleanBox(box) {
         while (box.firstChild) {
           box.removeChild(box.firstChild);
+        }
+      }
+
+      function getIndex(selectElement, textContent) {
+        for (let i = 0; i < selectElement.length; i++) {
+          if (selectElement[i].textContent === textContent) {
+            return i;
+            break;
+          }
         }
       }
 
@@ -100,7 +111,7 @@
           return
         }
         filteredOptions.forEach((content) => {
-          const option = createOptionButton(content);
+          const option = createOptionButton(content.textContent);
           box.appendChild(option);
           element.appendChild(box);
         });
@@ -108,7 +119,10 @@
 
       awesomplete.forEach(async (element) => {
         const data = getDataForOptions(element);
-        const input = document.creat
+        const input = document.createElement('input');
+        input.style.position = 'relative';
+
+        element.appendChild(input);
         const box = createBoxForOptions();
 
         element.addEventListener('input', (e) => {
@@ -119,8 +133,9 @@
         });
 
         box.addEventListener('click', (e) => {
-          const input = element.querySelector('[type="text"]');
+          const select = element.firstElementChild;
           input.value = e.target.textContent;
+          select.selectedIndex = getIndex(data, e.target.textContent);
           hideBox(element, box);
         });
 

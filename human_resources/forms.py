@@ -1,5 +1,6 @@
 from django import forms
 
+from core.widgets import Awesomplete
 from human_resources.models import (
     EmployeePosition,
     Employee,
@@ -22,6 +23,10 @@ class EmployeeForm(forms.ModelForm):
         model = Employee
         fields = '__all__'
 
+        widgets = {
+            'position': Awesomplete(),
+        }
+
 
 class EmployeeHiringForm(forms.ModelForm):
     class Meta:
@@ -29,6 +34,8 @@ class EmployeeHiringForm(forms.ModelForm):
         fields = '__all__'
 
         widgets = {
+            'employee': Awesomplete(),
+            'salary': Awesomplete(),
             'admission_date': forms.TextInput(attrs={'type': 'date'}),
             'expiry_of_experience': forms.TextInput(attrs={'type': 'date'}),
             'termination_date': forms.TextInput(attrs={'type': 'date'}),
@@ -54,6 +61,7 @@ class VacationForm(forms.ModelForm):
         fields = '__all__'
 
         widgets = {
+            'employee_hiring': Awesomplete(),
             'start_date': forms.TextInput(attrs={'type': 'date'}),
             'end_date': forms.TextInput(attrs={'type': 'date'})
         }
@@ -64,6 +72,10 @@ class SalaryForm(forms.ModelForm):
         model = Salary
         fields = '__all__'
 
+        widgets = {
+            'position': Awesomplete(),
+        }
+
 
 class SalaryAdjustmentForm(forms.ModelForm):
     class Meta:
@@ -71,6 +83,7 @@ class SalaryAdjustmentForm(forms.ModelForm):
         exclude = ['previous_salary']
 
         widgets = {
+            'salary': Awesomplete(),
             'date': forms.TextInput(attrs={'type': 'date'}),
         }
 
@@ -81,6 +94,7 @@ class DocumentForm(forms.ModelForm):
         fields = '__all__'
 
         widgets = {
+            'employee_hiring': Awesomplete(),
             'issue_date': forms.TextInput(attrs={'type': 'date'}),
             'expiration_date': forms.TextInput(attrs={'type': 'date'}),
         }

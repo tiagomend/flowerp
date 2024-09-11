@@ -157,7 +157,7 @@ class EmployeeHiring(models.Model):
         Salary,
         on_delete=models.PROTECT,
         default=1,
-        verbose_name=_('Salary')
+        verbose_name=_('Position')
     )
 
     def save(self, *args, **kwargs) -> None:

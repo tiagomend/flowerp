@@ -71,35 +71,159 @@ const SubmitTimeSheet = () => {
   const btnTimeSheet = document.getElementById('btnTimeSheet');
   const csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
 
-  btnTimeSheet.addEventListener('click', function () {
-    fetch('', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRFToken': csrfToken
-      },
-      body: JSON.stringify(TimeSheet()),
-    })
-      .then(response => response.json())
-      .then(data => {
-        const message = document.createElement('div')
-        const html = `
-            <div class="notification">
-                <div class="message message-success">
-                <i class="icon_check"></i>
-                ${data.msg}
-                </div>
-            </div>
-            `
-        message.innerHTML = html;
-        document.body.appendChild(message);
-
-        NotificationAutoHide();
+  if (btnTimeSheet) {
+    btnTimeSheet.addEventListener('click', function () {
+      fetch('', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrfToken
+        },
+        body: JSON.stringify(TimeSheet()),
       })
-      .catch((error) => {
-        console.error('Erro:', error);
-      });
-  });
+        .then(response => response.json())
+        .then(data => {
+          const message = document.createElement('div')
+          const html = `
+              <div class="notification">
+                  <div class="message message-success">
+                  <i class="icon_check"></i>
+                  ${data.msg}
+                  </div>
+              </div>
+              `
+          message.innerHTML = html;
+          document.body.appendChild(message);
+
+          NotificationAutoHide();
+        })
+        .catch((error) => {
+          console.error('Erro:', error);
+        });
+    });
+  }
 }
 
 SubmitTimeSheet();
+
+
+const Awesomplete = () => {
+  const awesomplete = [...document.getElementsByClassName('awesomplete')];
+
+  function getDataForOptions(element) {
+    const select = element.firstElementChild;
+    const options = [...select.getElementsByTagName('option')];
+    const data = [];
+
+    for (const option of options) {
+      data.push({
+        value: option.value,
+        textContent: option.textContent
+      })
+    }
+    select.style.visibility = 'hidden';
+    select.style.position = 'absolute';
+
+    return data;
+  }
+
+  function createBoxForOptions() {
+    const box = document.createElement('div');
+    box.className = 'awesomplete-options';
+    return box
+  }
+
+  function getRelatedData(data, value) {
+    return (
+      data.filter(item => {
+        return item.textContent.toLowerCase()
+          .includes(value.toLowerCase())
+      })
+    )
+  }
+
+  function cleanBox(box) {
+    while (box.firstChild) {
+      box.removeChild(box.firstChild);
+    }
+  }
+
+  function getIndex(selectElement, textContent) {
+    for (let i = 0; i < selectElement.length; i++) {
+      if (selectElement[i].textContent === textContent) {
+        return i;
+      }
+    }
+  }
+
+  function createOptionButton(textContent) {
+    const option = document.createElement('button');
+    option.className = 'awesomplete-btn';
+    option.type = 'button';
+    option.textContent = textContent;
+    return option;
+  }
+
+  function createNotOptionButton() {
+    const option = document.createElement('button');
+    option.className = 'awesomplete-btn';
+    option.type = 'button';
+    option.innerHTML = `<strong>Nenhuma opção econtrada!</strong>`;
+    return option;
+  }
+
+  function hideBox(element, box) {
+    if (element.contains(box)) {
+      element.removeChild(box);
+    }
+  }
+
+  function showBox(value, filteredOptions, box, element) {
+    if (!value) {
+      hideBox(element, box);
+      return
+    }
+    if (!filteredOptions.length) {
+      const option = createNotOptionButton();
+      box.appendChild(option);
+      element.appendChild(box);
+      return
+    }
+    filteredOptions.forEach((content) => {
+      const option = createOptionButton(content.textContent);
+      box.appendChild(option);
+      element.appendChild(box);
+    });
+  }
+
+  awesomplete.forEach(async (element) => {
+    const data = getDataForOptions(element);
+    const input = document.createElement('input');
+    input.style.position = 'relative';
+
+    element.appendChild(input);
+    const box = createBoxForOptions();
+
+    element.addEventListener('input', (e) => {
+      const value = e.target.value;
+      const filteredOptions = getRelatedData(data, value);
+      cleanBox(box);
+      showBox(value, filteredOptions, box, element);
+    });
+
+    box.addEventListener('click', (e) => {
+      const select = element.firstElementChild;
+      input.value = e.target.textContent;
+      select.selectedIndex = getIndex(data, e.target.textContent);
+      hideBox(element, box);
+    });
+
+    window.addEventListener('click', (e) => {
+      if (!element.contains(e.target)) {
+        hideBox(element, box);
+      }
+    });
+  });
+}
+
+Awesomplete();
