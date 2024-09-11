@@ -393,7 +393,7 @@ class TimeSheetEdit(View):
     def post(self, request, employee_hiring, month_year):
         employee = EmployeeHiring.objects.get(pk=employee_hiring)
         data = json.loads(request.body)
-        json.loads(month_year)
+        print(month_year)
 
         for value in data:
             date_request = value[0]['date']
