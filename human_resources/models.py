@@ -43,7 +43,7 @@ class Salary(models.Model):
 
     def __str__(self):
         money = _('$')
-        return f'{self.position} {self.level} - {money}{self.base_salary}'
+        return f'{self.display_position()} - {money}{self.base_salary}'
 
     def display_salary(self):
         money = _('$')
