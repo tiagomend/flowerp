@@ -44,7 +44,7 @@ from human_resources.models import (
 class CreateEmployeePosition(CreateView):
     icon = 'icon_schema'
     form = EmployeePositionForm
-    redirect = 'human_resources:update_position'
+    redirect = 'human_resources:create_position'
 
 
 class UpdateEmployeePosition(UpdateView):
@@ -66,7 +66,7 @@ class ReadEmployeePosition(ReadView):
 class CreateEmployee(CreateView):
     icon = 'icon_badge'
     form = EmployeeForm
-    redirect = 'human_resources:update_employee'
+    redirect = 'human_resources:create_employee'
 
 
 class UpdateEmployee(UpdateView):
@@ -88,7 +88,7 @@ class ReadEmployee(ReadView):
 class CreateEmployeeHiring(CreateView):
     icon = 'icon_badge'
     form = EmployeeHiringForm
-    redirect = 'human_resources:update_hiring'
+    redirect = 'human_resources:create_hiring'
 
 
 class UpdateEmployeeHiring(UpdateView):
@@ -110,7 +110,7 @@ class ReadEmployeeHiring(ReadView):
 class CreateVacation(CreateView):
     icon = 'icon_event_available'
     form = VacationForm
-    redirect = 'human_resources:update_vacation'
+    redirect = 'human_resources:create_vacation'
 
 
 class UpdateVacation(UpdateView):
@@ -427,7 +427,7 @@ class TimeSheetEdit(View):
 class CreateSalary(CreateView):
     icon = 'icon_account_balance_wallet'
     form = SalaryForm
-    redirect = 'human_resources:update_salary'
+    redirect = 'human_resources:create_salary'
 
 
 class UpdateSalary(UpdateView):
@@ -449,7 +449,7 @@ class ReadSalary(ReadView):
 class CreateSalaryAdjustment(CreateView):
     icon = 'icon_account_balance_wallet'
     form = SalaryAdjustmentForm
-    redirect = 'human_resources:update_salary_adjustment'
+    redirect = 'human_resources:create_salary_adjustment'
 
 
 class UpdateSalaryAdjustment(UpdateView):

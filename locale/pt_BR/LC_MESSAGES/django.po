@@ -52,11 +52,11 @@ msgstr "Nível"
 
 #: .\human_resources\models.py:35
 msgid "Monthly"
-msgstr "Mensal"
+msgstr "Mensalista"
 
 #: .\human_resources\models.py:35
 msgid "Hourly"
-msgstr "Horário"
+msgstr "Horista"
 
 #: .\human_resources\models.py:36 .\human_resources\presenters.py:129
 msgid "Modality"
