@@ -134,7 +134,6 @@ class EmployeeHiring(models.Model):
     employee = models.ForeignKey(
         Employee,
         on_delete=models.PROTECT,
-        blank=True,
         verbose_name=_('Employee')
     )
     admission_date = models.DateField(blank=True, verbose_name=_('Admission date'))
@@ -156,7 +155,6 @@ class EmployeeHiring(models.Model):
     salary = models.ForeignKey(
         Salary,
         on_delete=models.PROTECT,
-        default=1,
         verbose_name=_('Position')
     )
 
