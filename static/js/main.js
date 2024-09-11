@@ -123,6 +123,7 @@ const Awesomplete = () => {
     }
     select.style.visibility = 'hidden';
     select.style.position = 'absolute';
+    select.selectedIndex = 0;
 
     return data;
   }
@@ -208,6 +209,8 @@ const Awesomplete = () => {
       const value = e.target.value;
       const filteredOptions = getRelatedData(data, value);
       cleanBox(box);
+      const select = element.firstElementChild;
+      select.selectedIndex = 0;
       showBox(value, filteredOptions, box, element);
     });
 
