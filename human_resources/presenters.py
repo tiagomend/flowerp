@@ -167,9 +167,12 @@ class DocumentPresenter(Presenter):
 
     @property
     def values(self):
-        between = days_between(self.model.expiration_date)
+        between = days_between(self.model.expiration_date) if self.model.expiration_date else ''
 
-        if between <= 15:
+        if not between.isnumeric():
+            expiration_date = ''
+
+        elif between <= 15:
             expiration_date = badge(
                 self.model.expiration_date.strftime('%d/%m/%Y'),
                 'error-100'
