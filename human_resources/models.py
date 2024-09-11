@@ -348,8 +348,8 @@ class Document(models.Model):
         blank=True,
         verbose_name=_('Employee Hiring')
     )
-    issue_date = models.DateField(verbose_name=_('Issue date'))
-    expiration_date = models.DateField(verbose_name=_('Expiration date'))
+    issue_date = models.DateField(verbose_name=_('Issue date'), null=True, blank=True)
+    expiration_date = models.DateField(verbose_name=_('Expiration date'), null=True, blank=True)
     file = models.FileField(upload_to=rename_file, verbose_name=_('File'))
 
     def __str__(self) -> str:
