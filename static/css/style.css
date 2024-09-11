@@ -795,10 +795,12 @@ body {
 .awesomplete {
     position: relative;
     width: 100%;
+    margin-bottom: var(--spacing-2);
 }
 
 .awesomplete input {
     width: 100%;
+    margin-bottom: 0px;
 }
 
 .awesomplete-options {
@@ -808,13 +810,14 @@ body {
     align-items: start;
     background-color: var(--white-color);
     width: 100%;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     border: 1px solid var(--border-color);
     padding: var(--spacing-2) 0;
     left: var(--spacing-0);
     right: var(--spacing-0);
     top: 100%;
+    z-index: 99;
 }
 
 .awesomplete-options button {
