@@ -29,7 +29,7 @@ class Salary(models.Model):
         on_delete=models.PROTECT,
         verbose_name=_('Position')
     )
-    level = models.CharField(max_length=6, verbose_name=_('Level'))
+    level = models.CharField(max_length=6, verbose_name=_('Level'), null=True, blank=True)
     modality = models.CharField(
         max_length=7,
         choices=[('monthly', _('Monthly')), ('hourly', _('Hourly'))],
