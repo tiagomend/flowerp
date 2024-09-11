@@ -60,7 +60,7 @@ class ReadEmployeePosition(ReadView):
     redirect_for_edit = 'human_resources:read_position'
 
     def get_presenters(self):
-        return EmployeePositionPresenter.all()
+        return EmployeePositionPresenter.all('name')
 
 
 class CreateEmployee(CreateView):
@@ -82,7 +82,7 @@ class ReadEmployee(ReadView):
     redirect_for_edit = 'human_resources:read_employee'
 
     def get_presenters(self):
-        return EmployeePresenter.all()
+        return EmployeePresenter.all('first_name')
 
 
 class CreateEmployeeHiring(CreateView):
@@ -104,7 +104,7 @@ class ReadEmployeeHiring(ReadView):
     redirect_for_edit = 'human_resources:read_hiring'
 
     def get_presenters(self):
-        return EmployeeHiringPresenter.all()
+        return EmployeeHiringPresenter.all('employee__first_name')
 
 
 class CreateVacation(CreateView):
@@ -393,6 +393,7 @@ class TimeSheetEdit(View):
     def post(self, request, employee_hiring, month_year):
         employee = EmployeeHiring.objects.get(pk=employee_hiring)
         data = json.loads(request.body)
+        json.loads(month_year)
 
         for value in data:
             date_request = value[0]['date']
@@ -443,7 +444,7 @@ class ReadSalary(ReadView):
     redirect_for_edit = 'human_resources:read_salary'
 
     def get_presenters(self):
-        return SalaryPresenter.all()
+        return SalaryPresenter.all('position__name')
 
 
 class CreateSalaryAdjustment(CreateView):
@@ -498,7 +499,7 @@ def view_document(_, document_id):
         document = Document.objects.get(pk=document_id)
         return FileResponse(document.file.open(), content_type='application/pdf')
     except Document.DoesNotExist:
-        raise Http404("Document not found")
+        raise Http404("Document not found") from Document.DoesNotExist
 
 
 class HumanResourcesIndex(View):
