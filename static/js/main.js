@@ -200,7 +200,9 @@ const Awesomplete = () => {
   awesomplete.forEach(async (element) => {
     const data = getDataForOptions(element);
     const input = document.createElement('input');
+    const select = element.firstElementChild;
     input.style.position = 'relative';
+    input.value = select.querySelector('option[selected]').textContent;
 
     element.appendChild(input);
     const box = createBoxForOptions();
