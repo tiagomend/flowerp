@@ -794,7 +794,7 @@ body {
 /* Awesomplete Component */
 .awesomplete {
     position: relative;
-    display: inline-block;
+    width: 100%;
 }
 
 .awesomplete-options {
