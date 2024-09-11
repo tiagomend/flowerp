@@ -49,6 +49,11 @@ class Salary(models.Model):
         money = _('$')
         return f'{money} {self.base_salary} - ({self.get_modality_display()})'
 
+    def display_position(self):
+        level = self.level if self.level else ''
+
+        return f'{self.position} {level}'
+
     class Meta:
         verbose_name = _('Salary')
         constraints = [

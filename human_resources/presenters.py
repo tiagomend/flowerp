@@ -114,10 +114,8 @@ class SalaryPresenter(Presenter):
 
     @property
     def values(self):
-        level = self.model.level if self.model.level else ''
-
         return [
-            f'{self.model.position} {level}',
+            self.model.display_position(),
             self.model.get_modality_display(),
             self.model.base_salary
         ]
@@ -138,7 +136,7 @@ class SalaryAdjustmentPresenter(Presenter):
     def values(self):
         return [
             self.model.date,
-            self.model.salary.position,
+            self.model.salary.display_position(),
             self.model.previous_salary,
             self.model.get_adjustment_type_display(),
             self.model.adjustment_value,
