@@ -40,7 +40,7 @@ class CreateView(View):
             try:
                 form.save()
                 messages.success(request, _('Save with success!'))
-                return redirect(self.redirect, form.instance.pk)
+                return redirect(self.redirect)
 
             except ErrorSavingModel as error:
                 messages.error(request, error.message)
