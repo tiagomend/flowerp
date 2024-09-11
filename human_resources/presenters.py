@@ -169,7 +169,7 @@ class DocumentPresenter(Presenter):
     def values(self):
         between = days_between(self.model.expiration_date) if self.model.expiration_date else ''
 
-        if not between.isnumeric():
+        if not between:
             expiration_date = ''
 
         elif between <= 15:
@@ -186,7 +186,7 @@ class DocumentPresenter(Presenter):
         return [
             self.model.name,
             self.model.employee_hiring,
-            self.model.issue_date,
+            self.model.issue_date if self.model.issue_date else '',
             expiration_date,
         ]
 
