@@ -239,6 +239,12 @@ const Awesomplete = () => {
         hideBox(element, box);
       }
     });
+
+    window.addEventListener('load', (e) => {
+      const select = element.firstElementChild;
+      select.selectedIndex = getIndex(data, input.value);
+      hideBox(element, box);
+    });
   });
 }
 
