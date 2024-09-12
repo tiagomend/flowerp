@@ -117,7 +117,7 @@ class SalaryAdjustment(models.Model):
 class Employee(models.Model):
     first_name = models.CharField(max_length=50, verbose_name=_('First name'))
     last_name = models.CharField(max_length=80, verbose_name=_('Last name'))
-    pis_number = models.CharField(max_length=11, verbose_name=_('Pis number'))
+    pis_number = models.CharField(max_length=11, verbose_name=_('Pis number'), unique=True)
     position = models.ForeignKey(
         EmployeePosition,
         on_delete=models.PROTECT,
