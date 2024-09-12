@@ -462,8 +462,8 @@ class UpdateSalaryAdjustment(UpdateView):
 class ReadSalaryAdjustment(ReadView):
     icon = 'icon_account_balance_wallet'
     model = SalaryAdjustmentForm.Meta.model
-    redirect_for_new = 'human_resources:create_salary'
-    redirect_for_edit = 'human_resources:read_salary'
+    redirect_for_new = 'human_resources:create_salary_adjustment'
+    redirect_for_edit = 'human_resources:read_salary_adjustment'
 
     def get_presenters(self):
         return SalaryAdjustmentPresenter.all()
