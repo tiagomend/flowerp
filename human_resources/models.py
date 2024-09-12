@@ -163,7 +163,8 @@ class EmployeeHiring(models.Model):
 
             if EmployeeHiring.objects.filter(
                 employee=self.employee,
-                termination_date__isnull=True
+                termination_date__isnull=True,
+                enterprise=self.enterprise
             ).exists():
 
                 raise ActiveEmployeeHiring(_('There is already a hiring with this employee!'))
