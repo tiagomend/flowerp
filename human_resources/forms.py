@@ -101,7 +101,4 @@ class DocumentForm(forms.ModelForm):
 
     def clean_file(self):
         file = self.cleaned_data.get('file')
-        if file:
-            if not file.name.endswith('.pdf'):
-                raise forms.ValidationError("The file must be in PDF format.")
         return file
