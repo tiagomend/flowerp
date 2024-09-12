@@ -58,7 +58,7 @@ class EmployeeHiringPresenter(Presenter):
         return [
             self.model.employee.pis_number,
             self.model.employee,
-            self.model.employee.position,
+            self.model.salary.display_position(),
             self.model.salary.display_salary(),
             self.model.enterprise,
             self.format_date(self.model.admission_date),
