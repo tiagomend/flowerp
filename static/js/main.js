@@ -216,11 +216,22 @@ const Awesomplete = () => {
       showBox(value, filteredOptions, box, element);
     });
 
+    input.addEventListener('blur', (e) => {
+      if (!e.relatedTarget || e.relatedTarget.className !== 'awesomplete-btn') {
+        const select = element.firstElementChild;
+        select.selectedIndex = getIndex(data, input.value);
+        hideBox(element, box);
+      }
+      console.log(select.selectedIndex)
+    });
+
     box.addEventListener('click', (e) => {
+      e.stopPropagation()
       const select = element.firstElementChild;
       input.value = e.target.textContent;
       select.selectedIndex = getIndex(data, e.target.textContent);
       hideBox(element, box);
+      console.log(select.selectedIndex)
     });
 
     window.addEventListener('click', (e) => {
