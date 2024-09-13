@@ -497,7 +497,7 @@ class ReadDocument(ReadView):
 def view_document(_, document_id):
     try:
         document = Document.objects.get(pk=document_id)
-        return FileResponse(document.file.open(), content_type='application/pdf')
+        return FileResponse(document.file.open())
     except Document.DoesNotExist:
         raise Http404("Document not found") from Document.DoesNotExist
 
