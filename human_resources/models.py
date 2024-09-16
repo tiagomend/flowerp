@@ -315,7 +315,7 @@ class Vacation(models.Model):
         return vacation_duration == 30
 
     def vacation_duration(self):
-        return (self.end_date - self.start_date).days
+        return (self.end_date - self.start_date).days + 1
 
     def is_within_the_limit(self):
         try:
