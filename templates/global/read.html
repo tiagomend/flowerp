@@ -15,6 +15,7 @@
     </div>
   </div>
   <div class="card-body">
+    <div style="overflow-x: auto;">
     <table class="table">
         <tr>
           {% for header in presenters.0.headers %}
@@ -38,6 +39,7 @@
         </tr>
         {% endfor %}
     </table>
+  </div>
   </div>
 </div>
 {% endblock content %}

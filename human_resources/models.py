@@ -12,6 +12,9 @@ from core.exceptions import ErrorSavingModel
 class ActiveEmployeeHiring(ErrorSavingModel):
     pass
 
+class NoLimitConcession(ErrorSavingModel):
+    pass
+
 
 class EmployeePosition(models.Model):
     name = models.CharField(max_length=80)
@@ -152,6 +155,16 @@ class EmployeeHiring(models.Model):
         on_delete=models.PROTECT,
         verbose_name=_('Enterprise')
     )
+    vacation_expiration_date = models.DateField(
+        null=True,
+        blank=True,
+        verbose_name=_('Vacation Expiration Date')
+    )
+    grant_limit = models.DateField(
+        null=True,
+        blank=True,
+        verbose_name=_('Grant Limit')
+    )
     salary = models.ForeignKey(
         Salary,
         on_delete=models.PROTECT,
@@ -184,6 +197,11 @@ class EmployeeHiring(models.Model):
             )
 
         return vacation_limit
+
+    def get_paid_off(self):
+        last = Vacation.objects.filter(
+                employee_hiring=self).order_by('-start_date').first()
+        return last.paid_off if last else ''
 
     @property
     def status(self):
@@ -284,16 +302,39 @@ class Vacation(models.Model):
     )
     start_date = models.DateField(verbose_name=_('Start date'))
     end_date = models.DateField(verbose_name=_('End date'))
+    paid_off = models.IntegerField(default=0)
 
     def is_it_less_than_fourteen_days(self):
-        vaction_duration = (self.end_date - self.start_date).days
+        vacation_duration = (self.end_date - self.start_date).days
 
-        return vaction_duration < 14
+        return vacation_duration < 14
 
     def was_it_thirty_days(self):
-        vaction_duration = (self.end_date - self.start_date).days
+        vacation_duration = self.vacation_duration()
 
-        return vaction_duration == 30
+        return vacation_duration == 30
+
+    def vacation_duration(self):
+        return (self.end_date - self.start_date).days
+
+    def is_within_the_limit(self):
+        try:
+            return self.start_date <= self.employee_hiring.grant_limit
+        except TypeError as exc:
+            raise NoLimitConcession(_('There is no registered limit concession.')) from exc
+
+    def save(self, *args, **kwargs) -> None:
+        self.paid_off = 0
+        if self.was_it_thirty_days() and self.is_within_the_limit():
+            self.paid_off = 30
+        elif self.is_within_the_limit():
+            last = Vacation.objects.filter(
+                employee_hiring=self.employee_hiring).order_by('-start_date').first()
+            if last and last.paid_off < 30:
+                self.paid_off = self.vacation_duration() + last.paid_off
+            else:
+                self.paid_off = self.vacation_duration()
+        return super().save(*args, **kwargs)
 
     def __str__(self) -> str:
         taken_from = _('Taken from')
@@ -305,6 +346,12 @@ class Vacation(models.Model):
 
     class Meta:
         verbose_name = _('Vacation')
+        constraints = [
+            models.UniqueConstraint(
+                fields=['employee_hiring', 'start_date', 'end_date'],
+                name='unique_employee_hiring_start_and_end_date'
+            ),
+        ]
 
 
 class HoursBank(models.Model):

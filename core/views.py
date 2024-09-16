@@ -99,12 +99,20 @@ class ReadView(View):
     redirect_for_edit: str
     model: object
     template = 'global/read.html'
+    page_title = ''
 
     def get_context_data(self):
         list_of = _('List of')
-        context = {
-            'page_title': f'{list_of} {self.model._meta.verbose_name}'
-        }
+
+        if self.page_title:
+            context = {
+                'page_title': self.page_title
+            }
+        else:
+            context = {
+                'page_title': f'{list_of} {self.model._meta.verbose_name}'
+            }
+
         context['presenters'] = self.get_presenters()
         context['icon'] = self.icon
         context['redirect_for_new'] = reverse_lazy(self.redirect_for_new)

@@ -39,6 +39,8 @@ class EmployeeHiringForm(forms.ModelForm):
             'admission_date': forms.TextInput(attrs={'type': 'date'}),
             'expiry_of_experience': forms.TextInput(attrs={'type': 'date'}),
             'termination_date': forms.TextInput(attrs={'type': 'date'}),
+            'vacation_expiration_date': forms.TextInput(attrs={'type': 'date'}),
+            'grant_limit': forms.TextInput(attrs={'type': 'date'}),
         }
 
 
@@ -52,18 +54,32 @@ class EmployeeHiringEditForm(forms.ModelForm):
             'admission_date': forms.TextInput(attrs={'readonly': 'readonly', 'type': 'date'}),
             'expiry_of_experience': forms.TextInput(attrs={'type': 'date'}),
             'termination_date': forms.TextInput(attrs={'type': 'date'}),
+            'vacation_expiration_date': forms.TextInput(attrs={'type': 'date'}),
+            'grant_limit': forms.TextInput(attrs={'type': 'date'}),
         }
 
 
 class VacationForm(forms.ModelForm):
     class Meta:
         model = Vacation
-        fields = '__all__'
+        exclude = ['paid_off']
 
         widgets = {
             'employee_hiring': Awesomplete(),
             'start_date': forms.TextInput(attrs={'type': 'date'}),
             'end_date': forms.TextInput(attrs={'type': 'date'})
+        }
+
+
+class VacationEditForm(forms.ModelForm):
+    class Meta:
+        model = Vacation
+        exclude = ['paid_off']
+
+        widgets = {
+            'employee_hiring': forms.Select(attrs={'disabled': 'disabled'}),
+            'start_date': forms.TextInput(attrs={'readonly': 'readonly', 'type': 'date'}),
+            'end_date': forms.TextInput(attrs={'readonly': 'readonly', 'type': 'date'})
         }
 
 

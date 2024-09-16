@@ -18,6 +18,7 @@ urlpatterns = [
     path('hirings/new/', CreateEmployeeHiring.as_view(), name='create_hiring'),
     path('hirings/<int:pk>/', UpdateEmployeeHiring.as_view(), name='update_hiring'),
     path('vacations/new/', CreateVacation.as_view(), name='create_vacation'),
+    path('vacations/expiration/', ReadVacationExpiration.as_view(), name='read_vacation_expiration'),
     path('vacations/<int:pk>/', UpdateVacation.as_view(), name='update_vacation'),
     path('vacations/', ReadVacation.as_view(), name='read_vacation'),
     path('hirings/', ReadEmployeeHiring.as_view(), name='read_hiring'),

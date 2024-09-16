@@ -354,3 +354,15 @@ msgstr "Lista de Documentos"
 
 msgid "Create New Document"
 msgstr "Anexar Novo Documento"
+
+msgid "Vacation Expiration Date"
+msgstr "Vencimento de Férias"
+
+msgid "Grant Limit"
+msgstr "Limite de Concessão"
+
+msgid "Vacation Expiration Report"
+msgstr "Férias Vencidas ou a Vencer"
+
+msgid "Paid off"
+msgstr "Quitado"

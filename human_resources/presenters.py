@@ -15,6 +15,13 @@ from human_resources.models import (
     Document
 )
 
+def days_between(target_date):
+    today = datetime.now().date()
+    if isinstance(target_date, str):
+        target_date = datetime.strptime(target_date, '%Y-%m-%d').date()
+
+    delta = target_date - today
+    return delta.days
 
 class EmployeePositionPresenter(Presenter):
     model = EmployeePosition
@@ -53,7 +60,6 @@ class EmployeeHiringPresenter(Presenter):
 
     @property
     def values(self):
-        vacation_limit = self.format_date(self.model.time_limit_for_vacation())
 
         return [
             self.model.employee.pis_number,
@@ -64,7 +70,6 @@ class EmployeeHiringPresenter(Presenter):
             self.format_date(self.model.admission_date),
             self.format_date(self.model.expiry_of_experience),
             self.format_date(self.model.termination_date),
-            badge(vacation_limit, 'success-100') if vacation_limit else ''
         ]
 
     @property
@@ -78,7 +83,6 @@ class EmployeeHiringPresenter(Presenter):
             _('Admission date'),
             _('Expiry of experience'),
             _('Termination date'),
-            _('Vacation limit'),
         ]
 
     def format_date(self, date_obj):
@@ -87,14 +91,107 @@ class EmployeeHiringPresenter(Presenter):
         return ''
 
 
+class VacationExpirationPresenter(Presenter):
+    model = EmployeeHiring
+
+    @property
+    def values(self):
+        between = days_between(self.model.grant_limit) if \
+            self.model.grant_limit else ''
+
+        if not between:
+            grant_limit = ''
+
+        elif between <= 15:
+            grant_limit = badge(
+                self.model.grant_limit.strftime('%d/%m/%Y'),
+                'error-100'
+            )
+        elif between > 15:
+            grant_limit = badge(
+                self.model.grant_limit.strftime('%d/%m/%Y'),
+                'success-100'
+            )
+
+        between = days_between(self.model.vacation_expiration_date) if \
+            self.model.vacation_expiration_date else ''
+
+        if not between:
+            vacation_expiration_date = ''
+
+        elif between <= 15:
+            vacation_expiration_date = badge(
+                self.model.vacation_expiration_date.strftime('%d/%m/%Y'),
+                'error-100'
+            )
+        elif between > 15:
+            vacation_expiration_date = badge(
+                self.model.vacation_expiration_date.strftime('%d/%m/%Y'),
+                'success-100'
+            )
+
+        return [
+            self.model.employee,
+            self.model.enterprise,
+            self.model.get_paid_off(),
+            vacation_expiration_date,
+            grant_limit,
+        ]
+
+    @property
+    def headers(self):
+        return [
+            _('Name'),
+            _('Enterprise'),
+            _('Paid off'),
+            _('Vacation Expiration Date'),
+            _('Grant Limit'),
+        ]
+
+
 class VacationPresenter(Presenter):
     model = Vacation
 
     @property
     def values(self):
+        between = days_between(self.model.employee_hiring.grant_limit) if \
+            self.model.employee_hiring.grant_limit else ''
+
+        if not between:
+            grant_limit = ''
+
+        elif between <= 15:
+            grant_limit = badge(
+                self.model.employee_hiring.grant_limit.strftime('%d/%m/%Y'),
+                'error-100'
+            )
+        elif between > 15:
+            grant_limit = badge(
+                self.model.employee_hiring.grant_limit.strftime('%d/%m/%Y'),
+                'success-100'
+            )
+
+        between = days_between(self.model.employee_hiring.vacation_expiration_date) if \
+            self.model.employee_hiring.vacation_expiration_date else ''
+
+        if not between:
+            vacation_expiration_date = ''
+
+        elif between <= 15:
+            vacation_expiration_date = badge(
+                self.model.employee_hiring.vacation_expiration_date.strftime('%d/%m/%Y'),
+                'error-100'
+            )
+        elif between > 15:
+            vacation_expiration_date = badge(
+                self.model.employee_hiring.vacation_expiration_date.strftime('%d/%m/%Y'),
+                'success-100'
+            )
         return [
-            self.model.employee_hiring.employee.pis_number,
             self.model.employee_hiring,
+            vacation_expiration_date,
+            grant_limit,
+            self.model.paid_off,
             self.model.start_date,
             self.model.end_date,
         ]
@@ -102,8 +199,10 @@ class VacationPresenter(Presenter):
     @property
     def headers(self):
         return [
-            _('Pis number'),
             _('Name'),
+            _('Vacation Expiration Date'),
+            _('Vacation limit'),
+            _('Paid off'),
             _('Start date'),
             _('End date'),
         ]
@@ -151,15 +250,6 @@ class SalaryAdjustmentPresenter(Presenter):
             _('Adjustment Type'),
             _('Adjustment Value')
         ]
-
-
-def days_between(target_date):
-    today = datetime.now().date()
-    if isinstance(target_date, str):
-        target_date = datetime.strptime(target_date, '%Y-%m-%d').date()
-
-    delta = target_date - today
-    return abs(delta.days)
 
 
 class DocumentPresenter(Presenter):

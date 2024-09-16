@@ -18,6 +18,7 @@ from human_resources.forms import (
     EmployeeHiringForm,
     EmployeeHiringEditForm,
     VacationForm,
+    VacationEditForm,
     SalaryForm,
     SalaryAdjustmentForm,
     DocumentForm
@@ -29,7 +30,8 @@ from human_resources.presenters import (
     VacationPresenter,
     SalaryPresenter,
     SalaryAdjustmentPresenter,
-    DocumentPresenter
+    DocumentPresenter,
+    VacationExpirationPresenter
 )
 from human_resources.models import (
     Employee,
@@ -107,6 +109,17 @@ class ReadEmployeeHiring(ReadView):
         return EmployeeHiringPresenter.all('employee__first_name')
 
 
+class ReadVacationExpiration(ReadView):
+    icon = 'icon_event_available'
+    model = EmployeeHiringForm.Meta.model
+    redirect_for_new = 'human_resources:create_hiring'
+    redirect_for_edit = 'human_resources:read_hiring'
+    page_title = _('Vacation Expiration Report')
+
+    def get_presenters(self):
+        return VacationExpirationPresenter.all('employee__first_name')
+
+
 class CreateVacation(CreateView):
     icon = 'icon_event_available'
     form = VacationForm
@@ -115,7 +128,7 @@ class CreateVacation(CreateView):
 
 class UpdateVacation(UpdateView):
     icon = 'icon_event_available'
-    form = VacationForm
+    form = VacationEditForm
     redirect = 'human_resources:update_vacation'
 
 
