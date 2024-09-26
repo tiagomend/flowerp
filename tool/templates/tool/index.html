@@ -1,0 +1,67 @@
+{% extends "global/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-4">
+        <div class="card">
+          <div class="card-row">
+              <nav class="card-nav">
+                <a href="{% url "tool:read_category" %}" class="nav-item">
+                  <i class="icon_label"></i>
+                  {% translate "List of Tool Category" %}
+                </a>
+                <a href="{% url "tool:create_category" %}" class="nav-item">
+                  <i class="icon_label"></i>
+                  {% translate "New Tool Category" %}
+                </a>
+                <a href="{% url "tool:read_brand" %}" class="nav-item">
+                  <i class="icon_star"></i>
+                  {% translate "List of Tool Brand" %}
+                </a>
+                <a href="{% url "tool:create_brand" %}" class="nav-item">
+                  <i class="icon_star"></i>
+                  {% translate "New Tool Brand" %}
+                </a>
+                <a href="{% url "tool:read_tool" %}" class="nav-item">
+                  <i class="icon_build"></i>
+                  {% translate "List of Tool" %}
+                </a>
+                <a href="{% url "tool:create_tool" %}" class="nav-item">
+                  <i class="icon_build"></i>
+                  {% translate "New Tool" %}
+                </a>
+                
+              </nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div class="card">
+          <div class="card-row">
+              <nav class="card-nav">
+                <a href="{% url "tool:read_distribution" %}" class="nav-item">
+                  <i class="icon_inventory"></i>
+                  {% translate "List of Tool Distribution Record" %}
+                </a>
+                <a href="{% url "tool:create_distribution" %}" class="nav-item">
+                  <i class="icon_inventory"></i>
+                  {% translate "New Tool Distribution Record" %}
+                </a>
+                
+              </nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4">
+        
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock content %}

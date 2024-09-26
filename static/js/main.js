@@ -69,6 +69,8 @@ const TimeSheet = () => {
 
 const SubmitTimeSheet = () => {
   const btnTimeSheet = document.getElementById('btnTimeSheet');
+
+  if (!btnTimeSheet) return
   const csrfToken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
 
   if (btnTimeSheet) {
@@ -202,7 +204,8 @@ const Awesomplete = () => {
     const input = document.createElement('input');
     const select = element.firstElementChild;
     input.style.position = 'relative';
-    input.value = select.querySelector('option[selected]').textContent;
+    const textContent = select.querySelector('option[selected]').textContent;
+    input.value = textContent !== '---------' ? textContent : '';
 
     element.appendChild(input);
     const box = createBoxForOptions();
@@ -222,7 +225,6 @@ const Awesomplete = () => {
         select.selectedIndex = getIndex(data, input.value);
         hideBox(element, box);
       }
-      console.log(select.selectedIndex)
     });
 
     box.addEventListener('click', (e) => {
@@ -231,7 +233,6 @@ const Awesomplete = () => {
       input.value = e.target.textContent;
       select.selectedIndex = getIndex(data, e.target.textContent);
       hideBox(element, box);
-      console.log(select.selectedIndex)
     });
 
     window.addEventListener('click', (e) => {
@@ -249,3 +250,17 @@ const Awesomplete = () => {
 }
 
 Awesomplete();
+
+
+const InsertRow = () => {
+  const form = document.getElementById('insert_row');
+  const button = document.getElementById('insert_row_btn');
+
+  if (form) {
+    button.addEventListener('click', () => {
+      form.submit();
+    })
+  }
+}
+
+InsertRow();

@@ -8,9 +8,14 @@
       {% translate "Sales" %}
     </a>
 
-    <a href="#" class="nav-item">
+    <a href="{% url "warehouse:index" %}" class="nav-item">
       <i class="icon_garage_home"></i>
       {% translate "Warehouse" %}
+    </a>
+
+    <a href="{% url "tool:index" %}" class="nav-item">
+      <i class="icon_build"></i>
+      {% translate "Tool" %}
     </a>
 
     <a href="#" class="nav-item">

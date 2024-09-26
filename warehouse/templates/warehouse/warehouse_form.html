@@ -1,16 +1,23 @@
 {% extends "global/base.html" %}
+{% load i18n %}
 
 {% block content %}
 <div class="card">
   <div class="card-header flex space-between">
-    {% include "global/partials/page_header.html" %}
+    {% include "product/partials/page_header.html" %}
   </div>
   <div class="card-body">
     <form id="main-form" action="" method="post" class="form-control" autocomplete="off" {% if enctype %}enctype="multipart/form-data"{% endif %}>
       {% csrf_token %}
       <div class="row">
         <div class="col-4">
-          {{ form }}
+          {{ warehouse_form }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4">
+          <h2>{% translate "Address" %}</h2>
+          {{ address_form }}
         </div>
       </div>
     </form>

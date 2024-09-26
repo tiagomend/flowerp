@@ -5,150 +5,55 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: black;
+    }
+
+    .display {
+      padding: 8px;
+      display: flex;
+      gap: 8px;
+      width: 100vw;
+      height: 100vh;
+      align-items: center;
+    }
+
+    .sidebar1 {
+      background-color: rgb(71, 71, 71);
+      width: 20%;
+      height: 95%;
+      border-radius: 8px;
+    }
+
+    .sidebar2 {
+      background-color: rgb(71, 71, 71);
+      width: 20%;
+      height: 95%;
+      border-radius: 8px;
+    }
+
+    .main-section {
+      background-color: rgb(71, 71, 71);
+      width: 60%;
+      height: 95%;
+      border-radius: 8px;
+    }
+  </style>
 </head>
 
 <body>
-  <form action="">
-    <div class="awesomplete">
-      <select name="select">
-        <option value=""></option>
-        <option value="1">Option 1</option>
-        <option value="2">Option 2</option>
-        <option value="3">Option 3</option>
-        <option value="4">Option 4</option>
-        <option value="5">Option 5</option>
-        <option value="6">Option 6</option>
-        <option value="7">Option 7</option>
-        <option value="8">Option 8</option>
-        <option value="9">Option 9</option>
-      </select>
-    </div>
-    <input type="submit" value="submit">
-  </form>
-
-  <script>
-    const Awesomplete = () => {
-      const awesomplete = [...document.getElementsByClassName("awesomplete")];
-
-      function getDataForOptions(element) {
-        const select = element.firstElementChild;
-        const options = [...select.getElementsByTagName('option')];
-        const data = [];
-
-        for (option of options) {
-          data.push({
-            value: option.value,
-            textContent: option.textContent
-          })
-        }
-        select.style.visibility = 'hidden';
-        select.style.position = 'absolute';
-
-        return data;
-      }
-
-      function createBoxForOptions() {
-        const box = document.createElement('div');
-        box.className = 'awesomplete-options';
-        return box
-      }
-
-      function getRelatedData(data, value) {
-        return (
-          data.filter(item => {
-            return item.textContent.toLowerCase()
-              .includes(value.toLowerCase())
-          })
-        )
-      }
-
-      function cleanBox(box) {
-        while (box.firstChild) {
-          box.removeChild(box.firstChild);
-        }
-      }
-
-      function getIndex(selectElement, textContent) {
-        for (let i = 0; i < selectElement.length; i++) {
-          if (selectElement[i].textContent === textContent) {
-            return i;
-            break;
-          }
-        }
-      }
-
-      function createOptionButton(textContent) {
-        const option = document.createElement('button');
-        option.className = 'awesomplete-btn';
-        option.type = 'button';
-        option.textContent = textContent;
-        return option;
-      }
-
-      function createNotOptionButton() {
-        const option = document.createElement('button');
-        option.className = 'awesomplete-btn';
-        option.type = 'button';
-        option.innerHTML = `<strong>Nenhuma opção econtrada!</strong>`;
-        return option;
-      }
-
-      function hideBox(element, box) {
-        if (element.contains(box)) {
-          element.removeChild(box);
-        }
-      }
-
-      function showBox(value, filteredOptions, box, element) {
-        if (!value) {
-          hideBox(element, box);
-          return
-        }
-        if (!filteredOptions.length) {
-          const option = createNotOptionButton();
-          box.appendChild(option);
-          element.appendChild(box);
-          return
-        }
-        filteredOptions.forEach((content) => {
-          const option = createOptionButton(content.textContent);
-          box.appendChild(option);
-          element.appendChild(box);
-        });
-      }
-
-      awesomplete.forEach(async (element) => {
-        const data = getDataForOptions(element);
-        const input = document.createElement('input');
-        input.style.position = 'relative';
-
-        element.appendChild(input);
-        const box = createBoxForOptions();
-
-        element.addEventListener('input', (e) => {
-          const value = e.target.value;
-          const filteredOptions = getRelatedData(data, value);
-          cleanBox(box);
-          showBox(value, filteredOptions, box, element);
-        });
-
-        box.addEventListener('click', (e) => {
-          const select = element.firstElementChild;
-          input.value = e.target.textContent;
-          select.selectedIndex = getIndex(data, e.target.textContent);
-          hideBox(element, box);
-        });
-
-        window.addEventListener('click', (e) => {
-          if (!element.contains(e.target)) {
-            hideBox(element, box);
-          }
-        });
-      });
-    }
-
-    Awesomplete();
-  </script>
+  <div class="display">
+    <aside class="sidebar1"></aside>
+    <section class="main-section"></section>
+    <aside class="sidebar2"></aside>
+  </div>
 </body>
 
 </html>

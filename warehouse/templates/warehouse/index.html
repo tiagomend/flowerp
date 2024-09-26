@@ -1,0 +1,71 @@
+{% extends "global/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-4">
+        <div class="card">
+          <div class="card-row">
+              <nav class="card-nav">
+                <a href="{% url "product:read_product" %}" class="nav-item">
+                  <i class="icon_package_2"></i>
+                  {% translate "Product List" %}
+                </a>
+                <a href="{% url "product:create_product" %}" class="nav-item">
+                  <i class="icon_package_2"></i>
+                  {% translate "Create new product" %}
+                </a>
+                <a href="{% url "warehouse:read_w_type" %}" class="nav-item">
+                  <i class="icon_schema"></i>
+                  {% translate "List of Warehouse types" %}
+                </a>
+                <a href="{% url "warehouse:create_w_type" %}" class="nav-item">
+                  <i class="icon_schema"></i>
+                  {% translate "Create new Warehouse types" %}
+                </a>
+                <a href="{% url "warehouse:create_warehouse" %}" class="nav-item">
+                  <i class="icon_garage_home"></i>
+                  {% translate "Create new Warehouse" %}
+                </a>
+              </nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div class="card">
+          <div class="card-row">
+              <nav class="card-nav">
+                <a href="{% url "warehouse:create_storage_bin" %}" class="nav-item">
+                  <i class="icon_home_storage"></i>
+                  {% translate "Create new Storage Bin" %}
+                </a>
+                <a href="{% url "warehouse:stock_inbound" %}" class="nav-item">
+                  <i class="icon_inventory_2"></i>
+                  {% translate "New Stock Inbound" %}
+                </a>
+                <a href="{% url "warehouse:read_stock_movements" %}" class="nav-item">
+                  <i class="icon_inventory"></i>
+                  {% translate "List of stock movements" %}
+                </a>
+              </nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div class="card">
+          <div class="card-row">
+              <nav class="card-nav">
+                
+              </nav>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock content %}

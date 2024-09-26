@@ -145,7 +145,7 @@ class ReadVacation(ReadView):
 class RegisterPointHenryPrisma(View):
     def get_context_data(self):
         context = {
-            'page_title': 'Point Register',
+            'page_title': _('Point Register'),
             'icon': 'icon_more_time'
         }
 

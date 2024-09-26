@@ -21,7 +21,10 @@
           {% for header in presenters.0.headers %}
             <th>{{ header }}</th>
           {% endfor %}
+
+          {% if redirect_for_edit %}
           <th>#</th>
+          {% endif %}
         </tr>
 
         {% for presenter in presenters %}
@@ -29,6 +32,8 @@
           {% for value in presenter.values %}
             <td>{{ value }}</td>
           {% endfor %}
+
+          {% if redirect_for_edit %}
           <td>
             <div>
               <a class="btn btn-secondary" href="{{ redirect_for_edit }}{{ presenter.get_pk }}">
@@ -36,6 +41,7 @@
               </a>
             </div>
           </td>
+          {% endif %}
         </tr>
         {% endfor %}
     </table>

@@ -8,13 +8,16 @@
 </div>
 <div class="search-form">
   <form action="" class="form-control" method="get">
+    {% csrf_token %}
     <label for="employee_hiring">{% translate "Select Employee" %}</label>
-    <select name="employee_hiring" id="employee_hiring">
-      <option value="">---------------</option>
-      {% for employee in employees %}
-        <option value="{{ employee.pk }}">{{ employee }}</option>
-      {% endfor %}
-    </select>
+    <div class="awesomplete" style="margin-bottom: 0px;">
+      <select name="employee_hiring" id="employee_hiring">
+        <option value=""  selected></option>
+        {% for employee in employees %}
+          <option value="{{ employee.pk }}">{{ employee }}</option>
+        {% endfor %}
+      </select>
+    </div>
     <input type="month" name="month_year" id="month_year">
     <button type="submit" class="btn btn-primary">
       {% translate "Generate" %}

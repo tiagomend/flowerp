@@ -1,0 +1,61 @@
+{% extends "global/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="card">
+  <div class="card-header flex space-between">
+    <div class="page-header">
+      <i class="{{ icon }}"></i>
+      <h3>{{ page_title }}</h3>
+    </div>
+    <div class="section-action">
+      <form action="{% url "warehouse:stock_outbound_session_clean" %}" method="get">
+        <button class="btn btn-secondary" type="submit">
+          <i class="icon_refresh"></i>
+        </button>
+      </form>
+      <form action="" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">
+          {% translate "Release" %}
+        </button>
+      </form>
+    </div>
+  </div>
+  <div class="card-body">
+    <table class="table">
+      <tr>
+        {% for field in form %}
+          <th>{{ field.label }}</th>
+        {% endfor %}
+      </tr>
+      {% if stock_movement %}
+        {% for row in stock_movement %}
+          <tr>
+            <td>{{ row.item.description }}</td>
+            <td>{{ row.warehouse.description }}</td>
+            <td>{{ row.storage_bin.description }}</td>
+            <td>{{ row.quantity.display|safe }}</td>
+            <td>{{ row.stock_uom.description }}</td>
+            <td>{{ row.item_price }}</td>
+          </tr>
+        {% endfor %}
+      {% endif %}
+      <tr>
+        <form action="{% url "warehouse:stock_outbound_session" %}" class="form-control" id="insert_row" method="post"> 
+          {% csrf_token %}
+          <input type="hidden" name="date" value="{% now 'Y-m-d H:i' %}">
+          <input type="hidden" name="movement_type" value="out">
+          {% for field in form %}
+          <td>{{ field }}</td>
+          {% endfor %}
+        </form>
+      </tr>
+    </table>
+    <button id="insert_row_btn" class="btn btn-primary mt-3">
+      Inserir Linha
+    </button>
+  </div>
+</div>
+
+{% endblock content %}

@@ -308,7 +308,7 @@ body {
     border: none;
     text-decoration: none;
     width: 100%;
-    border-radius: 8px;
+    border-radius: var(--spacing-2);
     padding-top: var(--spacing-2);
     padding-bottom: var(--spacing-2);
     padding-left: var(--spacing-3);
@@ -692,15 +692,25 @@ body {
     padding: 0px 0px !important;
 }
 
-.table td input {
-    height: 100%;
+.table td input,
+.table td .awesomplete input {
+    height: 100% !important;
+    width: 100%;
+    border: none;
+    outline: none;
     background-color: transparent;
+    margin-bottom: 0px;
+    padding: var(--spacing-1) var(--spacing-2);
+}
+
+.table td .awesomplete {
+    height: 100%;
+    margin-bottom: 0px;
 }
 
 .table td input:focus {
-    outline: none;
     border-radius: 0px;
-    border: 2px solid var(--primary-400);
+    outline: 2px solid var(--primary-400);
 }
 
 .table h2 {
@@ -768,6 +778,10 @@ body {
 /* Colors */
 .success-100 {
     background-color: var(--success-100);
+}
+
+.success-200 {
+    background-color: var(--success-200);
 }
 
 .warning-100 {

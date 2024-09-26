@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
+from django.core.exceptions import ValidationError
 from django.forms import ModelForm
 from django.contrib import messages
 from django.urls import reverse_lazy
@@ -42,7 +43,7 @@ class CreateView(View):
                 messages.success(request, _('Save with success!'))
                 return redirect(self.redirect)
 
-            except ErrorSavingModel as error:
+            except ValidationError as error:
                 messages.error(request, error.message)
                 context = self.get_context_data(form=form)
                 return render(request, 'global/form.html', context)
@@ -96,7 +97,7 @@ class ReadView(View):
     presenters: list
     icon: str
     redirect_for_new: str
-    redirect_for_edit: str
+    redirect_for_edit = False
     model: object
     template = 'global/read.html'
     page_title = ''
@@ -116,7 +117,10 @@ class ReadView(View):
         context['presenters'] = self.get_presenters()
         context['icon'] = self.icon
         context['redirect_for_new'] = reverse_lazy(self.redirect_for_new)
-        context['redirect_for_edit'] = reverse_lazy(self.redirect_for_edit)
+
+        if self.redirect_for_edit:
+            context['redirect_for_edit'] = reverse_lazy(self.redirect_for_edit)
+
         html_language = translation.get_language()
         context['html_language'] = html_language
 
