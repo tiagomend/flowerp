@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-10 14:30-0300\n"
+"POT-Creation-Date: 2024-09-26 09:42-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,351 +18,681 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: .\core\views.py:19
+#: .\core\views.py:20
 #: .\human_resources\templates\human_resources\document_read.html:13
 #: .\templates\global\read.html:13
 msgid "New"
 msgstr "Criar"
 
-#: .\core\views.py:42 .\core\views.py:84
+#: .\core\views.py:43 .\core\views.py:85 .\human_resources\views.py:427
+#: .\warehouse\views.py:89 .\warehouse\views.py:129
 msgid "Save with success!"
 msgstr "Salvo com sucesso!"
 
-#: .\core\views.py:51 .\core\views.py:90
+#: .\core\views.py:52 .\core\views.py:91 .\warehouse\views.py:92
+#: .\warehouse\views.py:132
 msgid "Error: An error has occurred!"
 msgstr "Erro: Ocorreu um erro!"
 
-#: .\core\views.py:104
+#: .\core\views.py:106
 msgid "List of"
 msgstr "Lista de"
 
-#: .\human_resources\models.py:23
+#: .\human_resources\models.py:26
 msgid "Employee Position"
 msgstr "Cargo do Funcionário"
 
-#: .\human_resources\models.py:30 .\human_resources\models.py:113
-#: .\human_resources\presenters.py:47 .\human_resources\presenters.py:75
-#: .\human_resources\presenters.py:127 .\human_resources\presenters.py:151
+#: .\human_resources\models.py:33 .\human_resources\models.py:127
+#: .\human_resources\models.py:171 .\human_resources\presenters.py:54
+#: .\human_resources\presenters.py:80 .\human_resources\presenters.py:225
+#: .\human_resources\presenters.py:248
 msgid "Position"
 msgstr "Cargo"
 
-#: .\human_resources\models.py:32 .\human_resources\presenters.py:128
+#: .\human_resources\models.py:35
 msgid "Level"
 msgstr "Nível"
 
-#: .\human_resources\models.py:35
+#: .\human_resources\models.py:38
 msgid "Monthly"
 msgstr "Mensalista"
 
-#: .\human_resources\models.py:35
+#: .\human_resources\models.py:38
 msgid "Hourly"
 msgstr "Horista"
 
-#: .\human_resources\models.py:36 .\human_resources\presenters.py:129
+#: .\human_resources\models.py:39 .\human_resources\presenters.py:226
 msgid "Modality"
 msgstr "Modalidade"
 
-#: .\human_resources\models.py:41 .\human_resources\presenters.py:130
+#: .\human_resources\models.py:44 .\human_resources\presenters.py:227
 msgid "Base Salary"
 msgstr "Salário Base"
 
-#: .\human_resources\models.py:45 .\human_resources\models.py:49
+#: .\human_resources\models.py:48 .\human_resources\models.py:52
 msgid "$"
 msgstr "R$"
 
-#: .\human_resources\models.py:53 .\human_resources\models.py:61
-#: .\human_resources\models.py:149 .\human_resources\presenters.py:76
+#: .\human_resources\models.py:61 .\human_resources\models.py:72
+#: .\human_resources\presenters.py:81
 msgid "Salary"
 msgstr "Salário"
 
-#: .\human_resources\models.py:57 .\human_resources\models.py:306
-#: .\human_resources\presenters.py:150
-#: .\human_resources\templates\human_resources\time_sheet.html:57
+#: .\human_resources\models.py:68 .\human_resources\models.py:363
+#: .\human_resources\presenters.py:247
+#: .\human_resources\templates\human_resources\time_sheet.html:60
 #: .\human_resources\templates\human_resources\time_sheet_edit.html:39
+#: .\warehouse\presenters.py:46
 msgid "Date"
 msgstr "Data"
 
-#: .\human_resources\models.py:68 .\human_resources\presenters.py:152
+#: .\human_resources\models.py:79 .\human_resources\presenters.py:249
 msgid "Previous Salary"
 msgstr "Salário Anterior"
 
-#: .\human_resources\models.py:72
+#: .\human_resources\models.py:83
 msgid "Percentage"
 msgstr "Porcentagem"
 
-#: .\human_resources\models.py:72
+#: .\human_resources\models.py:83
 msgid "Amount"
 msgstr "Valor"
 
-#: .\human_resources\models.py:73 .\human_resources\presenters.py:153
+#: .\human_resources\models.py:84 .\human_resources\presenters.py:250
 msgid "Adjustment Type"
 msgstr "Tipo de Ajuste"
 
-#: .\human_resources\models.py:78 .\human_resources\presenters.py:154
+#: .\human_resources\models.py:89 .\human_resources\presenters.py:251
 msgid "Adjustment Value"
 msgstr "Valor do Ajuste"
 
-#: .\human_resources\models.py:80
+#: .\human_resources\models.py:91
 msgid "Reason"
 msgstr "Motivo"
 
-#: .\human_resources\models.py:103
+#: .\human_resources\models.py:114
 msgid "Salary Adjustment"
 msgstr "Ajuste Salarial"
 
-#: .\human_resources\models.py:107
+#: .\human_resources\models.py:121
 msgid "First name"
 msgstr "Nome"
 
-#: .\human_resources\models.py:108
+#: .\human_resources\models.py:122
 msgid "Last name"
 msgstr "Sobrenome"
 
-#: .\human_resources\models.py:109 .\human_resources\presenters.py:73
-#: .\human_resources\presenters.py:105
+#: .\human_resources\models.py:123 .\human_resources\presenters.py:78
 msgid "Pis number"
 msgstr "Número do PIS"
 
-#: .\human_resources\models.py:120 .\human_resources\models.py:127
+#: .\human_resources\models.py:134 .\human_resources\models.py:140
+#: .\tool\presenters.py:83
 msgid "Employee"
-msgstr "Pessoa"
+msgstr "Funcionário"
 
-#: .\human_resources\models.py:129 .\human_resources\presenters.py:78
+#: .\human_resources\models.py:142 .\human_resources\presenters.py:83
 msgid "Admission date"
 msgstr "Data de Admissão"
 
-#: .\human_resources\models.py:133 .\human_resources\presenters.py:79
+#: .\human_resources\models.py:146 .\human_resources\presenters.py:84
 msgid "Expiry of experience"
 msgstr "Término da Experiência"
 
-#: .\human_resources\models.py:138 .\human_resources\presenters.py:80
+#: .\human_resources\models.py:151 .\human_resources\presenters.py:85
 msgid "Termination date"
 msgstr "Data de Demissão"
 
-#: .\human_resources\models.py:143 .\human_resources\presenters.py:77
-#: .\human_resources\templates\human_resources\time_sheet.html:38
+#: .\human_resources\models.py:156 .\human_resources\presenters.py:82
+#: .\human_resources\presenters.py:145
+#: .\human_resources\templates\human_resources\time_sheet.html:41
 #: .\human_resources\templates\human_resources\time_sheet_edit.html:28
 msgid "Enterprise"
 msgstr "Empresa"
 
-#: .\human_resources\models.py:160
-msgid "There is already a hiring with this employee!"
-msgstr "Já existe uma contratação com este funcionário!"
-
-#: .\human_resources\models.py:180
-msgid "Active"
-msgstr "Ativo"
-
-#: .\human_resources\models.py:180
-msgid "Inactive"
-msgstr "Inativo"
-
-#: .\human_resources\models.py:186 .\human_resources\models.py:273
-#: .\human_resources\models.py:304 .\human_resources\models.py:338
-msgid "Employee Hiring"
-msgstr "Contratação de Funcionário"
-
-#: .\human_resources\models.py:187
-msgid "Employee Hirings"
-msgstr "Contratações de Funcionários"
-
-msgid "Day"
-msgstr "Dia"
-
-msgid "Month"
-msgstr "Mês"
-
-msgid "Descrição"
-msgstr "Descrição"
-
-msgid "Holiday"
-msgstr "Feriado"
-
-msgid "Point"
-msgstr "Ponto"
-
-msgid "Observation"
-msgstr "Observação"
-
-msgid "Start date"
-msgstr "Data de Início"
-
-msgid "End date"
-msgstr "Data de Término"
-
-msgid "Taken from"
-msgstr "Tirado de"
-
-msgid "to"
-msgstr "até"
-
-msgid "Vacation"
-msgstr "Férias"
-
-msgid "Hours owed"
-msgstr "Horas Devidas"
-
-msgid "Hours compensated"
-msgstr "Horas Compensadas"
-
-msgid "Hours Bank"
-msgstr "Banco de Horas"
-
-msgid "Name"
-msgstr "Nome"
-
-msgid "Issue date"
-msgstr "Data de Emissão"
-
-msgid "Expiration date"
-msgstr "Data de Expiração"
-
-msgid "File"
-msgstr "Arquivo"
-
-msgid "Document"
-msgstr "Documento"
-
-msgid "Pis Number"
-msgstr "Número do PIS"
-
-msgid "Vacation limit"
-msgstr "Limite para Férias"
-
-msgid "Document Name"
-msgstr "Nome do Documento"
-
-msgid "Employee Name"
-msgstr "Nome do Funcionário"
-
-msgid "Save"
-msgstr "Salvar"
-
-msgid "Select File"
-msgstr "Selecionar Arquivo"
-
-msgid "No file chosen"
-msgstr "Nenhum arquivo selecionado"
-
-msgid "Time Sheet Report"
-msgstr "Relatório de Folha de Ponto"
-
-msgid "Select Employee"
-msgstr "Selecionar Funcionário"
-
-msgid "Generate"
-msgstr "Gerar"
-
-msgid "Time Sheet"
-msgstr "Folha de Ponto"
-
-msgid "Employee:"
-msgstr "Funcionário:"
-
-msgid "Pis Number:"
-msgstr "Número do PIS:"
-
-msgid "Week"
-msgstr "Semana"
-
-msgid "Entry"
-msgstr "Entrada"
-
-msgid "Exit"
-msgstr "Saída"
-
-msgid "No reports generated yet"
-msgstr ""
-
-msgid "Normal Hrs"
-msgstr "Hrs normais"
-
-msgid "Overtime 50%"
-msgstr "Hrs extras 50%"
-
-msgid "Overtime 100%"
-msgstr "Hrs extras 100%"
-
-msgid "Time Sheet Edit"
-msgstr "Editar Folha de Ponto"
-
-msgid "Sales"
-msgstr "Vendas"
-
-msgid "Warehouse"
-msgstr "Almoxarifado"
-
-msgid "Purchase"
-msgstr "Compras"
-
-msgid "Manufacturing"
-msgstr "Fabricação"
-
-msgid "Human Resources"
-msgstr "Recursos Humanos"
-
-msgid "Messages"
-msgstr ""
-
-msgid "Site Maps"
-msgstr ""
-
-msgid "Static Files"
-msgstr "Selecionar Arquivo"
-
-msgid "Employee List"
-msgstr "Lista de Pessoas"
-
-msgid "Create New Employee"
-msgstr "Criar Nova Pessoa"
-
-msgid "Position List"
-msgstr "Lista de Cargos"
-
-msgid "Create New Position"
-msgstr "Criar Novo Cargo"
-
-msgid "Employee Hirings List"
-msgstr "Lista de Contratações"
-
-msgid "Create Employee Hirings"
-msgstr "Criar Nova Contratação"
-
-msgid "Vacation List"
-msgstr "Lista de Férias"
-
-msgid "Create New Vacation"
-msgstr "Registrar Nova Férias"
-
-msgid "Register Point Prisma Henry"
-msgstr "Registrar Ponto Prisma Henry"
-
-msgid "Salary List"
-msgstr "Lista de Salários"
-
-msgid "Create New Salary"
-msgstr "Criar Novo Salário"
-
-msgid "Salary Adjustment List"
-msgstr "Lista de Ajuste Salarial"
-
-msgid "Create Salary Adjustment"
-msgstr "Gerar Ajuste Salarial"
-
-msgid "Document List"
-msgstr "Lista de Documentos"
-
-msgid "Create New Document"
-msgstr "Anexar Novo Documento"
-
+#: .\human_resources\models.py:161 .\human_resources\presenters.py:147
+#: .\human_resources\presenters.py:203
 msgid "Vacation Expiration Date"
 msgstr "Vencimento de Férias"
 
+#: .\human_resources\models.py:166 .\human_resources\presenters.py:148
 msgid "Grant Limit"
 msgstr "Limite de Concessão"
 
+#: .\human_resources\models.py:183
+msgid "There is already a hiring with this employee!"
+msgstr "Já existe uma contratação com este funcionário!"
+
+#: .\human_resources\models.py:208
+msgid "Active"
+msgstr "Ativo"
+
+#: .\human_resources\models.py:208
+msgid "Inactive"
+msgstr "Inativo"
+
+#: .\human_resources\models.py:214 .\human_resources\models.py:301
+#: .\human_resources\models.py:361 .\human_resources\models.py:395
+msgid "Employee Hiring"
+msgstr "Contratação de Funcionário"
+
+#: .\human_resources\models.py:215
+msgid "Employee Hirings"
+msgstr "Contratações de Funcionários"
+
+#: .\human_resources\models.py:219
+msgid "Day"
+msgstr "Dia"
+
+#: .\human_resources\models.py:220
+msgid "Month"
+msgstr "Mês"
+
+#: .\human_resources\models.py:221 .\human_resources\models.py:291
+msgid "Descrição"
+msgstr "Descrição"
+
+#: .\human_resources\models.py:224
+msgid "Holiday"
+msgstr "Feriado"
+
+#: .\human_resources\models.py:286 .\human_resources\models.py:290
+msgid "Point"
+msgstr "Ponto"
+
+#: .\human_resources\models.py:294
+msgid "Observation"
+msgstr "Observação"
+
+#: .\human_resources\models.py:303 .\human_resources\presenters.py:206
+msgid "Start date"
+msgstr "Data de Início"
+
+#: .\human_resources\models.py:304 .\human_resources\presenters.py:207
+msgid "End date"
+msgstr "Data de Término"
+
+#: .\human_resources\models.py:324
+msgid "There is no registered limit concession."
+msgstr "Não há concessão de limite registrada."
+
+#: .\human_resources\models.py:340
+msgid "Taken from"
+msgstr "Tirado de"
+
+#: .\human_resources\models.py:341
+msgid "to"
+msgstr "até"
+
+#: .\human_resources\models.py:348
+msgid "Vacation"
+msgstr "Férias"
+
+#: .\human_resources\models.py:367
+msgid "Hours owed"
+msgstr "Horas Devidas"
+
+#: .\human_resources\models.py:372
+msgid "Hours compensated"
+msgstr "Horas Compensadas"
+
+#: .\human_resources\models.py:380
+msgid "Hours Bank"
+msgstr "Banco de Horas"
+
+#: .\human_resources\models.py:389 .\human_resources\presenters.py:35
+#: .\human_resources\presenters.py:53 .\human_resources\presenters.py:79
+#: .\human_resources\presenters.py:144 .\human_resources\presenters.py:202
+#: .\product\presenters.py:51 .\product\presenters.py:69 .\tool\models.py:11
+#: .\tool\models.py:21 .\tool\presenters.py:19 .\tool\presenters.py:35
+#: .\tool\presenters.py:56 .\warehouse\presenters.py:21
+msgid "Name"
+msgstr "Nome"
+
+#: .\human_resources\models.py:397 .\human_resources\presenters.py:288
+#: .\tool\models.py:103 .\tool\presenters.py:84
+msgid "Issue date"
+msgstr "Data de Emissão"
+
+#: .\human_resources\models.py:398 .\human_resources\presenters.py:289
+msgid "Expiration date"
+msgstr "Data de Expiração"
+
+#: .\human_resources\models.py:399
+#: .\venv\Lib\site-packages\django\db\models\fields\files.py:244
+msgid "File"
+msgstr "Arquivo"
+
+#: .\human_resources\models.py:405
+msgid "Document"
+msgstr "Documento"
+
+#: .\human_resources\presenters.py:52
+msgid "Pis Number"
+msgstr "Número do PIS"
+
+#: .\human_resources\presenters.py:146 .\human_resources\presenters.py:205
+msgid "Paid off"
+msgstr "Quitado"
+
+#: .\human_resources\presenters.py:204
+msgid "Vacation limit"
+msgstr "Limite para Férias"
+
+#: .\human_resources\presenters.py:286
+msgid "Document Name"
+msgstr "Nome do Documento"
+
+#: .\human_resources\presenters.py:287
+msgid "Employee Name"
+msgstr "Nome do Funcionário"
+
+#: .\human_resources\templates\human_resources\index.html:14
+msgid "Employee List"
+msgstr "Lista de Pessoas"
+
+#: .\human_resources\templates\human_resources\index.html:18
+msgid "Create New Employee"
+msgstr "Criar Nova Pessoa"
+
+#: .\human_resources\templates\human_resources\index.html:22
+msgid "Position List"
+msgstr "Lista de Cargos"
+
+#: .\human_resources\templates\human_resources\index.html:26
+msgid "Create New Position"
+msgstr "Criar Novo Cargo"
+
+#: .\human_resources\templates\human_resources\index.html:30
+msgid "Employee Hirings List"
+msgstr "Lista de Contratações"
+
+#: .\human_resources\templates\human_resources\index.html:34
+msgid "Create Employee Hirings"
+msgstr "Criar Nova Contratação"
+
+#: .\human_resources\templates\human_resources\index.html:47
+msgid "Vacation List"
+msgstr "Lista de Férias"
+
+#: .\human_resources\templates\human_resources\index.html:51
+#: .\human_resources\views.py:117
 msgid "Vacation Expiration Report"
 msgstr "Férias Vencidas ou a Vencer"
 
-msgid "Paid off"
-msgstr "Quitado"
+#: .\human_resources\templates\human_resources\index.html:55
+msgid "Create New Vacation"
+msgstr "Registrar Nova Férias"
+
+#: .\human_resources\templates\human_resources\index.html:59
+msgid "Register Point Prisma Henry"
+msgstr "Registrar Ponto Prisma Henry"
+
+#: .\human_resources\templates\human_resources\index.html:63
+#: .\human_resources\templates\human_resources\time_sheet.html:7
+msgid "Time Sheet Report"
+msgstr "Relatório de Folha de Ponto"
+
+#: .\human_resources\templates\human_resources\index.html:67
+msgid "Salary List"
+msgstr "Lista de Salários"
+
+#: .\human_resources\templates\human_resources\index.html:71
+msgid "Create New Salary"
+msgstr "Criar Novo Salário"
+
+#: .\human_resources\templates\human_resources\index.html:84
+msgid "Salary Adjustment List"
+msgstr "Lista de Ajuste Salarial"
+
+#: .\human_resources\templates\human_resources\index.html:88
+msgid "Create Salary Adjustment"
+msgstr "Gerar Ajuste Salarial"
+
+#: .\human_resources\templates\human_resources\index.html:92
+msgid "Document List"
+msgstr "Lista de Documentos"
+
+#: .\human_resources\templates\human_resources\index.html:96
+msgid "Create New Document"
+msgstr "Anexar Novo Documento"
+
+#: .\human_resources\templates\human_resources\point-register.html:16
+#: .\human_resources\templates\human_resources\time_sheet_edit.html:11
+#: .\product\templates\product\partials\page_header.html:13
+#: .\templates\global\partials\page_header.html:10
+msgid "Save"
+msgstr "Salvar"
+
+#: .\human_resources\templates\human_resources\point-register.html:30
+msgid "Select File"
+msgstr "Selecionar Arquivo"
+
+#: .\human_resources\templates\human_resources\point-register.html:32
+msgid "No file chosen"
+msgstr "Nenhum arquivo selecionado"
+
+#: .\human_resources\templates\human_resources\time_sheet.html:12
+msgid "Select Employee"
+msgstr "Selecionar Funcionário"
+
+#: .\human_resources\templates\human_resources\time_sheet.html:23
+msgid "Generate"
+msgstr "Gerar"
+
+#: .\human_resources\templates\human_resources\time_sheet.html:33
+#: .\human_resources\templates\human_resources\time_sheet_edit.html:20
+msgid "Time Sheet"
+msgstr "Folha de Ponto"
+
+#: .\human_resources\templates\human_resources\time_sheet.html:37
+#: .\human_resources\templates\human_resources\time_sheet_edit.html:24
+msgid "Employee:"
+msgstr "Funcionário:"
+
+#: .\human_resources\templates\human_resources\time_sheet.html:39
+#: .\human_resources\templates\human_resources\time_sheet_edit.html:26
+msgid "Pis Number:"
+msgstr "Número do PIS:"
+
+#: .\human_resources\templates\human_resources\time_sheet.html:61
+#: .\human_resources\templates\human_resources\time_sheet_edit.html:40
+msgid "Week"
+msgstr "Semana"
+
+#: .\human_resources\templates\human_resources\time_sheet.html:62
+#: .\human_resources\templates\human_resources\time_sheet.html:64
+#: .\human_resources\templates\human_resources\time_sheet.html:66
+#: .\human_resources\templates\human_resources\time_sheet_edit.html:41
+#: .\human_resources\templates\human_resources\time_sheet_edit.html:43
+#: .\human_resources\templates\human_resources\time_sheet_edit.html:45
+msgid "Entry"
+msgstr "Entrada"
+
+#: .\human_resources\templates\human_resources\time_sheet.html:63
+#: .\human_resources\templates\human_resources\time_sheet.html:65
+#: .\human_resources\templates\human_resources\time_sheet.html:67
+#: .\human_resources\templates\human_resources\time_sheet_edit.html:42
+#: .\human_resources\templates\human_resources\time_sheet_edit.html:44
+#: .\human_resources\templates\human_resources\time_sheet_edit.html:46
+msgid "Exit"
+msgstr "Saída"
+
+#: .\human_resources\templates\human_resources\time_sheet_base.html:22
+msgid "No reports generated yet"
+msgstr "Nenhum relatório gerado ainda"
+
+#: .\human_resources\templates\human_resources\time_sheet_base.html:31
+msgid "Normal Hrs"
+msgstr "Hrs normais"
+
+#: .\human_resources\templates\human_resources\time_sheet_base.html:32
+#, fuzzy, python-format
+msgid "Overtime 50%"
+msgstr "Hrs extras 50%"
+
+#: .\human_resources\templates\human_resources\time_sheet_base.html:33
+#, fuzzy, python-format
+msgid "Overtime 100%"
+msgstr "Hrs extras 100%"
+
+#: .\human_resources\templates\human_resources\time_sheet_edit.html:7
+msgid "Time Sheet Edit"
+msgstr "Editar Folha de Ponto"
+
+#: .\human_resources\views.py:148
+msgid "Point Register"
+msgstr "Registro de Ponto"
+
+#: .\product\presenters.py:52
+#, fuzzy
+msgid "Abbreviation"
+msgstr "Abreviação"
+
+#: .\product\presenters.py:70 .\product\presenters.py:88 .\tool\models.py:85
+#: .\warehouse\presenters.py:22
+#, fuzzy
+#| msgid "Descrição"
+msgid "Description"
+msgstr "Descrição"
+
+#: .\product\presenters.py:87
+msgid "Code"
+msgstr "Código"
+
+#: .\templates\global\partials\side_bar.html:8
+msgid "Sales"
+msgstr "Vendas"
+
+#: .\templates\global\partials\side_bar.html:13 .\warehouse\presenters.py:49
+#: .\warehouse\presenters.py:80
+msgid "Warehouse"
+msgstr "Almoxarifado"
+
+#: .\templates\global\partials\side_bar.html:18 .\tool\models.py:90
+#: .\tool\presenters.py:82
+msgid "Tool"
+msgstr "Ferramenta"
+
+#: .\templates\global\partials\side_bar.html:23
+msgid "Purchase"
+msgstr "Compras"
+
+#: .\templates\global\partials\side_bar.html:28
+msgid "Manufacturing"
+msgstr "Fabricação"
+
+#: .\templates\global\partials\side_bar.html:33
+msgid "Human Resources"
+msgstr "Recursos Humanos"
+
+#: .\tool\models.py:17 .\tool\models.py:66
+msgid "Tool Category"
+msgstr "Categoria de Ferramenta"
+
+#: .\tool\models.py:27 .\tool\models.py:74 .\tool\presenters.py:60
+msgid "Brand"
+msgstr "Marca"
+
+#: .\tool\models.py:44
+msgid "Product"
+msgstr "Produto"
+
+#: .\tool\models.py:49
+#, fuzzy
+#| msgid "Pis Number"
+msgid "Asset Number"
+msgstr "Número de Patrimônio"
+
+#: .\tool\models.py:54
+#, fuzzy
+#| msgid "Pis Number"
+msgid "Serial Number"
+msgstr "Número de Série"
+
+#: .\tool\models.py:58
+#, fuzzy
+#| msgid "Admission date"
+msgid "Acquisition Date"
+msgstr "Data de Aquisição"
+
+#: .\tool\models.py:80
+msgid "Tool Status"
+msgstr "Status da Ferramenta"
+
+#: .\tool\models.py:108 .\tool\models.py:141 .\tool\presenters.py:85
+#, fuzzy
+#| msgid "Start date"
+msgid "Return date"
+msgstr "Data de Devolução"
+
+#: .\tool\models.py:123
+msgid "This tool is not available."
+msgstr "Esta ferramenta não está disponível."
+
+#: .\tool\presenters.py:57
+#, fuzzy
+#| msgid "Pis number"
+msgid "Asset number"
+msgstr "Número de Patrimônio"
+
+#: .\tool\presenters.py:58
+#, fuzzy
+#| msgid "Pis number"
+msgid "Serial number"
+msgstr "Número de Série"
+
+#: .\tool\presenters.py:59
+#, fuzzy
+#| msgid "Admission date"
+msgid "Acquisition date"
+msgstr "Data de Aquisição"
+
+#: .\tool\presenters.py:61
+msgid "Tool status"
+msgstr "Status da Ferramenta"
+
+#: .\tool\templates\tool\index.html:14
+msgid "List of Tool Category"
+msgstr "Lista de Categoria de Ferramenta"
+
+#: .\tool\templates\tool\index.html:18
+msgid "New Tool Category"
+msgstr "Nova Categoria de Ferramenta"
+
+#: .\tool\templates\tool\index.html:22
+msgid "List of Tool Brand"
+msgstr "Lista de Marca"
+
+#: .\tool\templates\tool\index.html:26
+msgid "New Tool Brand"
+msgstr "Nova Marca"
+
+#: .\tool\templates\tool\index.html:30
+#, fuzzy
+#| msgid "List of"
+msgid "List of Tool"
+msgstr "Lista de Ferramentas"
+
+#: .\tool\templates\tool\index.html:34
+msgid "New Tool"
+msgstr "Nova Ferramenta"
+
+#: .\tool\templates\tool\index.html:48
+msgid "List of Tool Distribution Record"
+msgstr "Lista de Registro de Distribuição"
+
+#: .\tool\templates\tool\index.html:52
+msgid "New Tool Distribution Record"
+msgstr "Novo Registro de Distribuição"
+
+#: .\warehouse\presenters.py:47
+msgid "Sku Code"
+msgstr "Código (SKU)"
+
+#: .\warehouse\presenters.py:48 .\warehouse\presenters.py:79
+msgid "Item"
+msgstr "Item"
+
+#: .\warehouse\presenters.py:50 .\warehouse\presenters.py:81
+msgid "Storage Bin"
+msgstr "Posição no Depósito"
+
+#: .\warehouse\presenters.py:51
+#, fuzzy
+#| msgid "Adjustment Type"
+msgid "Movement Type"
+msgstr "Tipo de Movimentação"
+
+#: .\warehouse\presenters.py:52 .\warehouse\presenters.py:83
+msgid "Quantity"
+msgstr "Quantidade"
+
+#: .\warehouse\presenters.py:53 .\warehouse\presenters.py:82
+msgid "Stock Uom"
+msgstr "Un de Estoque"
+
+#: .\warehouse\presenters.py:54
+msgid "Item Price"
+msgstr "Preço do Item"
+
+#: .\warehouse\presenters.py:84
+msgid "Ordered Qty"
+msgstr "Qtd pedido"
+
+#: .\warehouse\presenters.py:85
+msgid "Reserved Qty"
+msgstr "Qtd reservado"
+
+#: .\warehouse\templates\warehouse\inbound.html:20
+#: .\warehouse\templates\warehouse\outbound.html:20
+msgid "Release"
+msgstr "Lançar"
+
+#: .\warehouse\templates\warehouse\index.html:14
+#, fuzzy
+#| msgid "Document List"
+msgid "Product List"
+msgstr "Lista de Produtos"
+
+#: .\warehouse\templates\warehouse\index.html:18
+#, fuzzy
+#| msgid "Create New Document"
+msgid "Create new product"
+msgstr "Criar Novo Produto"
+
+#: .\warehouse\templates\warehouse\index.html:22
+msgid "List of Warehouse types"
+msgstr "Lista de Tipos de Depósito"
+
+#: .\warehouse\templates\warehouse\index.html:26
+#, fuzzy
+#| msgid "Create New Document"
+msgid "Create new Warehouse types"
+msgstr "Criar Novo Tipo de Depósito"
+
+#: .\warehouse\templates\warehouse\index.html:30
+#, fuzzy
+#| msgid "Create New Document"
+msgid "Create new Warehouse"
+msgstr "Criar Novo Depósito"
+
+#: .\warehouse\templates\warehouse\index.html:43
+#, fuzzy
+#| msgid "Create New Position"
+msgid "Create new Storage Bin"
+msgstr "Criar Nova Posição no Depósito"
+
+#: .\warehouse\templates\warehouse\index.html:47
+msgid "New Stock Inbound"
+msgstr "Nova Entrada de Mercadoria"
+
+#: .\warehouse\templates\warehouse\index.html:51
+msgid "List of stock movements"
+msgstr "Lista de Movimentações no Estoque"
+
+#: .\warehouse\templates\warehouse\warehouse_form.html:19
+msgid "Address"
+msgstr "Endereço"
+
+#: .\warehouse\views.py:69 .\warehouse\views.py:106
+#, fuzzy
+#| msgid "Warehouse"
+msgid "New Warehouse"
+msgstr "Novo Depósito"
+
+#: .\warehouse\views.py:199
+msgid "Stock movement has been completed successfully."
+msgstr "A movimentação de estoque foi concluída com sucesso."
+
+#: .\warehouse\views.py:225
+msgid "Stock Inbound"
+msgstr "Entrada de Mercadoria"
+
+#: .\warehouse\views.py:232
+msgid "Stock Outbound"
+msgstr "Saída de Mercadoria"
+
+#: .\warehouse\views.py:255
+msgid "Error: The storage bin you specified is not in the warehouse you specified."
+msgstr "Erro: A posição no depósito especificada não está no depósito especificado."
