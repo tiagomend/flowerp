@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
 
 from product.models import (
     Product,
@@ -36,3 +37,8 @@ class ItemTypeForSpedForm(forms.ModelForm):
     class Meta:
         model = ItemTypeForSped
         fields = '__all__'
+
+
+# Form for filters
+class ProductFilterForm(forms.Form):
+    name = forms.CharField(max_length=100, label=_('Name'), required=False)

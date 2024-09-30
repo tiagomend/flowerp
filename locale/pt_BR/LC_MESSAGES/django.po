@@ -491,3 +491,21 @@ msgstr "Descartado"
 
 msgid "Tool Distribuition Record"
 msgstr "Registro de Distribuição de Ferramenta"
+
+msgid "Inbound"
+msgstr "Entrada"
+
+msgid "Outbound"
+msgstr "Saída"
+
+msgid "Product code"
+msgstr "Código do Produto"
+
+msgid "Movement type"
+msgstr "Tipo de movimentação"
+
+msgid "New Stock Outbound"
+msgstr "Nova Saída de Mercadoria"
+
+msgid "List of stock"
+msgstr "Balanço de Estoque"

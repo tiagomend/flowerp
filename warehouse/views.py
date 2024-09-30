@@ -14,7 +14,9 @@ from warehouse.forms import (
     WarehouseAddressForm,
     WarehouseForm,
     StorageBinForm,
-    StockMovementForm
+    StockMovementForm,
+    WarehouseTypeFilterForm,
+    StockMovementFilterForm
 )
 
 from warehouse.models import (
@@ -53,9 +55,18 @@ class ReadWarehouseType(ReadView):
     icon = 'icon_schema'
     redirect_for_new = 'warehouse:create_w_type'
     redirect_for_edit = 'warehouse:read_w_type'
+    filter_form = WarehouseTypeFilterForm
+    parameters = (
+        'name',
+        'description',
+    )
+    expressions = (
+        'name__contains',
+        'description__contains'
+    )
 
     def get_presenters(self):
-        return WarehouseTypePresenter.all('name')
+        return WarehouseTypePresenter.all(q_filter=self.get_filters() ,order_by='name')
 
 
 class CreateWarehouse(View):
@@ -377,9 +388,22 @@ class ReadStockMovements(ReadView):
     icon = 'icon_inventory'
     model = StockMovement
     redirect_for_new = 'warehouse:stock_inbound'
+    filter_form = StockMovementFilterForm
+    parameters = (
+        'start_date',
+        'end_date',
+        'product_code',
+        'movement_type',
+    )
+    expressions = (
+        'date__date__gte',
+        'date__date__lte',
+        'item__sku_code',
+        'movement_type',
+    )
 
     def get_presenters(self):
-        return StockMovementPresenter.all()
+        return StockMovementPresenter.all(q_filter=self.get_filters())
 
 
 class ReadStock(ReadView):

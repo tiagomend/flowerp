@@ -62,7 +62,7 @@ class ReadEmployeePosition(ReadView):
     redirect_for_edit = 'human_resources:read_position'
 
     def get_presenters(self):
-        return EmployeePositionPresenter.all('name')
+        return EmployeePositionPresenter.all(order_by='name')
 
 
 class CreateEmployee(CreateView):
@@ -84,7 +84,7 @@ class ReadEmployee(ReadView):
     redirect_for_edit = 'human_resources:read_employee'
 
     def get_presenters(self):
-        return EmployeePresenter.all('first_name')
+        return EmployeePresenter.all(order_by='first_name')
 
 
 class CreateEmployeeHiring(CreateView):
@@ -106,7 +106,7 @@ class ReadEmployeeHiring(ReadView):
     redirect_for_edit = 'human_resources:read_hiring'
 
     def get_presenters(self):
-        return EmployeeHiringPresenter.all('employee__first_name')
+        return EmployeeHiringPresenter.all(order_by='employee__first_name')
 
 
 class ReadVacationExpiration(ReadView):
@@ -117,7 +117,7 @@ class ReadVacationExpiration(ReadView):
     page_title = _('Vacation Expiration Report')
 
     def get_presenters(self):
-        return VacationExpirationPresenter.all('employee__first_name')
+        return VacationExpirationPresenter.all(order_by='employee__first_name')
 
 
 class CreateVacation(CreateView):
@@ -457,7 +457,7 @@ class ReadSalary(ReadView):
     redirect_for_edit = 'human_resources:read_salary'
 
     def get_presenters(self):
-        return SalaryPresenter.all('position__name')
+        return SalaryPresenter.all(order_by='position__name')
 
 
 class CreateSalaryAdjustment(CreateView):

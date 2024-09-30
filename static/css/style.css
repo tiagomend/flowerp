@@ -854,3 +854,44 @@ body {
     outline: none;
     background-color: var(--primary-100);
 }
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+    background-color: #ffffff;
+    width: 800px;
+    margin: 10% auto;
+    padding: 30px 30px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #5c5c5c48;
+}
+
+.close {
+    background-color: var(--secondary-200);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    color: var(--secondary-900);
+    float: right;
+    margin-top: -25px;
+    margin-right: -25px;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.close:hover {
+    background-color: var(--secondary-700);
+    color: var(--white-color);
+}

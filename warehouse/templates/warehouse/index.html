@@ -46,9 +46,17 @@
                   <i class="icon_inventory_2"></i>
                   {% translate "New Stock Inbound" %}
                 </a>
+                <a href="{% url "warehouse:stock_outbound" %}" class="nav-item">
+                  <i class="icon_inventory_2"></i>
+                  {% translate "New Stock Outbound" %}
+                </a>
                 <a href="{% url "warehouse:read_stock_movements" %}" class="nav-item">
                   <i class="icon_inventory"></i>
                   {% translate "List of stock movements" %}
+                </a>
+                <a href="{% url "warehouse:read_stock" %}" class="nav-item">
+                  <i class="icon_inventory"></i>
+                  {% translate "List of stock" %}
                 </a>
               </nav>
           </div>
@@ -56,13 +64,7 @@
       </div>
 
       <div class="col-4">
-        <div class="card">
-          <div class="card-row">
-              <nav class="card-nav">
-                
-              </nav>
-          </div>
-        </div>
+        
       </div>
 
     </div>

@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import View
+from django.db.models import Q
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm
 from django.contrib import messages
@@ -101,6 +102,7 @@ class ReadView(View):
     model: object
     template = 'global/read.html'
     page_title = ''
+    filter_form = None
 
     def get_context_data(self):
         list_of = _('List of')
@@ -124,7 +126,23 @@ class ReadView(View):
         html_language = translation.get_language()
         context['html_language'] = html_language
 
+        if self.filter_form:
+            context['filter_form'] = self.filter_form
+
         return context
+
+    def get_filters(self):
+        if self.parameters:
+            filters = Q()
+            for i, parameter in enumerate(self.parameters):
+                search = self.request.GET.get(parameter, '')
+
+                if search:
+                    args = {f"{self.expressions[i]}": search}
+                    filters &= Q(**args)
+
+            return filters
+        return None
 
     def get_presenters(self):
         raise NotImplementedError

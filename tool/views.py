@@ -77,7 +77,7 @@ class ReadTool(ReadView):
     model = ToolForm.Meta.model
     icon = 'icon_build'
     redirect_for_new = 'tool:create_tool'
-    redirect_for_edit = 'tool:read_tool'
+    redirect_for_edit = 'tool:index'
 
     def get_presenters(self):
         return ToolPresenter.all()

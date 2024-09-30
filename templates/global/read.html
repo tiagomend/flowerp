@@ -2,13 +2,22 @@
 {% load i18n %}
 
 {% block content %}
-<div class="card">
+<div class="card" id="card-print">
   <div class="card-header flex space-between">
     <div class="page-header">
       <i class="{{ icon }}"></i>
       <h3>{{ page_title }}</h3>
     </div>
     <div class="section-action">
+      <button class="btn btn-secondary" id="btn-print">
+        <i class="icon_print"></i>
+      </button>
+      {% if filter_form %}
+      <button class="btn btn-secondary" id="btn-filter">
+        <i class="icon_search"></i>
+      </button>
+      {% endif %}
+      
       <a href="{{ redirect_for_new }}" class="btn btn-primary">
         {% translate "New" %}
       </a>
@@ -48,4 +57,20 @@
   </div>
   </div>
 </div>
+
+{% if filter_form %}
+<div class="modal" data-open="btn-filter" data-close="close-modal">
+  <div class="modal-content">
+    <button id="close-modal" class="close">&times;</button>
+    <h2>{% translate "Pesquise" %}</h2>
+
+    <form class="form-control" action="" id="form" method="get">
+      {{ filter_form }}
+      <div class="mt-1">
+        <button type="submit" class="btn btn-primary">{% translate "Search" %}</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endif %}
 {% endblock content %}

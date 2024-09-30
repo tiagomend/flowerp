@@ -2,6 +2,7 @@ from decimal import Decimal
 
 from django.db import models
 from django.core.exceptions import ValidationError
+from django.utils.translation import gettext_lazy as _
 
 class StorageBinDoesNotBelongWarehouse(ValidationError):
     pass
@@ -117,8 +118,8 @@ class Stock(models.Model):
 
 
 class MovementType(models.TextChoices):
-    INBOUND = ('in', 'Inbound')
-    OUTBOUND = ('out', 'Outbound')
+    INBOUND = ('in', _('Inbound'))
+    OUTBOUND = ('out', _('Outbound'))
 
 
 class StockMovement(models.Model):

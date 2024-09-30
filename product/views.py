@@ -3,7 +3,8 @@ from product.forms import (
     ProductForm,
     UnitOfMeasureForm,
     ProductCategoryForm,
-    ItemTypeForSpedForm
+    ItemTypeForSpedForm,
+    ProductFilterForm
 )
 from product.presenters import (
     ProductPresenter,
@@ -29,9 +30,16 @@ class ReadProduct(ReadView):
     redirect_for_new = 'product:create_product'
     redirect_for_edit = 'product:read_product'
     model = ProductForm.Meta.model
+    filter_form = ProductFilterForm
+    parameters = (
+        'name',
+    )
+    expressions = (
+        'name__contains',
+    )
 
     def get_presenters(self):
-        return ProductPresenter.all()
+        return ProductPresenter.all(q_filter=self.get_filters())
 
 
 class CreateUnitOfMeasure(CreateView):
@@ -53,7 +61,7 @@ class ReadUnitOfMeasure(ReadView):
     model = UnitOfMeasureForm.Meta.model
 
     def get_presenters(self):
-        return UnitOfMeasurePresenter.all()
+        return UnitOfMeasurePresenter.all(q_filter=self.get_filters())
 
 
 class CreateProductCategory(CreateView):
@@ -75,7 +83,7 @@ class ReadProductCategory(ReadView):
     model = ProductCategoryForm.Meta.model
 
     def get_presenters(self):
-        return ProductCategoryPresenter.all()
+        return ProductCategoryPresenter.all(q_filter=self.get_filters())
 
 
 class CreateItemTypeForSped(CreateView):

@@ -26,9 +26,12 @@ class Presenter(ABC):
         return self.model.pk
 
     @classmethod
-    def all(cls, order_by = '-id'):
+    def all(cls, q_filter = None, order_by = '-id'):
+        if q_filter:
+            models = cls.model.objects.filter(q_filter).order_by(order_by)
+        else:
+            models = cls.model.objects.all().order_by(order_by)
 
-        models = cls.model.objects.all().order_by(order_by)
         models_list = []
         for model in models:
             models_list.append(cls(model=model))

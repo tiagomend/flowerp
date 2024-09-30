@@ -1,3 +1,41 @@
+const PrintCard = () => {
+  const printableDiv = document.getElementById('card-print');
+  if (printableDiv) {
+    // Cria uma nova janela para impressão
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(`
+      <html>
+        <head>
+          <title>Print Preview</title>
+          <link rel="stylesheet" href="/static/css/style.css">
+          <link rel="stylesheet" href="/static/icon/style.css">
+        </head>
+        <body>
+          ${printableDiv.innerHTML}
+        </body>
+      </html>
+    `);
+    printWindow.document.close();
+
+    printWindow.onload = () => {
+      printWindow.print();
+    };
+
+    const interval = setInterval(() => {
+      if (printWindow.closed) {
+        clearInterval(interval);
+      } else {
+        printWindow.close();
+      }
+    }, 500);
+  }
+}
+
+const btnPrint = document.getElementById('btn-print');
+if (btnPrint) {
+  btnPrint.addEventListener('click', PrintCard);
+}
+
 const SubmitButton = () => {
   const selector = '[data-btn="form-submit"]';
   const buttons = [...document.querySelectorAll(selector)];
@@ -264,3 +302,28 @@ const InsertRow = () => {
 }
 
 InsertRow();
+
+const Modal = () => {
+  const modals = [...document.getElementsByClassName('modal')];
+
+  modals.forEach((modal) => {
+    const btnOpenId = modal.getAttribute('data-open');
+    const btnCloseId = modal.getAttribute('data-close');
+    const btnOpen = document.getElementById(btnOpenId);
+    const btnClose = document.getElementById(btnCloseId);
+
+    if (btnOpen) {
+      btnOpen.addEventListener('click', () => {
+        modal.style.display = 'block';
+      });
+    }
+
+    if (btnClose) {
+      btnClose.addEventListener('click', () => {
+        modal.style.display = 'none';
+      });
+    }
+  });
+}
+
+Modal();
