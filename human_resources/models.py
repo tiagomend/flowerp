@@ -218,7 +218,7 @@ class EmployeeHiring(models.Model):
 class Holiday(models.Model):
     day = models.IntegerField(verbose_name=_('Day'))
     month = models.IntegerField(verbose_name=_('Month'))
-    description = models.CharField(max_length=100, verbose_name=_('Descrição'))
+    description = models.CharField(max_length=100, verbose_name=_('Description'))
 
     class Meta:
         verbose_name = _('Holiday')

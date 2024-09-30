@@ -28,13 +28,13 @@ class Brand(models.Model):
 
 
 class ToolStatus(models.TextChoices):
-    NEW = ('new', 'New')
-    LIGHTLY_USED = ('lightly_used', 'Lightly Used')
-    USED = ('used', 'Used')
-    WORN = ('worn', 'Worn')
-    BROKEN = ('broken', 'Broken')
-    UNDER_REPAIR = ('under_repair', 'Under Repair')
-    DISCARDED = ('discarded', 'Discarded')
+    NEW = ('new', _('New'))
+    LIGHTLY_USED = ('lightly_used', _('Lightly Used'))
+    USED = ('used', _('Used'))
+    WORN = ('worn', _('Worn'))
+    BROKEN = ('broken', _('Broken'))
+    UNDER_REPAIR = ('under_repair', _('Under Repair'))
+    DISCARDED = ('discarded', _('Discarded'))
 
 
 class Tool(models.Model):
@@ -110,10 +110,15 @@ class ToolDistributionRecord(models.Model):
 
     employee = models.ForeignKey(
         'human_resources.EmployeeHiring',
-        on_delete=models.PROTECT
+        on_delete=models.PROTECT,
+        verbose_name=_('Employee')
     )
 
-    tool = models.ForeignKey(Tool, on_delete=models.PROTECT)
+    tool = models.ForeignKey(
+        Tool,
+        on_delete=models.PROTECT,
+        verbose_name=_('Tool')
+    )
 
     def save(self, *args, **kwargs) -> None:
         if ToolDistributionRecord.objects.filter(
@@ -129,6 +134,7 @@ class ToolDistributionRecord(models.Model):
         return f'#{pk}'
 
     class Meta:
+        verbose_name = _('Tool Distribuition Record')
         constraints = [
             models.UniqueConstraint(
                 fields=['tool', 'employee', 'issue_date'],
