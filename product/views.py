@@ -61,7 +61,7 @@ class ReadUnitOfMeasure(ReadView):
     model = UnitOfMeasureForm.Meta.model
 
     def get_presenters(self):
-        return UnitOfMeasurePresenter.all(q_filter=self.get_filters())
+        return UnitOfMeasurePresenter.all()
 
 
 class CreateProductCategory(CreateView):

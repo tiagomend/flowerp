@@ -24,7 +24,7 @@ class ProductForm(forms.ModelForm):
 class UnitOfMeasureForm(forms.ModelForm):
     class Meta:
         model = UnitOfMeasure
-        fields = '__all__'
+        exclude = ['id']
 
 
 class ProductCategoryForm(forms.ModelForm):
