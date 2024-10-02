@@ -509,3 +509,6 @@ msgstr "Nova Saída de Mercadoria"
 
 msgid "List of stock"
 msgstr "Balanço de Estoque"
+
+msgid "Unit Of Measure"
+msgstr "Unidade de Medida"
