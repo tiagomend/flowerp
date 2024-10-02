@@ -1,4 +1,7 @@
+from uuid import uuid4
+
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class ItemTypeForSped(models.Model):
@@ -13,11 +16,20 @@ class ItemTypeForSped(models.Model):
 
 
 class UnitOfMeasure(models.Model):
-    name = models.CharField(max_length=30)
-    abbreviation = models.CharField(max_length=8)
+    id = models.UUIDField(primary_key=True, default=uuid4, unique=True)
+    name = models.CharField(
+        max_length=30,
+        verbose_name=_('Name')
+    )
+
+    abbreviation = models.CharField(
+        max_length=8,
+        verbose_name=_('Abbreviation')
+    )
 
     class Meta:
         db_table = 'units_of_measure'
+        verbose_name = _('Unit Of Measure')
 
     def __str__(self) -> str:
         return f'{self.abbreviation} - {self.name}'

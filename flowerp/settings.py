@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'human_resources',
     'warehouse',
     'tool',
+    'service',
 ]
 
 MIDDLEWARE = [

@@ -1,8 +1,9 @@
 from datetime import date, time, timedelta
 import json
 
-from django.template.loader import get_template
 from xhtml2pdf import pisa
+
+from django.template.loader import get_template
 from django.http import HttpResponse
 from django.views import View
 from django.http import FileResponse, Http404, JsonResponse
