@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+{% load static %}
+{% load i18n %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Folha de Ponto {{ colab|title }}</title>
+  <style>
+
+    @page {
+      margin: 1cm;
+      size: A3;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 11px;
+      zoom: 60%;
+    }
+
+    h2 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 12px;
+    }
+
+    .table {
+      border-collapse: collapse;
+      width: max-content;
+    }
+
+    .table table,
+    .table td,
+    .table th {
+      border: 1px solid #585b5f;
+      text-align: left;
+      padding: 2px;
+    }
+
+    .table th {
+      border-bottom: 2px solid #585b5f;
+      background-color: #f4f5f6;
+      font-size: 12px;
+    }
+
+    .nth tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    .table .center,
+    .center {
+      text-align: center;
+    }
+
+    .sabado {
+      background-color: #ffc000 !important;
+    }
+
+    .domingo {
+      background-color: #ed7d31 !important;
+    }
+
+    .feriado {
+      background-color: #87deaa !important;
+    }
+
+    .assinatura {
+      border-top: 1px solid #585b5f !important;
+      width: 200px;
+    }
+  </style>
+</head>
+
+<body style="width: 70%;">
+  
+  <table class="table">
+    <tr>
+      <td colspan="4" class="center">
+        <h1>Relatório de Ponto - {{ time_sheet.0.date|date:'F' }}/{{ time_sheet.0.date|date:'Y' }}</h1>
+      </td>
+    </tr>
+    <tr>
+      <td style='text-align: right; max-width: 10px;'><strong>Nome:</strong></td>
+      <td>{{ employee }}</td>
+      <td style='text-align: right; max-width: 30px;'><strong>Empresa:</strong></td>
+      <td>{{ employee.enterprise }}</td>
+    </tr>
+    <tr>
+      <td style='text-align: right; max-width: 30px;'><strong>Função:</strong></td>
+      <td>{{ employee.salary.position }}</td>
+      <td style='text-align: right; max-width: 30px;'><strong>Admissão:</strong></td>
+      <td>{{ employee.admission_date|date:'d/m/Y' }}</td>
+    </tr>
+  </table>
+  <br>
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="center">Data</th>
+        <th class="center">Semana</th>
+        <th class="center">Entrada 1</th>
+        <th class="center">Saída 1</th>
+        <th class="center">Entrada 2</th>
+        <th class="center">Saída 2</th>
+        <th class="center">Entrada 3</th>
+        <th class="center">Saída 3</th>
+        <th class="center">Total Hora</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for point in time_sheet %}
+        {% if point.date|date:'w' == '0' %}
+        <tr class="domingo">
+        {% elif point.date|date:'w' == '6' %}
+        <tr class="sabado">
+        {% else %}
+        <tr>
+        {% endif %}
+          <td>{{ point.date|date:'d/m/Y' }}</td>
+          <td>{{ point.date|date:'l' }}</td>
+          <td>{{ point.first_entry }}</td>
+          <td>{{ point.first_exit}}</td>
+          <td>{{ point.second_entry }}</td>
+          <td>{{ point.second_exit }}</td>
+          <td>{{ point.third_entry }}</td>
+          <td>{{ point.third_exit }}</td>
+          <td>{{ point.total_hours }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <br>
+  <table class="table">
+    <tr>
+      <td colspan="3" class="center">
+        <strong>OBSERVAÇÕES</strong>
+      </td>
+    </tr>
+    {% for row in observations %}
+    <tr>
+      <td>{{ row.point.date|date:'d/m/Y' }}</td>
+      <td colspan="2">{{ row.txt }}</td>
+    </tr>
+    {% endfor %}
+
+    <tr>
+      <td class="center">
+        <strong>TOTAL HR's</strong>
+      </td>
+      <td class="center">
+        <strong>TOTAL 50%</strong>
+      </td>
+      <td class="center">
+        <strong>TOTAL 100%</strong>
+      </td>
+    </tr>
+    <tr>
+      <td class="center" style="font-size: 16px;"><strong>{{ normal_hours }}</strong></td>
+      <td class="center" style="font-size: 16px;"><strong>{{ fifty_percent_hours }}</strong></td>
+      <td class="center" style="font-size: 16px;"><strong>{{ hundred_percent_hours }}</strong></td>
+    </tr>
+  </table>
+  <br>
+  <br>
+  <br>
+  <table style="width: 300px;">
+    <tr>
+      <td></td>
+      <td></td>
+      <td class="center"><img src="http://192.168.1.100:8000/static/images/assinatura.png" alt=""></td>
+    </tr>
+    <tr>
+      <td style="text-align: center; border-top: 1px solid black; padding: 5px;">
+        {{ employee }}
+      </td>
+      <td></td>
+      <td style="text-align: center; border-top: 1px solid black; padding: 5px;">
+        METALÚRGICA BRASIL
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

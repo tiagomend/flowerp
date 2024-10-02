@@ -1,12 +1,16 @@
 from datetime import date, time, timedelta
 import json
 
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+from django.http import HttpResponse
 from django.views import View
 from django.http import FileResponse, Http404, JsonResponse
 from django.views.generic.edit import CreateView as CreateViewDjango
 from django.urls import reverse_lazy
 from django.shortcuts import render
 from django.contrib import messages
+from django.utils import timezone
 from django.utils.translation import gettext as _
 
 from core.views import CreateView, UpdateView, ReadView
@@ -518,3 +522,41 @@ def view_document(_, document_id):
 class HumanResourcesIndex(View):
     def get(self, request):
         return render(request, 'human_resources/index.html')
+
+
+class ReportInPdf(View):
+    def get(self, _, employee_pk, month_year):
+        template = get_template('human_resources/timesheet-report.html')
+        current_date = timezone.localtime(timezone.now())
+        employee = EmployeeHiring.objects.get(
+            pk=int(employee_pk))
+
+        service = TimeSheetService(employee_hiring=employee, month_year=month_year)
+        time_sheet = service.get_time_sheet()
+        context = {
+            'time_sheet': time_sheet,
+            'current_date': current_date,
+            'employee': employee,
+            'observations': service.get_observations(),
+            'normal_hours': format_decimal_to_hours(service.total_normal_hours()),
+            'fifty_percent_hours':  format_decimal_to_hours(service.total_fifty_per_center()),
+            'hundred_percent_hours': format_decimal_to_hours(service.total_hundred_per_center()),
+        }
+
+        html = template.render(context)
+        html = html.replace(
+            '<<assinatura>>', 'http://127.0.0.1:8000/static/image/assinatura.png')
+
+        first_name = str(employee).capitalize()
+        pis = employee.employee.pis_number
+
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = f'attachment; filename="FolhaPonto{first_name}_{pis}.pdf"'
+
+        # Converter o HTML em PDF
+        pisa_status = pisa.CreatePDF(html, dest=response)
+
+        if pisa_status.err:
+            return HttpResponse('Ocorreu um erro ao gerar o relatório em PDF.')
+
+        return response

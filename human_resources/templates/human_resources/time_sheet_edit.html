@@ -48,7 +48,7 @@
   {% for point in time_sheet %}
   <tr>
     <td>{{ point.date|date:'d/m/Y' }}</td>
-    <td>{{ point.date|date:'d/m/Y' }}</td>
+    <td>{{ point.date|date:'l' }}</td>
     <td>
       <input type="time" name="first_entry" id="" value="{{ point.first_entry }}">
     </td>

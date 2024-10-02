@@ -45,7 +45,7 @@
         <a class="btn btn-secondary" href="{% url "human_resources:time_sheet_edit" pk_employee month_year %}">
           <i class="icon_settings"></i>
         </a>
-        <a class="btn btn-secondary" href="#">
+        <a class="btn btn-secondary" href="{% url "human_resources:time_sheet_pdf" pk_employee month_year %}">
           <i class="icon_print"></i>
         </a>
       </div>
@@ -75,7 +75,7 @@
   <tr>
   {% endif %}
     <td>{{ point.date|date:'d/m/Y' }}</td>
-    <td>{{ point.date|date:'d/m/Y' }}</td>
+    <td>{{ point.date|date:'l' }}</td>
     <td>{{ point.first_entry }}</td>
     <td>{{ point.first_exit}}</td>
     <td>{{ point.second_entry }}</td>

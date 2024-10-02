@@ -24,6 +24,7 @@ urlpatterns = [
     path('hirings/', ReadEmployeeHiring.as_view(), name='read_hiring'),
     path('points/register/', RegisterPointHenryPrisma.as_view(), name='register_point_henry'),
     path('timesheet/<int:employee_hiring>/<str:month_year>/', TimeSheetEdit.as_view(), name='time_sheet_edit'),
+    path('timesheet/pdf/<int:employee_pk>/<str:month_year>/', ReportInPdf.as_view(), name='time_sheet_pdf'),
     path('timesheet/', TimeSheetReport.as_view(), name='time_sheet_report'),
     path('salaries/new/', CreateSalary.as_view(), name='create_salary'),
     path('salaries/<int:pk>/', UpdateSalary.as_view(), name='update_salary'),
