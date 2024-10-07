@@ -2,7 +2,7 @@ from django.utils.translation import gettext as _
 
 from core.presenters import Presenter
 from core.html import badge
-from warehouse.models import WarehouseType, StockMovement, Stock
+from warehouse.models import WarehouseType, StockMovement, Stock, StorageBin
 
 
 class WarehouseTypePresenter(Presenter):
@@ -83,4 +83,22 @@ class StockPresenter(Presenter):
             _('Quantity'),
             _('Ordered Qty'),
             _('Reserved Qty'),
+        ]
+
+
+class StorageBinPresenter(Presenter):
+    model = StorageBin
+
+    @property
+    def values(self):
+        return [
+            self.model.ref_position,
+            self.model.warehouse
+        ]
+
+    @property
+    def headers(self):
+        return [
+            _('Bin'),
+            _('Warehouse')
         ]

@@ -512,3 +512,6 @@ msgstr "Balanço de Estoque"
 
 msgid "Unit Of Measure"
 msgstr "Unidade de Medida"
+
+msgid "List of Storage Bin"
+msgstr "Lista de Posições do Depósito"

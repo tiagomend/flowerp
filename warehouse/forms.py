@@ -84,3 +84,16 @@ class StockMovementFilterForm(forms.Form):
         choices=MovementType.choices,
         label=_('Movement type')
     )
+
+
+class StorageBinFilterForm(forms.Form):
+    ref_position = forms.CharField(
+        max_length=100,
+        label=_('Bin'),
+        required=False
+    )
+    warehouse = forms.CharField(
+        max_length=100,
+        label=_('Warehouse'),
+        required=False
+    )

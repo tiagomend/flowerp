@@ -91,18 +91,31 @@ class Warehouse(models.Model):
 
     class Meta:
         db_table = 'warehouses'
+        verbose_name = _('Warehouse')
 
 
 class StorageBin(models.Model):
-    ref_position = models.CharField(max_length=20)
-    warehouse = models.ForeignKey(Warehouse, on_delete=models.PROTECT)
-    items = models.ManyToManyField('product.Product', through='Stock')
+    ref_position = models.CharField(
+        max_length=20,
+        verbose_name=_('Bin')
+    )
+    warehouse = models.ForeignKey(
+        Warehouse,
+        on_delete=models.PROTECT,
+        verbose_name=_('Warehouse')
+    )
+    items = models.ManyToManyField(
+        'product.Product',
+        through='Stock',
+        verbose_name=_('Items')
+    )
 
     def __str__(self) -> str:
         return f'{self.ref_position} : W{self.warehouse.pk}'
 
     class Meta:
         db_table = 'storage_bins'
+        verbose_name = _('Storage Bin')
 
 
 class Stock(models.Model):
@@ -124,6 +137,13 @@ class MovementType(models.TextChoices):
 
 class StockMovement(models.Model):
     date = models.DateTimeField()
+    service_order = models.ForeignKey(
+        'service.ServiceOrder',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
+    tax_invoice = models.IntegerField(verbose_name=_('Tax Invoice'), null=True, blank=True)
     movement_type = models.CharField(max_length=3, choices=MovementType.choices)
     item = models.ForeignKey('product.Product', on_delete=models.PROTECT)
     warehouse = models.ForeignKey(Warehouse, on_delete=models.PROTECT)

@@ -105,4 +105,4 @@ class ReadItemTypeForSped(ReadView):
     model = ItemTypeForSpedForm.Meta.model
 
     def get_presenters(self):
-        return ItemTypeForSpedPresenter.all('-code')
+        return ItemTypeForSpedPresenter.all(order_by='-code')

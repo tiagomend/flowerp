@@ -16,7 +16,8 @@ from warehouse.forms import (
     StorageBinForm,
     StockMovementForm,
     WarehouseTypeFilterForm,
-    StockMovementFilterForm
+    StockMovementFilterForm,
+    StorageBinFilterForm
 )
 
 from warehouse.models import (
@@ -30,6 +31,7 @@ from warehouse.presenters import (
     WarehouseTypePresenter,
     StockMovementPresenter,
     StockPresenter,
+    StorageBinPresenter
 )
 
 
@@ -156,6 +158,25 @@ class UpdateStorageBin(UpdateView):
     icon = 'icon_home_storage'
     form = StorageBinForm
     redirect = 'warehouse:update_storage_bin'
+
+
+class ReadStorageBin(ReadView):
+    model = StorageBinForm.Meta.model
+    icon = 'icon_home_storage'
+    redirect_for_new = 'warehouse:create_storage_bin'
+    redirect_for_edit = 'warehouse:read_storage_bin'
+    filter_form = StorageBinFilterForm
+    parameters = (
+        'ref_position',
+        'warehouse',
+    )
+    expressions = (
+        'ref_position__contains',
+        'warehouse__name__contains'
+    )
+
+    def get_presenters(self):
+        return StorageBinPresenter.all(q_filter=self.get_filters() ,order_by='ref_position')
 
 
 class StockMovementView(View):

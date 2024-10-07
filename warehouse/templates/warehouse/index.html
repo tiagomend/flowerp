@@ -42,6 +42,10 @@
                   <i class="icon_home_storage"></i>
                   {% translate "Create new Storage Bin" %}
                 </a>
+                <a href="{% url "warehouse:read_storage_bin" %}" class="nav-item">
+                  <i class="icon_home_storage"></i>
+                  {% translate "List of Storage Bin" %}
+                </a>
                 <a href="{% url "warehouse:stock_inbound" %}" class="nav-item">
                   <i class="icon_inventory_2"></i>
                   {% translate "New Stock Inbound" %}
