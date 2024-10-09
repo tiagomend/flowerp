@@ -156,7 +156,7 @@ class ReadView(View):
 class CreateEnterprise(CreateView):
     form = EnterpriseForm
     icon = 'icon_location_home'
-    redirect = 'core:update_enterprise'
+    redirect = 'core:read_enterprise'
 
 
 class UpdateEnterprise(UpdateView):

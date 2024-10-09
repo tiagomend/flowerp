@@ -1,0 +1,125 @@
+{% extends "global/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<!-- Card for Form -->
+<div class="card" id="card-print">
+  <div class="card-header flex space-between">
+    <div class="page-header">
+      <i class="{{ icon }}"></i>
+      <h3>{{ page_title }}</h3>
+    </div>
+    <div class="section-action">
+      {% block buttons %}{% endblock buttons %}
+    </div>
+  </div>
+  <div class="card-body">
+    <form id="form_transaction" class="form-control" action="" autocomplete="off" method="post">
+      {% csrf_token %}
+      <div class="row">
+      {% for field in form %}
+        {% if forloop.counter <= 4 %}
+        <div class="col-3">
+          {{ field.label_tag }}
+          {{ field }}
+          {{ field.errors }}
+        </div>
+        {% endif %}
+      {% endfor %}
+      </div>
+      <div class="row">
+      {% for field in form %}
+        {% if forloop.counter <= 8 and forloop.counter > 4 %}
+        <div class="col-3">
+          {{ field.label_tag }}
+          {{ field }}
+          {{ field.errors }}
+        </div>
+        {% endif %}
+      {% endfor %}
+      </div>
+      <div class="row">
+        {% for field in form %}
+          {% if forloop.counter > 8 %}
+          <div class="col-3">
+            {{ field.label_tag }}
+            {{ field }}
+            {{ field.errors }}
+          </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <table class="table">
+            <thead>
+              <tr>
+                {% if objects %}
+                  {% for th in objects.0.put_in_table.head  %}
+                  <th>{{ th }}</th>
+                  {% endfor %}
+                {% else %}
+                  <!-- Label do Form Row -->
+                  {% block form_label %}{% endblock form_label %}
+                {% endif %}
+
+                {% if objects %}
+                <th class="center border-b-2">#</th>
+                {% endif %}
+              </tr>
+            </thead>
+            <tbody>
+              {% if objects %}
+              {% for tr in objects %}
+              <tr>
+                {% for td in tr.put_in_table.row %}
+                <td>{{ td }}</td>
+                {% endfor %}
+                <td>
+                  {% if not approved and not concluded and not canceled %}
+                  <div>
+                    <a class="btn btn-secondary" href="{% url url_delete tr.id %}">
+                      <i class="icon_remove"></i>
+                    </a>
+                    <button class="btn btn-secondary" id="open_{{ tr.id }}">
+                      <i class="icon_settings"></i>
+                    </button>
+                  </div>
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+              {% endif %}
+              <!-- Formulário em Linha -->
+              {% block form_row %}{% endblock form_row %}
+            </tbody>
+          </table>
+          {% block button_row %}{% endblock button_row %}
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% for obj in objects %}
+<div class="modal" data-open="open_{{ obj.id }}" data-close="close_{{ obj.id }}">
+  <div class="modal-content">
+    <button id="close_{{ obj.id }}" class="close">&times;</button>
+    <h2>{{obj.item}}</h2>
+    <form class="form-control" action="{% url "purchase:update_purchase_item" obj.id %}" id="form" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="item" value="{{ obj.item.id }}">
+      <label for="quantity">Quantidade:</label>
+      <input type="number" name="quantity" value="{{ obj.quantity|floatformat }}" step="0.01">
+      <label for="unit_price">Preço Un:</label>
+      <input type="number" name="unit_price" value="{{ obj.unit_price|floatformat }}" step="0.01">
+      <label for="freight">Frete:</label>
+      <input type="number" name="freight" value="{{ obj.freight|floatformat }}" step="0.01">
+      <div class="mt-1">
+        <button type="submit" class="btn btn-primary">{% translate "Edit" %}</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endfor %}
+{% endblock content %}

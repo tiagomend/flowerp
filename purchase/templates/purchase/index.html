@@ -9,6 +9,43 @@
         <div class="card">
           <div class="card-row">
               <nav class="card-nav">
+                <a href="{% url "purchase:start_purchase_order" %}" class="nav-item">
+                  <i class="icon_shopping_bag"></i>
+                  {% translate "New Purchase Order" %}
+                </a>
+
+                <a href="{% url "purchase:read_purchase_order" %}" class="nav-item">
+                  <i class="icon_shopping_bag"></i>
+                  {% translate "List of Purchase Order" %}
+                </a>
+
+                <a href="{% url "purchase:create_supplier" %}" class="nav-item">
+                  <i class="icon_location_home"></i>
+                  {% translate "New Supplier" %}
+                </a>
+
+                <a href="{% url "purchase:read_supplier" %}" class="nav-item">
+                  <i class="icon_location_home"></i>
+                  {% translate "List of Supplier" %}
+                </a>
+
+                <a href="{% url "purchase:report_purchase_order" %}" class="nav-item">
+                  <i class="icon_print"></i>
+                  {% translate "Print Purchase Order" %}
+                </a>
+
+                <a href="{% url "warehouse:read_stock" %}" class="nav-item">
+                  <i class="icon_inventory"></i>
+                  {% translate "List of stock" %}
+                </a>
+              </nav>
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="card">
+          <div class="card-row">
+              <nav class="card-nav">
                 <a href="{% url "product:read_product" %}" class="nav-item">
                   <i class="icon_package_2"></i>
                   {% translate "Product List" %}
@@ -62,19 +99,11 @@
                   <i class="icon_inventory"></i>
                   {% translate "List of stock movements" %}
                 </a>
-                <a href="{% url "warehouse:read_stock" %}" class="nav-item">
-                  <i class="icon_inventory"></i>
-                  {% translate "List of stock" %}
-                </a>
+                
               </nav>
           </div>
         </div>
       </div>
-
-      <div class="col-4">
-        
-      </div>
-
     </div>
   </div>
 </div>

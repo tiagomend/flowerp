@@ -100,7 +100,7 @@ msgid "Expiry of experience"
 msgstr "Validade da experiência"
 
 msgid "Termination date"
-msgstr "Data de Término"
+msgstr "Data da Rescisão"
 
 msgid "Enterprise"
 msgstr "Empresa"
@@ -421,10 +421,10 @@ msgid "Item Price"
 msgstr "Preço do Item"
 
 msgid "Ordered Qty"
-msgstr "Qtd Pedida"
+msgstr "Em Pedido"
 
 msgid "Reserved Qty"
-msgstr "Qtd Reservada"
+msgstr "Reservado"
 
 msgid "Release"
 msgstr "Lançar"
@@ -515,3 +515,105 @@ msgstr "Unidade de Medida"
 
 msgid "List of Storage Bin"
 msgstr "Lista de Posições do Depósito"
+
+msgid "Service Order"
+msgstr "Ordem de Serviço"
+
+msgid "Budget number"
+msgstr "Nº OS"
+
+msgid "Header"
+msgstr "Título"
+
+msgid "Price"
+msgstr "Preço"
+
+msgid "Categories"
+msgstr "Categorias"
+
+msgid "Item Type For SPED"
+msgstr "Tipo de Item (SPED)"
+
+msgid "Price Cost"
+msgstr "Preço de Custo (R$)"
+
+msgid "Code (SKU)"
+msgstr "Código (SKU)"
+
+msgid "Warehouse Type"
+msgstr "Tipo de Depósito"
+
+msgid "Street type"
+msgstr "Tipo de logradouro"
+
+msgid "Street"
+msgstr "Logradouro"
+
+msgid "Number"
+msgstr "Número"
+
+msgid "Complement"
+msgstr "Complemento"
+
+msgid "Neighborhood"
+msgstr "Bairro"
+
+msgid "City"
+msgstr "Cidade"
+
+msgid "State"
+msgstr "Estado"
+
+msgid "Postal code"
+msgstr "CEP"
+
+msgid "Purchase Order"
+msgstr "Ordem de Compra"
+
+msgid "Tax Invoice"
+msgstr "Nota fiscal (chave)"
+
+msgid "UOM"
+msgstr "UND"
+
+msgid "Stock Movement"
+msgstr "Movimentação do Estoque"
+
+msgid "Available"
+msgstr "Disponível"
+
+msgid "Stock"
+msgstr "Estoque"
+
+msgid "List of Warehouses"
+msgstr "Lista de Almoxarifados"
+
+msgid "Supplier"
+msgstr "Fornecedor"
+
+msgid "Status"
+msgstr "Situação"
+
+msgid "Approval Date"
+msgstr "Aprovado em"
+
+msgid "Delivery forecast"
+msgstr "Data de Entrega"
+
+msgid "Discount"
+msgstr "Desconto"
+
+msgid "New Purchase Order"
+msgstr "Nova Ordem de Compra"
+
+msgid "List of Purchase Order"
+msgstr "Relação de Ordens de Compra"
+
+msgid "New Supplier"
+msgstr "Novo Fornecedor"
+
+msgid "List of Supplier"
+msgstr "Lista de Fornecedores"
+
+msgid "Print Purchase Order"
+msgstr "Imprimir Ordem de Compra"

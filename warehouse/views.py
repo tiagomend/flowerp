@@ -17,7 +17,9 @@ from warehouse.forms import (
     StockMovementForm,
     WarehouseTypeFilterForm,
     StockMovementFilterForm,
-    StorageBinFilterForm
+    StorageBinFilterForm,
+    StockMovementInboundForm,
+    StockMovementOutboundForm
 )
 
 from warehouse.models import (
@@ -31,8 +33,12 @@ from warehouse.presenters import (
     WarehouseTypePresenter,
     StockMovementPresenter,
     StockPresenter,
-    StorageBinPresenter
+    StorageBinPresenter,
+    WarehousePresenter
 )
+
+from service.models import ServiceOrder
+from purchase.models import PurchaseOrder
 
 
 class Index(View):
@@ -52,6 +58,16 @@ class UpdateWarehouseType(UpdateView):
     redirect = 'warehouse:update_w_type'
 
 
+class ReadWarehouse(ReadView):
+    model = WarehouseForm.Meta.model
+    icon = 'icon_garage_home'
+    redirect_for_new = 'warehouse:create_warehouse'
+    redirect_for_edit = 'warehouse:read_warehouse'
+
+    def get_presenters(self):
+        return WarehousePresenter.all(order_by='name')
+
+
 class ReadWarehouseType(ReadView):
     model = WarehouseTypeForm.Meta.model
     icon = 'icon_schema'
@@ -68,8 +84,7 @@ class ReadWarehouseType(ReadView):
     )
 
     def get_presenters(self):
-        return WarehouseTypePresenter.all(q_filter=self.get_filters() ,order_by='name')
-
+        return WarehouseTypePresenter.all(q_filter=self.get_filters(), order_by='name')
 
 class CreateWarehouse(View):
     warehouse_form = WarehouseForm
@@ -185,23 +200,53 @@ class StockMovementView(View):
     redirect: str
     session: str
 
-    def get_context_data(self, form, stock_movement):
+    def get_context_data(self, form, stock_movement, form_general):
         return {
             'form': form,
             'stock_movement': stock_movement,
             'page_title': self.page_title,
-            'icon': 'icon_inventory_2'
+            'icon': 'icon_inventory_2',
+            'form_general': form_general
         }
 
     def get(self, request):
         form = StockMovementForm
+
+        if request.session.get('service_order', ''):
+            if self.session == 'stock_outbound':
+                form_general = StockMovementOutboundForm(data={
+                    'tax_invoice': request.session.get('tax_invoice', ''),
+                    'service_order': self.get_service_order(
+                        request.session.get('service_order', None).get('pk', '')
+                    ),
+                })
+            else:
+                form_general = StockMovementInboundForm(data={
+                    'tax_invoice': request.session.get('tax_invoice', ''),
+                    'purchase_order': self.get_purchase_order(
+                        request.session.get('purchase_order', None).get('pk', '')
+                    ),
+                })
+        else:
+            if self.session == 'stock_outbound':
+                form_general = StockMovementOutboundForm
+            else:
+                form_general = StockMovementInboundForm
 
         if request.session.get(self.session, ''):
             stock_movement = request.session[self.session]
         else:
             stock_movement = False
 
-        return render(request, self.template, self.get_context_data(form, stock_movement))
+        return render(
+            request,
+            self.template,
+            self.get_context_data(
+                form,
+                stock_movement,
+                form_general
+            )
+        )
 
     def post(self, request):
         stock_movement_session = request.session[self.session]
@@ -218,6 +263,11 @@ class StockMovementView(View):
                     quantity=movement['quantity']['qty'],
                     stock_uom=self.get_uom(movement['stock_uom']['pk']),
                     item_price=movement['item_price'],
+                    service_order=self.get_service_order(
+                        request.session.get('service_order', None).get('pk', '')),
+                    purchase_order=self.get_purchase_order(
+                        request.session.get('purchase_order', None).get('pk', '')),
+                    tax_invoice=request.session.get('tax_invoice', None),
                 )
 
                 stock_movement.is_valid()
@@ -232,6 +282,9 @@ class StockMovementView(View):
             )
 
             request.session.pop(self.session, None)
+            request.session.pop('service_order', None)
+            request.session.pop('tax_invoice', None)
+            request.session.pop('purchase_order', None)
 
             return redirect('warehouse:read_stock_movements')
 
@@ -250,6 +303,16 @@ class StockMovementView(View):
 
     def get_uom(self, pk):
         return UnitOfMeasure.objects.get(pk=pk)
+
+    def get_service_order(self, pk):
+        if pk:
+            return ServiceOrder.objects.get(pk=pk)
+        return None
+
+    def get_purchase_order(self, pk):
+        if pk:
+            return PurchaseOrder.objects.get(pk=pk)
+        return None
 
 
 class StockInbound(StockMovementView):
@@ -280,6 +343,10 @@ class StockSession(View):
             stock_movement.append(data)
             request.session.modified = True
 
+            request.session['service_order'] = self.get_service_order(request)
+            request.session['tax_invoice'] = self.get_tax_invoice(request)
+            request.session['purchase_order'] = self.get_purchase_order(request)
+
             return redirect(self.redirect)
 
         messages.error(
@@ -294,11 +361,17 @@ class StockSession(View):
     def get_movement_type(self, request):
         return request.POST['movement_type']
 
+    def get_tax_invoice(self, request):
+        tax_invoice = request.POST['tax_invoice']
+        if tax_invoice:
+            return tax_invoice
+        return None
+
     def get_item(self, request):
         item = Product.objects.get(pk=request.POST['item'])
 
         return {
-            'pk': item.pk,
+            'pk': str(item.pk),
             'description': str(item),
         }
 
@@ -320,8 +393,11 @@ class StockSession(View):
     def get_quantity(self, request):
         quantity = request.POST['quantity']
         stock = self.get_stock(request)
-        color = 'success-100' if float(quantity) <= stock.quantity else 'error-100'
-        display = f"""<div>{quantity} / {badge(stock.quantity, color)}</div>"""
+        if stock:
+            color = 'success-100' if float(quantity) <= float(stock.quantity) else 'error-100'
+            display = f"""<div>{quantity} / {badge(stock.quantity, color)}</div>"""
+        else:
+            display = f"""<div>{quantity}</div>"""
         return {
             'qty': quantity,
             'display': mark_safe(display),
@@ -330,12 +406,40 @@ class StockSession(View):
     def get_stock_uom(self, request):
         uom = UnitOfMeasure.objects.get(pk=request.POST['stock_uom'])
         return {
-            'pk': uom.pk,
+            'pk': str(uom.pk),
             'description': str(uom),
         }
 
     def get_item_price(self, request):
         return request.POST['item_price']
+
+    def get_service_order(self, request):
+        pk = request.POST.get('service_order', '')
+
+        if pk:
+            service_order = ServiceOrder.objects.get(pk=pk)
+            return {
+                'pk': service_order.pk,
+                'description': str(service_order)
+            }
+
+        return {
+            'description': ''
+        }
+
+    def get_purchase_order(self, request):
+        pk = request.POST.get('purchase_order', '')
+
+        if pk:
+            purchase_order = PurchaseOrder.objects.get(pk=pk)
+            return {
+                'pk': purchase_order.pk,
+                'description': str(purchase_order)
+            }
+
+        return {
+            'description': '' 
+        }
 
     def get_stock(self, request):
         item = Product.objects.get(pk=request.POST['item'])
@@ -371,7 +475,7 @@ class StockSession(View):
             'storage_bin': self.get_storage_bin(request),
             'quantity': self.get_quantity(request),
             'stock_uom': self.get_stock_uom(request),
-            'item_price': self.get_item_price(request)
+            'item_price': self.get_item_price(request),
         }
 
 
@@ -381,6 +485,8 @@ class StockSessionClean(View):
 
     def get(self, request):
         request.session.pop(self.session, None)
+        request.session.pop('service_order', None)
+        request.session.pop('tax_invoice', None)
 
         return redirect(self.redirect)
 
@@ -434,3 +540,17 @@ class ReadStock(ReadView):
 
     def get_presenters(self):
         return StockPresenter.all()
+
+class DeleteSessionStock(View):
+    def get(self, request, index):
+        if 'stock_outbound' in request.session:
+            session = request.session['stock_outbound']
+
+            try:
+                del session[index]
+
+                request.session['stock_outbound'] = session
+            except IndexError:
+                pass
+
+        return redirect('warehouse:stock_outbound')

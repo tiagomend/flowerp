@@ -1,0 +1,69 @@
+{% extends "global/transaction.html" %}
+
+{% block buttons %}
+{% if purchase_items_form %}
+  {% if not start %}
+    {% if not concluded and not canceled %}
+    <form action="{% url "purchase:cancel_purchase_order" %}" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="id" value="{{ form.instance.id }}">
+      <button type="submit" class="btn btn-error">
+        <i class="icon_block"></i>
+      </button>
+    </form>
+    <form action="{% url "purchase:conclude_purchase_order" %}" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="id" value="{{ form.instance.id }}">
+      <button type="submit" class="btn btn-success">
+        <i class="icon_task_alt"></i>
+      </button>
+    </form>
+    {% endif %}
+
+    {% if not approved and not concluded and not canceled %}
+    <form action="{% url "purchase:approve_purchase_order" %}" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="id" value="{{ form.instance.id }}">
+      <button type="submit" class="btn btn-secondary">
+        <i class="icon_approval"></i>
+      </button>
+    </form>
+
+    <button id="save_form" data-id={{ form.instance.id }} class="btn btn-primary">Salvar</button>
+    {% endif %}
+  {% endif %}
+
+
+  {% if approved %}
+  <!--
+  <form action="{% url "purchase:receive_purchase_order" %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="id" value="{{ form.instance.id }}">
+    <button type="submit" class="btn btn-primary">Receber Material</button>
+  </form>
+  -->
+  {% endif %}
+{% endif %}
+{% endblock buttons %}
+
+{% block form_label %}
+{% for field in purchase_items_form %}
+  <th>{{ field.label }}</th>
+{% endfor %}
+{% endblock form_label %}
+
+{% block form_row %}
+{% if not approved and not concluded %}
+  <tr>
+    {% for field in purchase_items_form %}
+    <td class="border-none">{{ field }}</td>
+    {% endfor %}
+  </tr>
+{% endif %}
+{% endblock form_row %}
+
+{% block button_row %}
+{% if not approved and not concluded %}
+  <button type="submit" class="btn btn-primary mt-1">Inserir Linha</button>
+{% endif %}
+{% endblock button_row %}

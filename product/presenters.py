@@ -27,11 +27,11 @@ class ProductPresenter(Presenter):
     @property
     def headers(self):
         return [
-            'Sku code',
-            'Name',
-            'Unit Of Measure',
-            'Item Type For Sped',
-            'Price Cost'
+            _('Code (SKU)'),
+            _('Name'),
+            _('Unit Of Measure'),
+            _('Item Type For SPED'),
+            _('Price Cost')
         ]
 
 

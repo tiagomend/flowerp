@@ -548,6 +548,32 @@ body {
     background-color: var(--primary-700);
 }
 
+.btn-error {
+    background-color: var(--error-500);
+    color: var(--white-color);
+}
+
+.btn-error i {
+    color: var(--white-color);
+}
+
+.btn-error:hover {
+    background-color: var(--error-700);
+}
+
+.btn-success {
+    background-color: var(--success-600);
+    color: var(--white-color);
+}
+
+.btn-success i {
+    color: var(--white-color);
+}
+
+.btn-success:hover {
+    background-color: var(--success-700);
+}
+
 .btn-secondary {
     background-color: var(--secondary-500);
     color: var(--secondary-900);
@@ -671,13 +697,13 @@ body {
     justify-content: center;
 }
 
-.table td a.btn {
+.table td .btn {
     height: 25px;
     width: 25px;
     text-align: center;
 }
 
-.table td a.btn [class*="icon_"] {
+.table td .btn [class*="icon_"] {
     font-size: 17px;
     text-align: center;
 }

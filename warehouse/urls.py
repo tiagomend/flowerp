@@ -9,6 +9,7 @@ app_name = 'warehouse'
 
 urlpatterns = [
     path('', Index.as_view(), name='index'),
+    path('list/', ReadWarehouse.as_view(), name='read_warehouse'),
     path('new/', CreateWarehouse.as_view(), name='create_warehouse'),
     path('<int:pk>/', UpdateWarehouse.as_view(), name='update_warehouse'),
     path('type/', ReadWarehouseType.as_view(), name='read_w_type'),
@@ -24,6 +25,7 @@ urlpatterns = [
     path('outbound/new/', StockOutbound.as_view(), name='stock_outbound'),
     path('outbound/session/', StockOutboundSession.as_view(), name='stock_outbound_session'),
     path('outbound/session/clean', StockOutboundSessionClean.as_view(), name='stock_outbound_session_clean'),
+    path('outbound/session/<int:index>/', DeleteSessionStock.as_view(), name='delete_outbound_session'),
     path('movements/', ReadStockMovements.as_view(), name='read_stock_movements'),
     path('stocks/', ReadStock.as_view(), name='read_stock'),
 ]

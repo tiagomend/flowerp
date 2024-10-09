@@ -23,38 +23,56 @@
     </div>
   </div>
   <div class="card-body">
-    <table class="table">
-      <tr>
-        {% for field in form %}
-          <th>{{ field.label }}</th>
-        {% endfor %}
-      </tr>
-      {% if stock_movement %}
-        {% for row in stock_movement %}
+    <form action="{% url "warehouse:stock_outbound_session" %}" class="form-control" id="insert_row" method="post"> 
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-4">
+        {{ form_general }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <table class="table">
           <tr>
-            <td>{{ row.item.description }}</td>
-            <td>{{ row.warehouse.description }}</td>
-            <td>{{ row.storage_bin.description }}</td>
-            <td>{{ row.quantity.display|safe }}</td>
-            <td>{{ row.stock_uom.description }}</td>
-            <td>{{ row.item_price }}</td>
+            {% for field in form %}
+              <th>{{ field.label }}</th>
+            {% endfor %}
+            <th>#</th>
           </tr>
-        {% endfor %}
-      {% endif %}
-      <tr>
-        <form action="{% url "warehouse:stock_outbound_session" %}" class="form-control" id="insert_row" method="post"> 
-          {% csrf_token %}
-          <input type="hidden" name="date" value="{% now 'Y-m-d H:i' %}">
-          <input type="hidden" name="movement_type" value="out">
-          {% for field in form %}
-          <td>{{ field }}</td>
-          {% endfor %}
+          {% if stock_movement %}
+            {% for row in stock_movement %}
+              <tr>
+                <td>{{ row.item.description }}</td>
+                <td>{{ row.warehouse.description }}</td>
+                <td>{{ row.storage_bin.description }}</td>
+                <td>{{ row.quantity.display|safe }}</td>
+                <td>{{ row.stock_uom.description }}</td>
+                <td>{{ row.item_price }}</td>
+                <td>
+                  <div>
+                    <a href="{% url "warehouse:delete_outbound_session" forloop.counter0 %}" class="btn btn-error">
+                      <i class="icon_remove"></i>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            {% endfor %}
+          {% endif %}
+          <tr>
+              <input type="hidden" name="date" value="{% now 'Y-m-d H:i' %}">
+              <input type="hidden" name="movement_type" value="out">
+              {% for field in form %}
+              <td>{{ field }}</td>
+              {% endfor %}
+            </tr>
+          </table>
         </form>
-      </tr>
-    </table>
-    <button id="insert_row_btn" class="btn btn-primary mt-3">
-      Inserir Linha
-    </button>
+        <button id="insert_row_btn" class="btn btn-primary mt-3">
+          Inserir Linha
+        </button>
+      </div>
+    </div>
+    
   </div>
 </div>
 

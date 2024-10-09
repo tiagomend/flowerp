@@ -11,7 +11,7 @@ class ServiceOrderPresenter(Presenter):
         return [
             self.model.budget_number,
             self.model.price,
-            self.description
+            self.model.header
         ]
 
     @property
@@ -19,5 +19,5 @@ class ServiceOrderPresenter(Presenter):
         return [
             _('Budget number'),
             _('Price'),
-            _('Description')
+            _('Header')
         ]

@@ -13,14 +13,22 @@ class NotSufficientBalance(ValidationError):
 
 
 class WarehouseType(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField(null=True, blank=True)
+    name = models.CharField(
+        max_length=100,
+        verbose_name=_('Name')
+    )
+    description = models.TextField(
+        null=True,
+        blank=True,
+        verbose_name=_('Description')
+    )
 
     def __str__(self) -> str:
         return str(self.name)
 
     class Meta:
         db_table = 'warehouse_types'
+        verbose_name = _('Warehouse Type')
 
 
 class StreetType(models.TextChoices):
@@ -35,18 +43,38 @@ class WarehouseAddress(models.Model):
         max_length=3,
         choices=StreetType.choices,
         default=StreetType.STREET,
+        verbose_name=_('Street type')
     )
-    street = models.CharField(max_length=100)
-    number = models.CharField(max_length=20)
+    street = models.CharField(
+        max_length=100,
+        verbose_name=_('Street')
+    )
+    number = models.CharField(
+        max_length=20,
+        verbose_name=_('Number')
+    )
     complement = models.CharField(
         max_length=50,
         blank=True,
         null=True,
+        verbose_name=_('Complement')
     )
-    neighborhood = models.CharField(max_length=50)
-    city = models.CharField(max_length=50)
-    state = models.CharField(max_length=50)
-    postal_code = models.CharField(max_length=9)
+    neighborhood = models.CharField(
+        max_length=50,
+        verbose_name=_('Neighborhood')
+    )
+    city = models.CharField(
+        max_length=50,
+        verbose_name=_('City')
+    )
+    state = models.CharField(
+        max_length=50,
+        verbose_name=_('State')
+    )
+    postal_code = models.CharField(
+        max_length=9,
+        verbose_name=_('Postal code')
+    )
 
     def __str__(self) -> str:
         return (
@@ -62,18 +90,23 @@ class WarehouseAddress(models.Model):
 
 
 class Warehouse(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(
+        max_length=100,
+        verbose_name=_('Name')
+    )
 
     enterprise = models.ForeignKey(
         'core.Enterprise',
         on_delete=models.PROTECT,
         null=True,
-        blank=True
+        blank=True,
+        verbose_name=_('Enterprise')
     )
 
     w_type = models.ForeignKey(
         'WarehouseType',
         on_delete=models.PROTECT,
+        verbose_name=_('Warehouse Type')
     )
 
     address = models.ForeignKey(
@@ -87,7 +120,7 @@ class Warehouse(models.Model):
     disabled = models.BooleanField(default=False)
 
     def __str__(self) -> str:
-        return f'W{self.pk} - {self.name}'
+        return f'DP{self.pk} - {self.name}'
 
     class Meta:
         db_table = 'warehouses'
@@ -111,7 +144,7 @@ class StorageBin(models.Model):
     )
 
     def __str__(self) -> str:
-        return f'{self.ref_position} : W{self.warehouse.pk}'
+        return f'{self.ref_position} : DP{self.warehouse.pk}'
 
     class Meta:
         db_table = 'storage_bins'
@@ -119,15 +152,29 @@ class StorageBin(models.Model):
 
 
 class Stock(models.Model):
-    item = models.ForeignKey('product.Product', on_delete=models.PROTECT)
-    storage_bin = models.ForeignKey(StorageBin, on_delete=models.PROTECT)
-    quantity = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    item = models.ForeignKey(
+        'product.Product',
+        on_delete=models.PROTECT,
+        verbose_name=_('Item')
+    )
+    storage_bin = models.ForeignKey(
+        StorageBin,
+        on_delete=models.PROTECT,
+        verbose_name=_('Storage Bin')
+    )
+    quantity = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0,
+        verbose_name=_('Quantity')
+    )
     ordered_qty = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     reserved_qty = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     stock_uom = models.ForeignKey('product.UnitOfMeasure', on_delete=models.PROTECT)
 
     class Meta:
         db_table = 'stocks'
+        verbose_name = _('Stock')
 
 
 class MovementType(models.TextChoices):
@@ -136,21 +183,61 @@ class MovementType(models.TextChoices):
 
 
 class StockMovement(models.Model):
-    date = models.DateTimeField()
+    date = models.DateTimeField(verbose_name=_('Date'))
     service_order = models.ForeignKey(
         'service.ServiceOrder',
         on_delete=models.SET_NULL,
         null=True,
-        blank=True
+        blank=True,
+        verbose_name=_('Service Order')
     )
-    tax_invoice = models.IntegerField(verbose_name=_('Tax Invoice'), null=True, blank=True)
-    movement_type = models.CharField(max_length=3, choices=MovementType.choices)
+    purchase_order = models.ForeignKey(
+        'purchase.PurchaseOrder',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name=_('Purchase Order')
+    )
+    tax_invoice = models.CharField(
+        verbose_name=_('Tax Invoice'),
+        null=True,
+        blank=True,
+        max_length=255
+    )
+    movement_type = models.CharField(
+        max_length=3,
+        choices=MovementType.choices,
+        verbose_name=_('Movement type'),
+    )
     item = models.ForeignKey('product.Product', on_delete=models.PROTECT)
-    warehouse = models.ForeignKey(Warehouse, on_delete=models.PROTECT)
-    storage_bin = models.ForeignKey(StorageBin, on_delete=models.SET_NULL, null=True)
-    quantity = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    stock_uom = models.ForeignKey('product.UnitOfMeasure', on_delete=models.PROTECT)
-    item_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    warehouse = models.ForeignKey(
+        Warehouse,
+        on_delete=models.PROTECT,
+        verbose_name=_('Warehouse')
+    )
+    storage_bin = models.ForeignKey(
+        StorageBin,
+        on_delete=models.SET_NULL,
+        null=True,
+        verbose_name=_('Storage Bin')
+    )
+    quantity = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0,
+        verbose_name=_('Quantity')
+    )
+    stock_uom = models.ForeignKey(
+        'product.UnitOfMeasure',
+        on_delete=models.PROTECT,
+        verbose_name=_('UOM')
+    )
+    item_price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0,
+        verbose_name=_('Price')
+    )
 
     def get_stock(self):
         if Stock.objects.filter(
@@ -215,3 +302,4 @@ class StockMovement(models.Model):
     class Meta:
         ordering = ['-date']
         db_table = 'stock_movements'
+        verbose_name = _('Stock Movement')

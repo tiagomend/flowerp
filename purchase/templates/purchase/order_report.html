@@ -1,0 +1,120 @@
+{% extends "global/base.html" %}
+{% load static %}
+
+{% block content %}
+<div id="card" class="card">
+  <div class="card-header  flex space-between">
+    <div class="page-header">
+      <i class="{{ icon }}"></i>
+      <h3>{{ page_title }}</h3>
+    </div>
+    <div class="section-action">
+      <button class="btn btn-secondary" id="btn-print">
+        <i class="icon_print"></i>
+      </button>
+    </div>
+  </div>
+  <div class="card-body" id="card-print">
+    <table class="table">
+      <tr>
+        <td colspan="4">
+          <div>
+            <h2>GRUPO DE ORDEM DE COMPRA</h2>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div>
+            <img src="{% static "/media/logo.png" %}" alt="">
+          </div>
+        </td>
+        <td colspan="3">
+          METALURGICA BRASIL FAB E MONT
+          <br>
+          TEL.: (16)99347-9406
+          <br>
+          Av. Antonio Boscaglia, 96, Jardim Nova Igarapava,
+          Igarapava/SP - 14.540-000
+        </td>
+      </tr>
+    </table>
+    <br>
+    <table class="table">
+    {% for order in orders %}
+      <thead>
+        <th class="center">Pedido</th>
+        <th class="center" colspan="2">Empresa</th>
+        <th class="center" colspan="2">Fornecedor</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="center">{{order.code}}</td>
+          <td class="center" colspan="2">
+            {{ order.enterprise }}
+          </td>
+          <td class="center" colspan="2">
+            {{ order.supplier }}
+          </td>
+        </tr>
+      </tbody>
+      <thead>
+        <tr>
+          <th>Descrição</th>
+          <th>QTD</th>
+          <th>Unitário (R$)</th>
+          <th>Frete</th>
+          <th>Subtotal (R$)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for poitem in order.poitems %}
+        <tr>
+          <td>{{ poitem.item }}</td>
+          <td>{{ poitem.quantity }}</td>
+          <td>{{ poitem.unit_price }}</td>
+          <td>{{ poitem.freight }}</td>
+          <td>{{ poitem.subtotal_display }}</td>
+        </tr>
+        {% endfor %}
+        <tr class="border-none">
+          <td colspan="5"></td>
+        </tr>
+        <tr>
+          <td style="background-color:#e4e5e6;">
+            <strong>DESCONTO</strong>
+          </td>
+          <td>
+            {{ order.discount }}
+          </td>
+          <td style="text-align: right; background-color:#e4e5e6;">
+            <strong>TOTAL</strong>
+          </td>
+          <td colspan="2">
+            <h3>
+              {{ order.total }}
+            </h3>
+          </td>
+        </tr>
+      </tbody>
+      <tr class="border-none">
+        <td colspan="5"></td>
+      </tr>
+      {% endfor %}
+    </table>
+    <br>
+    <table class="table">
+      <tr>
+        <td colspan="4" style="text-align: right;">
+          <strong>TOTAIS</strong>
+        </td>
+        <td>
+          <h3>
+            {{ totals }}
+          </h3>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+{% endblock content %}

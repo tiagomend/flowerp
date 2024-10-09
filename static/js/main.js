@@ -36,6 +36,7 @@ if (btnPrint) {
   btnPrint.addEventListener('click', PrintCard);
 }
 
+
 const SubmitButton = () => {
   const selector = '[data-btn="form-submit"]';
   const buttons = [...document.querySelectorAll(selector)];
@@ -311,9 +312,11 @@ const Modal = () => {
     const btnCloseId = modal.getAttribute('data-close');
     const btnOpen = document.getElementById(btnOpenId);
     const btnClose = document.getElementById(btnCloseId);
+    console.log(modal)
 
     if (btnOpen) {
-      btnOpen.addEventListener('click', () => {
+      btnOpen.addEventListener('click', (event) => {
+        event.preventDefault();
         modal.style.display = 'block';
       });
     }
@@ -327,3 +330,20 @@ const Modal = () => {
 }
 
 Modal();
+
+
+const SavePurchaseOrder = () => {
+  if (document.getElementById("save_form")) {
+    let formBase = document.getElementById("form_transaction");
+    let btnSave = document.getElementById("save_form");
+
+    btnSave.addEventListener("click", () => {
+      let id = btnSave.getAttribute('data-id');
+      formBase.action = `/purchases/order/save/${id}/`;
+      formBase.submit();
+      formBase.action = '';
+    });
+  }
+}
+
+SavePurchaseOrder();
