@@ -83,7 +83,7 @@ class ReadProductCategory(ReadView):
     model = ProductCategoryForm.Meta.model
 
     def get_presenters(self):
-        return ProductCategoryPresenter.all(q_filter=self.get_filters())
+        return ProductCategoryPresenter.all()
 
 
 class CreateItemTypeForSped(CreateView):
