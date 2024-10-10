@@ -675,11 +675,13 @@ body {
 .table {
     width: 100%;
     border-collapse: collapse;
+    font-size: 15px;
 }
 
 .table,
 .table td,
 .table th {
+    font-size: 15px;
     border: 1px solid var(--border-color);
     height: 30px;
     padding: var(--spacing-0) var(--spacing-1);
@@ -920,4 +922,62 @@ body {
 .close:hover {
     background-color: var(--secondary-700);
     color: var(--white-color);
+}
+
+/* Table for Report */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--white-color);
+}
+
+table,
+th,
+td {
+    border: 1px solid var(--border-color);
+}
+
+table h3 {
+    margin: 0px;
+}
+
+table.border-black,
+table.border-black th,
+table.border-black td {
+    border: 1px solid var(--secondary-900);
+}
+
+th {
+    background-color: var(--secondary-700);
+}
+
+th,
+td {
+    padding: var(--spacing-2);
+    font-size: 13px;
+    min-width: 100px;
+}
+
+th {
+    border-bottom: 2px solid var(--border-color);
+}
+
+table.border-black,
+table.border-black th {
+    border-bottom: 2px solid var(--secondary-900);
+}
+
+table.border-black tr.border-none,
+table.border-black .border-none td,
+table.border-black .border-none th {
+    border-left: 1px solid #00375700;
+    border-right: 1px solid #00375700;
+}
+
+.border-black td div {
+    width: 100%;
+    display: flex;
+    gap: var(--spacing-2);
+    align-items: center;
+    justify-content: center;
 }
