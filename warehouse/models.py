@@ -263,6 +263,9 @@ class StockMovement(models.Model):
         if self.movement_type == MovementType.OUTBOUND:
             stock = self.get_stock()
 
+            if not stock:
+                raise NotSufficientBalance('Inventory does not have sufficient balance.')
+
             if stock:
                 if (stock.quantity + Decimal(self.quantity)) < 0:
                     raise NotSufficientBalance('Inventory does not have sufficient balance.')
