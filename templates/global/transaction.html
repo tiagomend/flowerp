@@ -1,5 +1,6 @@
 {% extends "global/base.html" %}
 {% load i18n %}
+{% load custom_filters %}
 
 {% block content %}
 <!-- Card for Form -->
@@ -110,11 +111,11 @@
       {% csrf_token %}
       <input type="hidden" name="item" value="{{ obj.item.id }}">
       <label for="quantity">Quantidade:</label>
-      <input type="number" name="quantity" value="{{ obj.quantity|floatformat }}" step="0.01">
+      <input type="number" name="quantity" value="{{ obj.quantity|float_dot }}" step="0.01">
       <label for="unit_price">Preço Un:</label>
-      <input type="number" name="unit_price" value="{{ obj.unit_price|floatformat }}" step="0.01">
+      <input type="number" name="unit_price" value="{{ obj.unit_price|float_dot }}" step="0.01">
       <label for="freight">Frete:</label>
-      <input type="number" name="freight" value="{{ obj.freight|floatformat }}" step="0.01">
+      <input type="number" name="freight" value="{{ obj.freight|float_dot }}" step="0.01">
       <div class="mt-1">
         <button type="submit" class="btn btn-primary">{% translate "Edit" %}</button>
       </div>
