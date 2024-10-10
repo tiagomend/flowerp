@@ -5,6 +5,11 @@ from core.widgets import Awesomplete
 
 
 class PurchaseOrderForm(forms.ModelForm):
+    total = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={'disabled': 'disabled'}),
+    )
+
     class Meta:
         model = PurchaseOrder
         exclude = ['id', 'items', 'approval_date']
@@ -16,6 +21,13 @@ class PurchaseOrderForm(forms.ModelForm):
             'delivery_forecast': forms.TextInput(attrs={'type': 'date'}),
             'status': forms.Select(attrs={'disabled': True}),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.instance.pk:
+            purchase_order = self.instance
+            total = purchase_order.calculate_total()
+            self.fields['total'].initial = f"R$ {round(total, 2)}".replace('.', ',')
 
 
 class PurchaseOrderItemsForm(forms.ModelForm):
