@@ -238,11 +238,15 @@ class PurchaseOrder(models.Model):
 
 
 class PurchaseOrderItems(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid4)
-    item = models.ForeignKey('product.Product', on_delete=models.PROTECT)
-    quantity = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    unit_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    freight = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid4,
+        verbose_name=_('Id')
+    )
+    item = models.ForeignKey('product.Product', on_delete=models.PROTECT, verbose_name=_('Item'))
+    quantity = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name=_('QTD'))
+    unit_price = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name='Preço Un (R$)')
+    freight = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name='Frete')
     purchase_order = models.ForeignKey('PurchaseOrder', on_delete=models.PROTECT, blank=True)
 
     def subtotal(self):
