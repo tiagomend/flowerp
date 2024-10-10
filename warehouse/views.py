@@ -411,7 +411,12 @@ class StockSession(View):
         }
 
     def get_item_price(self, request):
-        return request.POST['item_price']
+        price = request.POST['item_price']
+        if price == '0':
+            item = Product.objects.get(pk=request.POST['item'])
+            price = str(item.price_cost)
+
+        return price
 
     def get_service_order(self, request):
         pk = request.POST.get('service_order', '')
