@@ -41,7 +41,10 @@ class ReadProduct(ReadView):
     )
 
     def get_presenters(self):
-        return ProductPresenter.all(q_filter=self.get_filters())
+        return ProductPresenter.all(
+            q_filter=self.get_filters(),
+            order_by=('sku_code')
+        )
 
 
 class CreateUnitOfMeasure(CreateView):
