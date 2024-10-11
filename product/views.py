@@ -33,9 +33,11 @@ class ReadProduct(ReadView):
     filter_form = ProductFilterForm
     parameters = (
         'name',
+        'code',
     )
     expressions = (
         'name__contains',
+        'sku_code__contains'
     )
 
     def get_presenters(self):

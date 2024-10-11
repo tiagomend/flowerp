@@ -42,3 +42,4 @@ class ItemTypeForSpedForm(forms.ModelForm):
 # Form for filters
 class ProductFilterForm(forms.Form):
     name = forms.CharField(max_length=100, label=_('Name'), required=False)
+    code = forms.CharField(max_length=100, label=_('Code (SKU)'), required=False)
