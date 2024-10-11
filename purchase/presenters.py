@@ -1,6 +1,7 @@
 from django.utils.translation import gettext as _
 
 from core.presenters import Presenter
+from core.html import badge_icon
 from purchase.models import PurchaseOrder, Person
 
 
@@ -9,12 +10,29 @@ class PurchaseOrderPresenter(Presenter):
 
     @property
     def values(self):
+        status = self.model.get_status_display()
+
+        if status == 'Aprovado':
+            color = 'primary-100'
+            icon = 'approval'
+        elif status == 'Concluído':
+            color = 'success-100'
+            icon = 'task_alt'
+        elif status == 'Cancelado':
+            color = 'error-100'
+            icon = 'block'
+        else:
+            color = 'warning-100'
+            icon = 'pending'
+
+        status_badge = badge_icon(status, color, icon)
+
         return [
             self.model.code,
             self.model.enterprise,
             self.model.warehouse.name,
             self.model.supplier,
-            self.model.get_status_display(),
+            status_badge,
             self.model.total,
             self.model.approval_date if self.model.approval_date else "Não Aprovado",
         ]
