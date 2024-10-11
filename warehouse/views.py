@@ -19,7 +19,8 @@ from warehouse.forms import (
     StockMovementFilterForm,
     StorageBinFilterForm,
     StockMovementInboundForm,
-    StockMovementOutboundForm
+    StockMovementOutboundForm,
+    StockFilterForm
 )
 
 from warehouse.models import (
@@ -542,9 +543,20 @@ class ReadStock(ReadView):
     model = Stock
     icon = 'icon_inventory_2'
     redirect_for_new = 'warehouse:stock_inbound'
+    filter_form = StockFilterForm
+    parameters = (
+        'product_name',
+        'product_code',
+        'storage_bin',
+    )
+    expressions = (
+        'item__name__contains',
+        'item__sku_code__contains',
+        'storage_bin__ref_position__contains'
+    )
 
     def get_presenters(self):
-        return StockPresenter.all()
+        return StockPresenter.all(q_filter=self.get_filters())
 
 class DeleteSessionStock(View):
     def get(self, request, index):

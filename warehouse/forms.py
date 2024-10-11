@@ -114,3 +114,21 @@ class StorageBinFilterForm(forms.Form):
         label=_('Warehouse'),
         required=False
     )
+
+
+class StockFilterForm(forms.Form):
+    product_name = forms.CharField(
+        max_length=100,
+        label=_('Product'),
+        required=False
+    )
+    product_code = forms.CharField(
+        max_length=100,
+        label=_('Code (SKU)'),
+        required=False
+    )
+    storage_bin = forms.CharField(
+        max_length=100,
+        label=_('Storage Bin'),
+        required=False
+    )
