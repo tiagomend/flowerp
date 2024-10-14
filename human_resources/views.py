@@ -9,10 +9,11 @@ from django.views import View
 from django.http import FileResponse, Http404, JsonResponse
 from django.views.generic.edit import CreateView as CreateViewDjango
 from django.urls import reverse_lazy
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.utils import timezone
 from django.utils.translation import gettext as _
+from django.urls import reverse_lazy
 
 from core.views import CreateView, UpdateView, ReadView
 from core.utils import format_decimal_to_hours
@@ -394,6 +395,7 @@ class TimeSheetReport(View):
                 context['time_sheet'] = time_sheet
                 context['month_year'] = month_year
                 context['pk_employee'] = pk_employee
+                context['observations'] = service.get_observations()
 
         return render(request, 'human_resources/time_sheet.html', context)
 
@@ -561,3 +563,33 @@ class ReportInPdf(View):
             return HttpResponse('Ocorreu um erro ao gerar o relatório em PDF.')
 
         return response
+
+
+class CreateObservation(View):
+    def post(self, request):
+        point_pk = request.POST['point']
+        point = Point.objects.get(pk=point_pk)
+        observation = Observation.objects.create(
+            point=point,
+            description=request.POST['description']
+        )
+        observation.save()
+
+        return redirect(
+            'human_resources:time_sheet_edit',
+            employee_hiring=point.employee_hiring.pk,
+            month_year=point.date.strftime('%Y-%m-%d')
+        )
+
+
+class DeleteObservation(View):
+    def get(self, request, pk):
+        observation = Observation.objects.get(pk=pk)
+        observation.delete()
+        employee_pk = observation.point.employee_hiring.pk
+        month_year = observation.point.date.strftime('%Y-%m-%d')
+
+        query_params = f'?employee_hiring={employee_pk}&month_year={month_year}'
+        url = reverse_lazy('human_resources:time_sheet_report')
+
+        return redirect(f'{url}{query_params}')

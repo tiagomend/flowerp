@@ -35,6 +35,8 @@ urlpatterns = [
     path('documents/new', CreateDocument.as_view(), name='create_document'),
     path('documents/', ReadDocument.as_view(), name='read_document'),
     path('documents/<int:document_id>', view_document, name='view_document'),
+    path('observation/new/', CreateObservation.as_view(), name='create_observation'),
+    path('observation/<int:pk>', DeleteObservation.as_view(), name='delete_observation'),
 ]
 
 if settings.DEBUG:

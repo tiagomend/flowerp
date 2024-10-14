@@ -6,7 +6,9 @@
   <i class="icon_more_time"></i>
   <h3>{% translate "Time Sheet Edit" %}</h3>
 </div>
-<div class="search-form">
+<div class="section-action">
+  <a href="/humans/timesheet/?employee_hiring={{time_sheet.0.employee_hiring.pk}}&month_year={{time_sheet.0.date|date:'Y-m-d'}}"
+    class="btn btn-success">{% translate "Voltar" %}</a>
   <button id="btnTimeSheet" class="btn btn-primary">
     {% translate "Save" %}
   </button>
@@ -44,6 +46,11 @@
     <th>{% translate "Exit" %}</th>
     <th>{% translate "Entry" %}</th>
     <th>{% translate "Exit" %}</th>
+    <th>
+      <div>
+        <i class="icon_unfold_more"></i>
+      </div>
+    </th>
   </tr>
   {% for point in time_sheet %}
   <tr>
@@ -67,10 +74,34 @@
     <td>
       <input type="time" name="third_exit" id="" value="{{ point.third_exit }}">
     </td>
+    <td>
+      <div>
+        <button class="btn btn-secondary" id="open_{{ point.pk }}">
+          <i class="icon_sell"></i>
+        </button>
+      </div>
+    </td>
   </tr>
   {% endfor %}
 </table>
 </form>
+
+{% for point in time_sheet %}
+<div class="modal" data-open="open_{{ point.pk }}" data-close="close_{{ point.pk }}">
+  <div class="modal-content">
+    <button id="close_{{ point.pk }}" class="close">&times;</button>
+    <h2>{% translate "Observation for " %}{{ point.date|date:'d/m/Y' }}</h2>
+    
+    <form class="form-control" action="{% url "human_resources:create_observation" %}" method="post">
+      {% csrf_token %}
+      <input type="hidden" name="point" value={{point.pk}}>
+      <label for="description_id">{% translate "Observation" %}</label>
+      <textarea name="description" id="description_id" cols="30" rows="10"></textarea>
+      <button type="submit" class="btn btn-primary">{% translate "Submit" %}</button>
+    </form>
+  </div>
+</div>
+{% endfor %}
 
 <div class="msg"></div>
 {% endblock timesheet %}
