@@ -95,7 +95,11 @@ class PurchaseOrderView(View):
         return render(request, self.template, context)
 
     def post(self, request, id):
-        purchase_order = PurchaseOrder.objects.get(id=id)
+        try:
+            purchase_order = PurchaseOrder.objects.get(id=id)
+        except ValidationError:
+            purchase_order = PurchaseOrder.objects.get(pk=id)
+
         form = PurchaseOrderForm(request.POST, instance=purchase_order)
         purchase_items_form = PurchaseOrderItemsForm(request.POST)
 
