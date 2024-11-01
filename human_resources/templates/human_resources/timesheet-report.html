@@ -140,7 +140,7 @@
     {% for row in observations %}
     <tr>
       <td>{{ row.point.date|date:'d/m/Y' }}</td>
-      <td colspan="2">{{ row.txt }}</td>
+      <td colspan="2">{{ row.description }}</td>
     </tr>
     {% endfor %}
 
