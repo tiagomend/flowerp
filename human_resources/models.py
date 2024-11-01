@@ -99,10 +99,12 @@ class SalaryAdjustment(models.Model):
         if self.adjustment_type == "percentage":
             adjustment_amount = self.salary.base_salary * (self.adjustment_value / 100)
             new_salary = self.salary.base_salary + adjustment_amount
+            self.salary.base_salary = new_salary
+
         elif self.adjustment_type == "amount":
             new_salary = self.salary.base_salary + self.adjustment_value
+            self.salary.base_salary = new_salary
 
-        self.salary.base_salary = new_salary
         self.salary.save()
 
 
