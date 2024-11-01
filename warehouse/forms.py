@@ -97,6 +97,11 @@ class StockMovementFilterForm(forms.Form):
         label=_('Product code'),
         required=False
     )
+    service_order_code = forms.CharField(
+        max_length=100,
+        label=_('OS'),
+        required=False
+    )
     movement_type = forms.ChoiceField(
         choices=MovementType.choices,
         label=_('Movement type')

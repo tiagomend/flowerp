@@ -527,12 +527,14 @@ class ReadStockMovements(ReadView):
         'end_date',
         'product_code',
         'movement_type',
+        'service_order_code',
     )
     expressions = (
         'date__date__gte',
         'date__date__lte',
         'item__sku_code',
         'movement_type',
+        'service_order__budget_number'
     )
 
     def get_presenters(self):

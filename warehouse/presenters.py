@@ -38,12 +38,13 @@ class StockMovementPresenter(Presenter):
             self.model.date,
             self.model.item.sku_code,
             self.model.item.name,
-            self.model.warehouse,
-            self.model.storage_bin,
+            self.model.warehouse.name,
+            self.model.storage_bin.ref_position,
             self.model.get_movement_type_display(),
             self.model.quantity,
-            self.model.stock_uom,
-            self.model.item_price
+            self.model.stock_uom.abbreviation,
+            self.model.item_price,
+            self.model.service_order.budget_number if self.model.service_order else '',
         ]
 
     @property
@@ -57,7 +58,8 @@ class StockMovementPresenter(Presenter):
             _('Movement Type'),
             _('Quantity'),
             _('UOM'),
-            _('Price')
+            _('Price'),
+            _('OS'),
         ]
 
 
