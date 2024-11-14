@@ -10,7 +10,6 @@ class ServiceOrderPresenter(Presenter):
     def values(self):
         return [
             self.model.budget_number,
-            self.model.price,
             self.model.header
         ]
 
@@ -18,6 +17,5 @@ class ServiceOrderPresenter(Presenter):
     def headers(self):
         return [
             _('Budget number'),
-            _('Price'),
             _('Header')
         ]
