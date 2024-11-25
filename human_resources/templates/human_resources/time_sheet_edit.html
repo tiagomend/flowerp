@@ -52,8 +52,14 @@
       </div>
     </th>
   </tr>
-  {% for point in time_sheet %}
-  <tr>
+      {% for point in time_sheet %}
+      {% if point.date|date:'w' == '0' %} <!--W "DOMINGO"-->
+    <tr class="warning-100"> <!-- COR -->
+      {% elif point.date|date:'w' == '6' %} <!--W "SABADO"-->
+    <tr class="primary-100"> <!-- COR -->
+      {% else %}
+    <tr>
+    {% endif %}
     <td>{{ point.date|date:'d/m/Y' }}</td>
     <td>{{ point.date|date:'l' }}</td>
     <td>
