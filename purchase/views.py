@@ -259,7 +259,7 @@ class ReportPurchaseOrder(View):
                     request.POST["start_date"],
                     request.POST["end_date"]
                 ],
-                status__in=["Approved", "Concluded"]
+                status__in=["Approved"]
             )
 
         totals = 0
