@@ -45,6 +45,7 @@ class StockMovementPresenter(Presenter):
             self.model.stock_uom.abbreviation,
             self.model.item_price,
             self.model.service_order.budget_number if self.model.service_order else '',
+            self.model.coust_center if self.model.coust_center else '',
         ]
 
     @property
@@ -60,6 +61,7 @@ class StockMovementPresenter(Presenter):
             _('UOM'),
             _('Price'),
             _('OS'),
+            _('Centro de Custo')
         ]
 
 

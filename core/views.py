@@ -8,8 +8,8 @@ from django.urls import reverse_lazy
 from django.utils import translation
 from django.utils.translation import gettext as _
 
-from core.forms import EnterpriseForm
-from core.presenters import EnterprisePresenter
+from core.forms import EnterpriseForm, CoustCenterForm
+from core.presenters import EnterprisePresenter, CoustCenterPresenter
 from core.exceptions import ErrorSavingModel
 
 class CreateView(View):
@@ -173,3 +173,25 @@ class ReadEnterprise(ReadView):
 
     def get_presenters(self):
         return EnterprisePresenter.all()
+
+
+class CreateCoustCenter(CreateView):
+    form = CoustCenterForm
+    icon = 'icon_location_home'
+    redirect = 'core:read_coustcenter'
+
+
+class UpdateCoustCenter(UpdateView):
+    form = CoustCenterForm
+    icon = 'icon_location_home'
+    redirect = 'core:update_coustcenter'
+
+
+class ReadCoustCenter(ReadView):
+    icon = 'icon_location_home'
+    model = CoustCenterForm.Meta.model
+    redirect_for_new = 'core:create_coustcenter'
+    redirect_for_edit = 'core:read_coustcenter'
+
+    def get_presenters(self):
+        return CoustCenterPresenter.all()

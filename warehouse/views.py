@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError
 from django.utils.safestring import mark_safe
 
 from core.views import CreateView, UpdateView, ReadView
+from core.models import CoustCenter
 from core.html import badge
 from product.models import Product, UnitOfMeasure
 
@@ -220,6 +221,9 @@ class StockMovementView(View):
                     'service_order': self.get_service_order(
                         request.session.get('service_order', None).get('pk', '')
                     ),
+                    'coust_center': self.get_coust_center(
+                        request.session.get('coust_center', None).get('pk', '')
+                    ),
                 })
             else:
                 form_general = StockMovementInboundForm(data={
@@ -264,6 +268,9 @@ class StockMovementView(View):
                     quantity=movement['quantity']['qty'],
                     stock_uom=self.get_uom(movement['stock_uom']['pk']),
                     item_price=movement['item_price'],
+                    coust_center=self.get_coust_center(
+                        request.session.get('coust_center', None).get('pk', '')
+                    ),
                     service_order=self.get_service_order(
                         request.session.get('service_order', None).get('pk', '')),
                     purchase_order=self.get_purchase_order(
@@ -310,6 +317,11 @@ class StockMovementView(View):
             return ServiceOrder.objects.get(pk=pk)
         return None
 
+    def get_coust_center(self, pk):
+        if pk:
+            return CoustCenter.objects.get(pk=pk)
+        return None
+
     def get_purchase_order(self, pk):
         if pk:
             return PurchaseOrder.objects.get(pk=pk)
@@ -347,6 +359,7 @@ class StockSession(View):
             request.session['service_order'] = self.get_service_order(request)
             request.session['tax_invoice'] = self.get_tax_invoice(request)
             request.session['purchase_order'] = self.get_purchase_order(request)
+            request.session['coust_center'] = self.get_coust_center(request)
 
             return redirect(self.redirect)
 
@@ -441,6 +454,20 @@ class StockSession(View):
             return {
                 'pk': purchase_order.pk,
                 'description': str(purchase_order)
+            }
+
+        return {
+            'description': '' 
+        }
+
+    def get_coust_center(self, request):
+        pk = request.POST.get('coust_center', '')
+
+        if pk:
+            coust_center = CoustCenter.objects.get(pk=pk)
+            return {
+                'pk': coust_center.pk,
+                'description': str(coust_center)
             }
 
         return {

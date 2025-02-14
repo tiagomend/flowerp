@@ -7,3 +7,9 @@ class Enterprise(models.Model):
 
     def __str__(self) -> str:
         return str(self.trade_name)
+
+class CoustCenter(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return str(self.name)

@@ -40,7 +40,7 @@ class StorageBinForm(forms.ModelForm):
 class StockMovementForm(forms.ModelForm):
     class Meta:
         model = StockMovement
-        exclude = ['movement_type', 'date', 'tax_invoice', 'service_order', 'purchase_order']
+        exclude = ['movement_type', 'date', 'tax_invoice', 'service_order', 'purchase_order', 'coust_center']
 
         widgets = {
             'item': Awesomplete(),
@@ -61,10 +61,11 @@ class StockMovementInboundForm(forms.ModelForm):
 class StockMovementOutboundForm(forms.ModelForm):
     class Meta:
         model = StockMovement
-        fields = ['tax_invoice', 'service_order']
+        fields = ['tax_invoice', 'service_order', 'coust_center']
 
         widgets = {
             'service_order': Awesomplete(),
+            'coust_center': Awesomplete(),
         }
 
 # Form for filters

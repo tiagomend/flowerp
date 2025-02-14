@@ -198,6 +198,13 @@ class StockMovement(models.Model):
         blank=True,
         verbose_name=_('Purchase Order')
     )
+    coust_center = models.ForeignKey(
+        'core.CoustCenter',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name=_('Centro de Custo')
+    )
     tax_invoice = models.CharField(
         verbose_name=_('Tax Invoice'),
         null=True,

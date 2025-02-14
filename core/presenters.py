@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 from django.db.models import Model
 
-from core.models import Enterprise
+from core.models import Enterprise, CoustCenter
 
 
 class Presenter(ABC):
@@ -56,4 +56,20 @@ class EnterprisePresenter(Presenter):
             'Identification Number',
             'Corporate Reason',
             'Trade Name',
+        ]
+
+
+class CoustCenterPresenter(Presenter):
+    model = CoustCenter
+
+    @property
+    def values(self):
+        return [
+            self.model.name
+        ]
+
+    @property
+    def headers(self):
+        return [
+            'Nome'
         ]
