@@ -337,6 +337,13 @@ class TimeSheetService:
             total_hours += point.total_hours
         return total_hours.total_seconds() / 3600
 
+    def calculate_total_night_shift_bonus(self):
+        total_hours = timedelta(seconds=0)
+
+        for point in self.points:
+            total_hours += point.calculate_night_shift_bonus()
+        return total_hours.total_seconds() / 3600
+
     def total_fifty_per_center(self):
         total = timedelta(seconds=0)
         for point in self.points:
@@ -396,6 +403,9 @@ class TimeSheetReport(View):
                 context['month_year'] = month_year
                 context['pk_employee'] = pk_employee
                 context['observations'] = service.get_observations()
+                context['night_time'] = format_decimal_to_hours(
+                    service.calculate_total_night_shift_bonus()
+                )
 
         return render(request, 'human_resources/time_sheet.html', context)
 

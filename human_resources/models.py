@@ -284,6 +284,62 @@ class Point(models.Model):
 
         return point in point_list
 
+    
+    def calculate_night_shift_bonus(self):
+        """Calculates the total night shift bonus time in hours."""
+        night_period_start = datetime.time(21, 59)
+        night_period_end = datetime.time(5, 0)
+
+        def calculate_night_time(entry, exit):
+            if entry == exit:  # If entry and exit are the same, no work was done.
+                return datetime.timedelta()
+
+            if entry < exit:  # Normal period within the same day
+                return self._time_within_night_period(entry, exit, night_period_start, night_period_end)
+            else:  # Period crossing midnight
+                return (
+                    self._time_within_night_period(entry, datetime.time(23, 59, 59), night_period_start, night_period_end) +
+                    self._time_within_night_period(datetime.time(0, 0), exit, night_period_start, night_period_end)
+                )
+
+        total_night_time = (
+            calculate_night_time(self.first_entry, self.first_exit) +
+            calculate_night_time(self.second_entry, self.second_exit) +
+            calculate_night_time(self.third_entry, self.third_exit)
+        )
+
+        return total_night_time
+
+    @staticmethod
+    def _time_within_night_period(entry, exit, night_start, night_end):
+        """Calculates the time worked within the night period."""
+        if entry >= exit:
+            return datetime.timedelta()
+
+        if night_end < night_start:  # Night period crossing midnight (22h-05h)
+            if entry >= night_start or exit <= night_end:  
+                # Completely within the night period
+                return datetime.timedelta(hours=exit.hour - entry.hour, minutes=exit.minute - entry.minute, seconds=exit.second - entry.second)
+
+            if entry < night_start and exit > night_start:  
+                # Entry before 22:00 and exit after 22:00
+                return datetime.timedelta(hours=exit.hour - night_start.hour, minutes=exit.minute - night_start.minute, seconds=exit.second - night_start.second)
+
+            if entry < night_end and exit > night_end:
+                # Entry before 05:00 and exit after 05:00
+                return datetime.timedelta(hours=night_end.hour - entry.hour, minutes=night_end.minute - entry.minute, seconds=night_end.second - entry.second)
+
+        else:  # Case where the night period is within the same day (e.g., 22h-23h)
+            entry = max(entry, night_start)
+            exit = min(exit, night_end)
+
+            if entry >= exit:
+                return datetime.timedelta()
+
+            return datetime.timedelta(hours=exit.hour - entry.hour, minutes=exit.minute - entry.minute, seconds=exit.second - entry.second)
+
+        return datetime.timedelta()
+
     class Meta:
         verbose_name = _('Point')
 
