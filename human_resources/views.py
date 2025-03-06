@@ -554,6 +554,7 @@ class ReportInPdf(View):
             'normal_hours': format_decimal_to_hours(service.total_normal_hours()),
             'fifty_percent_hours':  format_decimal_to_hours(service.total_fifty_per_center()),
             'hundred_percent_hours': format_decimal_to_hours(service.total_hundred_per_center()),
+            'night_time': format_decimal_to_hours(service.calculate_total_night_shift_bonus())
         }
 
         html = template.render(context)
