@@ -67,8 +67,8 @@ class ReadEmployeePosition(ReadView):
     redirect_for_new = 'human_resources:create_position'
     redirect_for_edit = 'human_resources:read_position'
 
-    def get_presenters(self):
-        return EmployeePositionPresenter.all(order_by='name')
+    def get_presenters(self, request):
+        return EmployeePositionPresenter.all(request, order_by='name')
 
 
 class CreateEmployee(CreateView):
@@ -89,8 +89,8 @@ class ReadEmployee(ReadView):
     redirect_for_new = 'human_resources:create_employee'
     redirect_for_edit = 'human_resources:read_employee'
 
-    def get_presenters(self):
-        return EmployeePresenter.all(order_by='first_name')
+    def get_presenters(self, request):
+        return EmployeePresenter.all(request, order_by='first_name')
 
 
 class CreateEmployeeHiring(CreateView):
@@ -111,8 +111,8 @@ class ReadEmployeeHiring(ReadView):
     redirect_for_new = 'human_resources:create_hiring'
     redirect_for_edit = 'human_resources:read_hiring'
 
-    def get_presenters(self):
-        return EmployeeHiringPresenter.all(order_by='employee__first_name')
+    def get_presenters(self, request):
+        return EmployeeHiringPresenter.all(request, order_by='employee__first_name')
 
 
 class ReadVacationExpiration(ReadView):
@@ -122,8 +122,8 @@ class ReadVacationExpiration(ReadView):
     redirect_for_edit = 'human_resources:read_hiring'
     page_title = _('Vacation Expiration Report')
 
-    def get_presenters(self):
-        return VacationExpirationPresenter.all(order_by='employee__first_name')
+    def get_presenters(self, request):
+        return VacationExpirationPresenter.all(request, order_by='employee__first_name')
 
 
 class CreateVacation(CreateView):
@@ -144,8 +144,8 @@ class ReadVacation(ReadView):
     redirect_for_new = 'human_resources:create_vacation'
     redirect_for_edit = 'human_resources:read_vacation'
 
-    def get_presenters(self):
-        return VacationPresenter.all()
+    def get_presenters(self, request):
+        return VacationPresenter.all(request)
 
 
 class RegisterPointHenryPrisma(View):
@@ -473,8 +473,8 @@ class ReadSalary(ReadView):
     redirect_for_new = 'human_resources:create_salary'
     redirect_for_edit = 'human_resources:read_salary'
 
-    def get_presenters(self):
-        return SalaryPresenter.all(order_by='position__name')
+    def get_presenters(self, request):
+        return SalaryPresenter.all(request, order_by='position__name')
 
 
 class CreateSalaryAdjustment(CreateView):
@@ -495,8 +495,8 @@ class ReadSalaryAdjustment(ReadView):
     redirect_for_new = 'human_resources:create_salary_adjustment'
     redirect_for_edit = 'human_resources:read_salary_adjustment'
 
-    def get_presenters(self):
-        return SalaryAdjustmentPresenter.all()
+    def get_presenters(self, request):
+        return SalaryAdjustmentPresenter.all(request)
 
 
 class CreateDocument(CreateViewDjango):
@@ -520,8 +520,8 @@ class ReadDocument(ReadView):
     redirect_for_new = 'human_resources:create_document'
     redirect_for_edit = 'human_resources:read_document'
 
-    def get_presenters(self):
-        return DocumentPresenter.all()
+    def get_presenters(self, request):
+        return DocumentPresenter.all(request)
 
 
 def view_document(_, document_id):
