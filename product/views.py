@@ -40,8 +40,9 @@ class ReadProduct(ReadView):
         'sku_code__contains'
     )
 
-    def get_presenters(self):
+    def get_presenters(self, request):
         return ProductPresenter.all(
+            request=request,
             q_filter=self.get_filters(),
             order_by=('sku_code')
         )
@@ -65,8 +66,8 @@ class ReadUnitOfMeasure(ReadView):
     redirect_for_edit = 'product:read_uom'
     model = UnitOfMeasureForm.Meta.model
 
-    def get_presenters(self):
-        return UnitOfMeasurePresenter.all()
+    def get_presenters(self, request):
+        return UnitOfMeasurePresenter.all(request)
 
 
 class CreateProductCategory(CreateView):
@@ -87,8 +88,8 @@ class ReadProductCategory(ReadView):
     redirect_for_edit = 'product:read_category'
     model = ProductCategoryForm.Meta.model
 
-    def get_presenters(self):
-        return ProductCategoryPresenter.all()
+    def get_presenters(self, request):
+        return ProductCategoryPresenter.all(request)
 
 
 class CreateItemTypeForSped(CreateView):
@@ -109,5 +110,5 @@ class ReadItemTypeForSped(ReadView):
     redirect_for_edit = 'product:read_item_type'
     model = ItemTypeForSpedForm.Meta.model
 
-    def get_presenters(self):
-        return ItemTypeForSpedPresenter.all(order_by='-code')
+    def get_presenters(self, request):
+        return ItemTypeForSpedPresenter.all(request, order_by='-code')

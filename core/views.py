@@ -104,7 +104,7 @@ class ReadView(View):
     page_title = ''
     filter_form = None
 
-    def get_context_data(self):
+    def get_context_data(self, request):
         list_of = _('List of')
 
         if self.page_title:
@@ -116,7 +116,7 @@ class ReadView(View):
                 'page_title': f'{list_of} {self.model._meta.verbose_name}'
             }
 
-        context['presenters'] = self.get_presenters()
+        context['presenters'] = self.get_presenters(request)
         context['icon'] = self.icon
         context['redirect_for_new'] = reverse_lazy(self.redirect_for_new)
 
@@ -144,11 +144,11 @@ class ReadView(View):
             return filters
         return None
 
-    def get_presenters(self):
+    def get_presenters(self, request):
         raise NotImplementedError
 
     def get(self, request):
-        context = self.get_context_data()
+        context = self.get_context_data(request)
 
         return render(request, self.template, context)
 
@@ -171,8 +171,8 @@ class ReadEnterprise(ReadView):
     redirect_for_new = 'core:create_enterprise'
     redirect_for_edit = 'core:read_enterprise'
 
-    def get_presenters(self):
-        return EnterprisePresenter.all()
+    def get_presenters(self, request):
+        return EnterprisePresenter.all(request)
 
 
 class CreateCoustCenter(CreateView):
@@ -193,5 +193,5 @@ class ReadCoustCenter(ReadView):
     redirect_for_new = 'core:create_coustcenter'
     redirect_for_edit = 'core:read_coustcenter'
 
-    def get_presenters(self):
-        return CoustCenterPresenter.all()
+    def get_presenters(self, request):
+        return CoustCenterPresenter.all(request)

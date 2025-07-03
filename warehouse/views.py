@@ -66,8 +66,8 @@ class ReadWarehouse(ReadView):
     redirect_for_new = 'warehouse:create_warehouse'
     redirect_for_edit = 'warehouse:read_warehouse'
 
-    def get_presenters(self):
-        return WarehousePresenter.all(order_by='name')
+    def get_presenters(self, request):
+        return WarehousePresenter.all(request, order_by='name')
 
 
 class ReadWarehouseType(ReadView):
@@ -85,8 +85,8 @@ class ReadWarehouseType(ReadView):
         'description__contains'
     )
 
-    def get_presenters(self):
-        return WarehouseTypePresenter.all(q_filter=self.get_filters(), order_by='name')
+    def get_presenters(self, request):
+        return WarehouseTypePresenter.all(request, q_filter=self.get_filters(), order_by='name')
 
 class CreateWarehouse(View):
     warehouse_form = WarehouseForm
@@ -192,8 +192,8 @@ class ReadStorageBin(ReadView):
         'warehouse__name__contains'
     )
 
-    def get_presenters(self):
-        return StorageBinPresenter.all(q_filter=self.get_filters() ,order_by='ref_position')
+    def get_presenters(self, request):
+        return StorageBinPresenter.all(request, q_filter=self.get_filters() ,order_by='ref_position')
 
 
 class StockMovementView(View):
@@ -564,8 +564,8 @@ class ReadStockMovements(ReadView):
         'service_order__budget_number'
     )
 
-    def get_presenters(self):
-        return StockMovementPresenter.all(q_filter=self.get_filters())
+    def get_presenters(self, request):
+        return StockMovementPresenter.all(request, q_filter=self.get_filters())
 
 
 class ReadStock(ReadView):
@@ -584,8 +584,8 @@ class ReadStock(ReadView):
         'storage_bin__ref_position__contains'
     )
 
-    def get_presenters(self):
-        return StockPresenter.all(q_filter=self.get_filters())
+    def get_presenters(self, request):
+        return StockPresenter.all(request, q_filter=self.get_filters())
 
 class DeleteSessionStock(View):
     def get(self, request, index):
@@ -600,3 +600,75 @@ class DeleteSessionStock(View):
                 pass
 
         return redirect('warehouse:stock_outbound')
+
+
+def getReport(request):
+    from openpyxl import Workbook
+    from openpyxl.utils import get_column_letter
+    from io import BytesIO
+    from django.http import HttpResponse
+
+    from purchase.models import PurchaseOrderItems
+
+    class Data:
+        def __init__(self, description, qty, unit_price, category):
+            self.description = description
+            self.qty = qty
+            self.unit_price = unit_price
+            self.category = category
+
+        @property
+        def total(self):
+            return self.unit_price * self.qty
+    
+    stocks = Stock.objects.filter(quantity__gt=0)
+
+    data = []
+
+    for stock in stocks:
+        purchase_item = PurchaseOrderItems.objects.filter(item=stock.item).last()
+        unit_price = stock.item.price_cost
+        if purchase_item:
+            unit_price = purchase_item.unit_price
+        
+        data.append(Data(
+            stock.item.name,
+            stock.quantity,
+            unit_price,
+            stock.item.categories.all().first().name if stock.item.categories.all().first() else ''
+        ))
+    
+    
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Relatório de Estoque"
+
+    # Cabeçalhos
+    headers = ["Descrição", "Quantidade", "Preço Unitário", "Total", "Categoria"]
+    ws.append(headers)
+
+    # Linhas de dados
+    for row in data:
+        ws.append([
+            row.description,
+            row.qty,
+            float(row.unit_price),
+            float(row.total),
+            row.category
+        ])
+
+    # Ajustar largura das colunas
+    for i, column in enumerate(headers, 1):
+        ws.column_dimensions[get_column_letter(i)].width = 20
+
+    # Gerar resposta HTTP com o Excel
+    response = HttpResponse(
+        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
+    response['Content-Disposition'] = 'attachment; filename=relatorio_estoque.xlsx'
+
+    with BytesIO() as file_stream:
+        wb.save(file_stream)
+        response.write(file_stream.getvalue())
+
+    return response

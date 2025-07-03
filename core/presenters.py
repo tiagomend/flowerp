@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 
 from django.db.models import Model
+from django.core.paginator import Paginator
 
 from core.models import Enterprise, CoustCenter
 
@@ -8,8 +9,9 @@ from core.models import Enterprise, CoustCenter
 class Presenter(ABC):
     model: Model
 
-    def __init__(self, model) -> None:
+    def __init__(self, model, page_obj = None) -> None:
         self.model = model
+        self.page_obj = page_obj
 
     @property
     @abstractmethod
@@ -26,15 +28,23 @@ class Presenter(ABC):
         return self.model.pk
 
     @classmethod
-    def all(cls, q_filter = None, order_by = '-id'):
+    def all(cls, request, q_filter = None, order_by = '-id'):
         if q_filter:
             models = cls.model.objects.filter(q_filter).order_by(order_by)
         else:
             models = cls.model.objects.all().order_by(order_by)
 
+        paginator = Paginator(models, 30)
+        object = paginator.get_page(request.GET.get('page'))
         models_list = []
-        for model in models:
-            models_list.append(cls(model=model))
+
+        is_first = True
+        for model in object:
+            if is_first:
+                models_list.append(cls(model=model, page_obj=object))
+            else:
+                models_list.append(cls(model=model))
+            is_first = False
 
         return models_list
 

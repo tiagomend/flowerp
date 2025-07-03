@@ -512,6 +512,7 @@ body {
     justify-content: center;
     padding: var(--spacing-0) var(--spacing-4);
     height: 36px;
+    width: min-content;
     border: none;
     border-radius: 6px;
     font-size: 14px;
@@ -675,15 +676,14 @@ body {
 .table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 15px;
+    border-spacing: 0;
+    font-size: 14px;
 }
 
-.table,
 .table td,
 .table th {
-    font-size: 15px;
+    font-size: 14px;
     border: 1px solid var(--border-color);
-    height: 30px;
     padding: var(--spacing-0) var(--spacing-1);
 }
 
@@ -984,4 +984,13 @@ table.border-black .border-none th {
     gap: var(--spacing-2);
     align-items: center;
     justify-content: center;
+}
+
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 10px;
 }

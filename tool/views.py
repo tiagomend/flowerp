@@ -35,8 +35,8 @@ class ReadToolCategory(ReadView):
     redirect_for_new = 'tool:create_category'
     redirect_for_edit = 'tool:read_category'
 
-    def get_presenters(self):
-        return ToolCategoryPresenter.all()
+    def get_presenters(self, request):
+        return ToolCategoryPresenter.all(request)
 
 
 class CreateBrand(CreateView):
@@ -57,8 +57,8 @@ class ReadBrand(ReadView):
     redirect_for_new = 'tool:create_brand'
     redirect_for_edit = 'tool:read_brand'
 
-    def get_presenters(self):
-        return BrandPresenter.all()
+    def get_presenters(self, request):
+        return BrandPresenter.all(request)
 
 
 class CreateTool(CreateView):
@@ -79,8 +79,8 @@ class ReadTool(ReadView):
     redirect_for_new = 'tool:create_tool'
     redirect_for_edit = 'tool:index'
 
-    def get_presenters(self):
-        return ToolPresenter.all()
+    def get_presenters(self, request):
+        return ToolPresenter.all(request)
 
 
 class CreateToolDistributionRecord(CreateView):
@@ -101,8 +101,8 @@ class ReadToolDistributionRecord(ReadView):
     redirect_for_new = 'tool:create_distribution'
     redirect_for_edit = 'tool:read_distribution'
 
-    def get_presenters(self):
-        return ToolDistributionRecordPresenter.all()
+    def get_presenters(self, request):
+        return ToolDistributionRecordPresenter.all(request)
 
 
 class ToolIndex(View):

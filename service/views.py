@@ -21,5 +21,5 @@ class ReadServiceOrder(ReadView):
     redirect_for_edit = 'service:read_service_order'
     redirect_for_new = 'service:create_service_order'
 
-    def get_presenters(self):
-        return ServiceOrderPresenter.all(order_by='-budget_number')
+    def get_presenters(self, request):
+        return ServiceOrderPresenter.all(request, order_by='-budget_number')

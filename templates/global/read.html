@@ -54,7 +54,31 @@
         </tr>
         {% endfor %}
     </table>
-  </div>
+    </div>
+
+    <div class="pagination">
+      <span>
+        Página {{ presenters.0.page_obj.number }} de {{ presenters.0.page_obj.paginator.num_pages }}
+      </span>
+
+      {% if presenters.0.page_obj.has_previous %}
+        <a class="btn btn-primary" href="?page=1">Primeiro</a>
+        <a class="btn btn-secondary" href="?page={{ presenters.0.page_obj.previous_page_number }}">Anterior</a>
+      {% endif %}
+
+      {% for num in presenters.0.page_obj.paginator.page_range %}
+        {% if presenters.0.page_obj.number == num %}
+          <strong class="btn btn-secondary">{{ num }}</strong>
+        {% elif num > presenters.0.page_obj.number|add:'-3' and num < presenters.0.page_obj.number|add:'3' %}
+          <a class="btn btn-secondary" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if presenters.0.page_obj.has_next %}
+        <a class="btn btn-secondary" href="?page={{ presenters.0.page_obj.next_page_number }}">Próximo</a>
+        <a class="btn btn-primary" href="?page={{ presenters.0.page_obj.paginator.num_pages }}">Ultimo</a>
+      {% endif %}
+    </div>
   </div>
 </div>
 
