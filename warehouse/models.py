@@ -299,7 +299,7 @@ class StockMovement(models.Model):
 
     def save(self, *args, **kwargs) -> None:
         if self.movement_type == MovementType.OUTBOUND:
-            self.quantity = int(self.quantity)
+            self.quantity = float(self.quantity)
             self.quantity *= -1
 
         if self.item_price == str(0):
