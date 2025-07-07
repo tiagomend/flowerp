@@ -234,8 +234,8 @@ class ReadSupplier(ReadView):
     redirect_for_new = 'purchase:create_supplier'
     redirect_for_edit = 'purchase:read_supplier'
 
-    def get_presenters(self, request):
-        return SupplierPresenter.all(request)
+    def get_presenters(self, _):
+        return SupplierPresenter.all()
 
 
 class ReportPurchaseOrder(View):
